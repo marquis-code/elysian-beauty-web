@@ -17,7 +17,7 @@
 
     <!-- Form Container -->
     <div
-        class="relative z-30 bg-white w-full sm:w-4/5 md:w-1/3 h-auto p-4 lg:p-8 rounded-lg shadow-lg mx-auto md:mr-12 mt-auto mb-auto"
+        class="relative z-30 bg-white w-full h-screen sm:h-auto sm:w-4/5 md:w-1/3 p-4 lg:p-8 rounded-none sm:rounded-lg shadow-none sm:shadow-lg mx-auto md:mr-12 mt-auto mb-auto"
     >
       <slot />
     </div>
