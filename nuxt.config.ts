@@ -16,12 +16,12 @@ export default defineNuxtConfig({
       enabled: true
     },
     meta: {
-      title: "Buildr",
+      title: "Elysian Beauty",
       author: "Marquis",
       mobileAppIOS: false,
       mobileApp: true,
       description:
-        "specialize in software development, product design, and bespoke solutions to help businesses innovate and thrive in the digital age.",
+        "Elysian Beauty",
       theme_color: "#27396B",
       background_color: "#27396B",
       display: "standalone",

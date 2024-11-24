@@ -1,0 +1,4 @@
+<template>
+  <Newsletter />
+  <Footer />
+</template>

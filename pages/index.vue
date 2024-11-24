@@ -1,22 +1,15 @@
+<!-- pages/index.vue -->
 <template>
-  <main>
-    <hero-section id="about-section" />
-    <hero-feature id="services-section" />
-    <feature-one id="services-section" />
-    <feature-two id="services-section" />
-    <feature-three id="services-section" />
-    <feature-four id="services-section" />
-    <stat-section />
-    <updated-testimonials class="" />
-    <cta-section />
-    <image-carousel id="projects"></image-carousel>
-    <frequently-asked-questions />
-    <contact-section id="contact-section" />
-    <footer-section />
-  </main>
+  <div>
+    <div class=" p-2 lg:px-20 mt-10">
+      <HeroSection />
+    </div>
+    <LogoSection class="mt-16" />
+    <MissionSection />
+    <ProductServices />
+    <Products />
+      <TestimonialSlider />
+  </div>
 </template>
-
 <script setup lang="ts">
-const openSidebar = ref(false);
-const speed = ref(10);
 </script>
