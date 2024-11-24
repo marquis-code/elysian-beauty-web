@@ -1,8 +1,8 @@
 <template>
   <section class="relative flex flex-col md:flex-row rounded-3xl bg-emerald-900 text-white">
     <!-- Text Section -->
-    <div class="flex flex-col justify-center max-w-lg px-6 py-12 md:px-20 md:py-24">
-      <h1 class="text-4xl md:text-4xl font-bold mb-6">
+    <div class="flex flex-col justify-center max-w-lg px-6 py-12 ">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
         Your Journey to
         Timeless Beauty
         Begins Here
