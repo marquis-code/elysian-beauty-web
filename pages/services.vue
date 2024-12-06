@@ -8,9 +8,8 @@
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-black text-sm border-[#F0F0F0] border font-medium flex items-center gap-x-3 px-4 py-2 rounded-full">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="6.10002" cy="5.79961" r="5.7" fill="black"/>
-</svg>
-
+            <circle cx="6.10002" cy="5.79961" r="5.7" fill="black"/>
+            </svg>
             To the vendors</span>
         </div>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
@@ -47,14 +46,6 @@
       </div>
       <!-- Text Content -->
       <div>
-<!--        <div class="flex items-center space-x-2 mb-4">-->
-<!--                  <span class="text-black text-sm border-[#F0F0F0] border font-medium flex items-center gap-x-3 px-4 py-2 rounded-full">-->
-<!--            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-<!--<circle cx="6.10002" cy="5.79961" r="5.7" fill="black"/>-->
-<!--</svg>-->
-
-<!--            Our Mission</span>-->
-<!--        </div>-->
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
           Tailored Selfcare Solutions for Every Client
         </h2>

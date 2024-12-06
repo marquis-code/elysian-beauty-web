@@ -42,7 +42,7 @@ onMounted(() => {
   <div class="relative w-full py-10 bg-[#F1F2F2] my-16">
    <div class="flex justify-center items-center flex-col p-3 lg:p-0">
      <h1 class="text-[#045940] text-4xl">What People Are Saying</h1>
-     <p class="text-[#8C8C8C] pt-3 lg:pt-0">Real feedback from clients who’ve experienced the Elysian Beauty difference.</p>
+     <p class="text-[#8C8C8C] text-center lg:text-start pt-3 lg:pt-0">Real feedback from clients who’ve experienced the Elysian Beauty difference.</p>
    </div>
    <section class="space-y-10 mt-16">
      <div class="flex justify-center items-center relative max-w-4xl mx-auto overflow-hidden">

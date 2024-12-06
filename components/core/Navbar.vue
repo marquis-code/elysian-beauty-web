@@ -133,8 +133,7 @@
           </div>
         </div>
       </div>
-      <CoreFullScreenModal header-text="Get In Touch" class="" :show="showContactModal">
-
+      <CoreFullScreenModal @close="showContactModal = false" header-text="Get In Touch" class="" :show="showContactModal">
         <ContactForm />
       </CoreFullScreenModal>
     </main>

@@ -22,7 +22,7 @@
     </div>
 
     <!-- Core Values Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 pt-10 lg:pt-16">
       <!-- Integrity -->
       <div v-for="item in coreValues" :key="item.title" class="flex justify-start items-start flex-col">
       <div>

@@ -17,7 +17,7 @@
       <input
           type="email"
           placeholder="Email address"
-          class="w-full max-w-xl px-6 py-4 border placeholder-[#A3A8A7] bg-[#FAFBFB] border-[#FAFBFB] rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500  text-sm md:text-base"
+          class="w-full max-w-xl px-6 py-5 border placeholder-[#A3A8A7] bg-gray-100 border-[#FAFBFB] rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500  text-sm md:text-base"
       />
 
       <!-- Subscribe Button -->
