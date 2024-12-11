@@ -133,7 +133,7 @@
         <label for="remember" class="custom-label">Remember me</label>
       </div>
 
-      <a href="#" class="text-[#79807E]">Forgot Password?</a>
+      <NuxtLink to="/forgot" class="text-[#79807E]">Forgot Password?</NuxtLink>
     </div>
 
     <!-- Google Login -->
