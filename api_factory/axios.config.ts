@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { useUser } from "@/composables/auth/user";
+import { useUser } from "~/composables/auth/useUser";
 import { useCustomToast } from '@/composables/core/useCustomToast'
 const { showToast } = useCustomToast();
 

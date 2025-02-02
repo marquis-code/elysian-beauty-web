@@ -220,7 +220,7 @@
     <CoreFullScreenLoader :visible="loading" />
   </template>
     <script setup lang="ts">
-    import  { use_auth_login } from '@/composables/auth/login'
+    import  { use_auth_login } from '~/composables/auth/useLogin'
     const { login, loading } = use_auth_login()
     import { ref } from "vue";
   

@@ -206,7 +206,7 @@
   </template>
   
   <script setup lang="ts">
-  import  { use_auth_register } from '@/composables/auth/register'
+  import  { use_auth_register } from '~/composables/auth/useRegister'
   const { register, loading } = use_auth_register()
   import { ref } from "vue";
 
