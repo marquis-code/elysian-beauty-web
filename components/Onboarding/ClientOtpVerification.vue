@@ -32,9 +32,9 @@
     <button
           @click="verifyOTP"
           class="w-full py-3.5 bg-[#045940] text-white rounded-full hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          :disabled="!isComplete"
+          :disabled="!isComplete || loading"
         >
-          Verify
+           {{ loading ? 'processing' : 'Verify' }}
         </button>
 </div>
   
@@ -51,13 +51,17 @@
         <OnboardingFooter />
       </div>
     </div>
+    <CoreFullScreenLoader text="Please wait while we  verify your OTP" :visible="loading" />
   </template>
   
   <script setup lang="ts">
+  import { use_auth_verify_user } from '@/composables/auth/useVerifyUser'
+  const {  verifyUser, loading, setPayload } = use_auth_verify_user()
   const email = ref('olasehindeolalekanpeter@gmail.com')
   const otpValues = ref(['', '', '', ''])
   const inputs = ref<HTMLInputElement[]>([])
   const isComplete = computed(() => otpValues.value.every(val => val.length === 1))
+  const route = useRoute()
   
   const handleInput = (event: Event, index: number) => {
     const input = event.target as HTMLInputElement
@@ -106,8 +110,14 @@
     }
   }
   
-  const verifyOTP = () => {
+  const verifyOTP = async () => {
     const otp = otpValues.value.join('')
+    const payloadObj = {
+      email: route.query.email,
+      otp
+    }
+    setPayload(payloadObj)
+    await verifyUser()
     console.log('Verifying OTP:', otp)
     // Add your verification logic here
   }

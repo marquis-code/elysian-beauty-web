@@ -5,13 +5,20 @@ import { useUser } from '~/composables/auth/useUser';
 import { useCustomToast } from '@/composables/core/useCustomToast';
 
 const { showToast } = useCustomToast();
+// const route = useRoute()
+
 
 export const use_auth_verify_user = () => {
     const loading = ref(false);
-    const credential = ref({ token: '' });
+    const route = useRoute()
+    const credential = ref({
+        email: "",
+        otp: ""
+    });
 
     const verifyUser = async () => {
         loading.value = true;
+        const route = useRoute()
         const res = await auth_api.$_verify_user(credential.value) as any
         loading.value = false;
 
@@ -21,5 +28,10 @@ export const use_auth_verify_user = () => {
             showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
-    return { credential, verifyUser, loading };
+
+    const setPayload = (data: any) => {
+        credential.value.email = route.query.email || data.email,
+        credential.value.otp = data.otp
+    }
+    return { credential, verifyUser, loading, setPayload };
 };
