@@ -1,14 +1,13 @@
 <template>
-  <div class="h-screen w-full relative flex items-center justify-end md:justify-center">
+  <div class="h-screen w-full flex flex-col md:flex-row">
     <!-- Background Image with Overlay -->
-    <div
-        class="absolute inset-0 bg-cover bg-center"
-        :style="{ backgroundImage: `url(${currentBackground})` }"
-    >
+    <div 
+      class="hidden md:block md:w-1/2 h-full relative bg-cover bg-center"
+      :style="{ backgroundImage: `url(${currentBackground})` }">
       <!-- Logo -->
-      <img
-          src="@/assets/img/logo-white.png"
-          class="absolute h-16 top-10 left-10 z-20"
+      <img 
+        src="@/assets/img/logo-white.png" 
+        class="absolute h-16 top-10 left-10 z-20" 
       />
 
       <!-- Dark Overlay -->
@@ -16,9 +15,7 @@
     </div>
 
     <!-- Form Container -->
-    <div
-        class="relative z-30 bg-white w-full h-screen sm:h-auto sm:w-4/5 md:w-1/3 p-4 lg:p-8 rounded-none sm:rounded-lg shadow-none sm:shadow-lg mx-auto md:mr-12 mt-auto mb-auto"
-    >
+    <div class="w-full md:w-1/2 h-full flex items-center justify-center bg-white p-8">
       <slot />
     </div>
   </div>
@@ -43,5 +40,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Add custom styles for transitions if needed */
+/* Ensuring the parent container maintains full height */
 </style>

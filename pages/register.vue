@@ -1,10 +1,11 @@
 <template>
-    <div class="w-full max-w-2xl mx-auto bg-white rounded-xl py-6">
+  <OnboardingUserSelection />
+    <!-- <div class="w-full mx-auto bg-white py-6">
       <h2 class="text-3xl font-semibold text-[#045940] mb-4 text-center">Create Your Account</h2>
       <p class="text-[#79807E] mb-6 text-center">Please input your information</p>
       <form @submit.prevent="handleSubmit">
         <div class="grid lg:grid-cols-2 gap-4">
-          <!-- First Name -->
+
           <div class="relative">
             <label for="firstName" class="block text-[#045940] font-light text-sm mb-1">First Name</label>
             <input
@@ -21,7 +22,7 @@
             <p v-if="errors.firstName" class="text-red-500 text-sm mt-1">{{ errors.firstName }}</p>
           </div>
 
-          <!-- Last Name -->
+        
           <div class="relative">
             <label for="lastName" class="block text-[#045940] font-light text-sm mb-1">Last Name</label>
             <input
@@ -39,7 +40,7 @@
           </div>
         </div>
 
-        <!-- Email -->
+
         <div class="mt-4 relative">
           <label for="email" class="block text-[#045940] font-light text-sm mb-1">Email</label>
           <input
@@ -57,7 +58,7 @@
           <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
         </div>
 
-        <!-- Password -->
+
         <div class="mt-4">
           <label for="password" class="block text-[#045940] font-light text-sm mb-1">Password</label>
           <div class="relative">
@@ -77,8 +78,6 @@
               @click="togglePassword"
               class="absolute inset-y-0 right-4 text-gray-500"
             >
-              <!-- <span v-if="!showPassword">👁</span>
-              <span v-else>🙈</span> -->
               <span v-if="!showPassword">
               <svg
             width="20"
@@ -148,7 +147,7 @@
           <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
         </div>
 
-        <!-- Login Button -->
+
         <button
           type="submit"
           class="w-full bg-[#045940] text-white p-3 py-3.5 rounded-full mt-6 hover:bg-green-800"
@@ -156,17 +155,13 @@
           Login
         </button>
 
-        <!-- Errors -->
+
         <p v-if="errors.form" class="text-red-500 text-center text-sm mt-4">{{ errors.form }}</p>
       </form>
 
-      <!-- Additional Links -->
+ 
       <div class="flex items-center justify-between mt-6 text-sm">
-<!--        <label class="flex items-center text-[#79807E]">-->
-<!--          <input type="checkbox" class="form-checkbox text-green-600" /> Remember me-->
-<!--        </label>-->
         <div class="remember-me-container">
-          <!-- Custom Checkbox -->
           <input type="checkbox" id="remember" class="custom-checkbox" />
           <label for="remember" class="custom-label">Remember me</label>
         </div>
@@ -174,19 +169,15 @@
         <NuxtLink to="/forgot" class="text-[#79807E]">Forgot Password?</NuxtLink>
       </div>
 
-      <!-- Google Login -->
+
       <div class="text-center mt-6">
         <div class="flex items-center my-6">
-          <!-- Left Line -->
           <div class="flex-grow border-t border-[#C1C7D0]"></div>
 
-          <!-- Center Text -->
           <span class="mx-4 text-[#79807E] font-light text-sm">Or Sign in with</span>
 
-          <!-- Right Line -->
           <div class="flex-grow border-t border-[#C1C7D0]"></div>
         </div>
-<!--        <p class="text-[#045940]">Or Sign in with</p>-->
         <button
           class="mt-2 w-full text-sm text-[#011610] border border-gray-300 flex items-center justify-center p-3 rounded-full hover:bg-gray-100"
         >
@@ -195,19 +186,19 @@
         </button>
       </div>
 
-      <!-- Sign Up Link -->
+
       <div class="text-center mt-6">
         <p class="text-[#0D0D12] text-sm">
           Don’t have an account? <NuxtLink to="/login" class="text-[#045940]">Login</NuxtLink>
         </p>
       </div>
-    </div>
+    </div> -->
   <CoreFullScreenLoader :visible="loading" />
   </template>
   
   <script setup lang="ts">
-  import  { use_auth_register } from '~/composables/auth/useRegister'
-  const { register, loading } = use_auth_register()
+  import  { useRegister } from '~/composables/auth/useRegister'
+  const { register, loading } = useRegister()
   import { ref } from "vue";
 
   definePageMeta({
