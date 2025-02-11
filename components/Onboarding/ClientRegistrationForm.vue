@@ -107,10 +107,13 @@
               type="button"
               class="absolute inset-y-0 right-4 flex items-center"
             >
-              <Icon 
+              <!-- <Icon 
                 :name="showPassword ? 'heroicons:eye-slash' : 'heroicons:eye'" 
                 class="h-5 w-5 text-gray-400" 
-              />
+              /> -->
+              <img v-if="!showPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
+              <img v-if="showPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+              <!-- <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> -->
             </button>
           </div>
           <p v-if="errors.password" class="text-red-500 text-sm">{{ errors.password }}</p>
@@ -137,10 +140,12 @@
               type="button"
               class="absolute inset-y-0 right-4 flex items-center"
             >
-              <Icon 
+            <img v-if="!showConfirmPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
+            <img v-if="showConfirmPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+              <!-- <Icon 
                 :name="showConfirmPassword ? 'heroicons:eye-slash' : 'heroicons:eye'" 
                 class="h-5 w-5 text-gray-400" 
-              />
+              /> -->
             </button>
           </div>
           <p v-if="errors.confirmPassword" class="text-red-500 text-sm">{{ errors.confirmPassword }}</p>
