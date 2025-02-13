@@ -5,7 +5,7 @@
             <p class="mt-2 text-[#79807E] pb-8">Please choose your account category</p>
 
             <div class="mt-6 space-y-6 w-full">
-                <button
+                <NuxtLink to="/client"
                     class="flex w-full items-center justify-between font-medium rounded-lg border border-gray-300 bg-white px-4 py-3.5 text-[#282B2A] shadow-sm hover:bg-gray-50"
                 >
                     Client Seeking Services
@@ -26,9 +26,9 @@
                             />
                         </svg>
                     </span>
-                </button>
+                </NuxtLink>
 
-                <button
+                <NuxtLink to="/business"
                     class="flex w-full items-center justify-between font-medium rounded-lg border border-gray-300 bg-white px-4 py-3.5 text-[#282B2A] shadow-sm hover:bg-gray-50"
                 >
                     Beauty Professionals
@@ -49,12 +49,12 @@
                             />
                         </svg>
                     </span>
-                </button>
+                </NuxtLink>
             </div>
 
             <p class="mt-4 text-[#0D0D12] pt-4">
                 Already have an account?
-                <a href="#" class="text-[#045940] hover:underline">Login</a>
+                <NuxtLink to="/login" class="text-[#045940] hover:underline">Login</NuxtLink>
             </p>
 
            <OnboardingFooter />

@@ -42,6 +42,7 @@
           Didn't receive the code? 
           <button 
             @click="resendOTP" 
+            type="button"
             class="text-[#045940] font-medium hover:text-emerald-700"
           >
             Resend OTP
@@ -52,16 +53,19 @@
       </div>
     </div>
     <CoreFullScreenLoader text="Please wait while we  verify your OTP" :visible="loading" />
+    <CoreFullScreenLoader text="Please wait while we resend verification OTP" :visible="resending" />
   </template>
   
   <script setup lang="ts">
   import { use_auth_verify_user } from '@/composables/auth/useVerifyUser'
+  import { use_auth_resend_verify_email } from '@/composables/auth/useResendEmail'
   const {  verifyUser, loading, setPayload } = use_auth_verify_user()
-  const email = ref('olasehindeolalekanpeter@gmail.com')
-  const otpValues = ref(['', '', '', ''])
-  const inputs = ref<HTMLInputElement[]>([])
-  const isComplete = computed(() => otpValues.value.every(val => val.length === 1))
   const route = useRoute()
+  const email = ref(route.query.email)
+  const otpValues = ref(['', '', '', '']) as any
+  const inputs = ref<HTMLInputElement[]>([])
+  const { resendVerifyEmail, loading: resending } = use_auth_resend_verify_email()
+  const isComplete = computed(() => otpValues.value.every(val => val.length === 1))
   
   const handleInput = (event: Event, index: number) => {
     const input = event.target as HTMLInputElement
@@ -122,8 +126,10 @@
     // Add your verification logic here
   }
   
-  const resendOTP = () => {
+  const resendOTP = async () => {
     console.log('Resending OTP...')
+    await resendVerifyEmail(route?.query?.email)
+    otpValues.value = null
     // Add your resend logic here
   }
   </script>

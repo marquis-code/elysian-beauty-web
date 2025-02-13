@@ -38,6 +38,7 @@ export const useRegister = () => {
     loading.value = true;
     try {
       const res = (await auth_api.$_register(credential.value)) as any;
+      console.log(res, 'res here')
       loading.value = false;
 
       if (res.type !== "ERROR") {
@@ -52,7 +53,7 @@ export const useRegister = () => {
       } else {
         showToast({
           title: "Error",
-          message: res?.data?.error || "Something went wrong",
+          message: res?.data?.message || "Something went wrong",
           toastType: "error",
           duration: 3000,
         });

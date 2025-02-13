@@ -58,7 +58,7 @@
             <input
               v-model="formData.phone"
               type="tel"
-              class="w-full pl-28 pr-12 py-3.5 outline-none focus:border-[#045940] rounded-full border   "
+              class="w-full pl-20 pr-12 py-3.5 outline-none focus:border-[#045940] rounded-full border   "
               :class="{ 'border-red-500': errors.phone }"
             />
             <div class="absolute inset-y-0 right-4 flex items-center">
@@ -111,8 +111,8 @@
                 :name="showPassword ? 'heroicons:eye-slash' : 'heroicons:eye'" 
                 class="h-5 w-5 text-gray-400" 
               /> -->
-              <img v-if="!showPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
-              <img v-if="showPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+              <img v-if="!showPassword" src="@/assets/icons/eye-close.svg" class="h-6 w-6" />
+              <img v-if="showPassword" src="@/assets/icons/eye-open.svg" class="h-6 w-6" />
               <!-- <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> -->
             </button>
           </div>
@@ -140,8 +140,8 @@
               type="button"
               class="absolute inset-y-0 right-4 flex items-center"
             >
-            <img v-if="!showConfirmPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
-            <img v-if="showConfirmPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+            <img v-if="!showConfirmPassword" src="@/assets/icons/eye-close.svg" class="h-6 w-6" />
+            <img v-if="showConfirmPassword" src="@/assets/icons/eye-open.svg" class="h-6 w-6" />
               <!-- <Icon 
                 :name="showConfirmPassword ? 'heroicons:eye-slash' : 'heroicons:eye'" 
                 class="h-5 w-5 text-gray-400" 

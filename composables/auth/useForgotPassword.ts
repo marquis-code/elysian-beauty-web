@@ -18,7 +18,7 @@ export const use_auth_forgot_password = () => {
         if (res.type !== 'ERROR') {
             showToast({ title: 'Success', message: 'Password reset instructions sent to your email.', toastType: 'success', duration: 3000 });
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, forgotPassword, loading };

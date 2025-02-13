@@ -35,5 +35,13 @@ export const auth_api = {
     $_change_password: (credential: any) => {
         const url = '/auth/change-password'
         return GATEWAY_ENDPOINT.patch(url, credential)
-    }
+    },
+    $_social_signin: (credential: any) => {
+		const url = '/auth/social-signin'
+		return GATEWAY_ENDPOINT.post(url, credential)
+	},
+	$_social_signup: (credential: any) => {
+		const url = '/auth/social-signup'
+		return GATEWAY_ENDPOINT.post(url, credential)
+	},
 }

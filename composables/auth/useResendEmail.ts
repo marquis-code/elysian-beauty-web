@@ -10,7 +10,8 @@ export const use_auth_resend_verify_email = () => {
     const loading = ref(false);
     const credential = ref({ email: '' });
 
-    const resendVerifyEmail = async () => {
+    const resendVerifyEmail = async (email: any) => {
+        credential.value.email = email
         loading.value = true;
         const res = await auth_api.$_resend_verify_email(credential.value) as any
         loading.value = false;
@@ -18,7 +19,7 @@ export const use_auth_resend_verify_email = () => {
         if (res.type !== 'ERROR') {
             showToast({ title: 'Success', message: 'Verification email resent successfully.', toastType: 'success', duration: 3000 });
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, resendVerifyEmail, loading };

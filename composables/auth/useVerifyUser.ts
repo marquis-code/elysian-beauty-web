@@ -7,7 +7,6 @@ import { useCustomToast } from '@/composables/core/useCustomToast';
 const { showToast } = useCustomToast();
 // const route = useRoute()
 
-
 export const use_auth_verify_user = () => {
     const loading = ref(false);
     const route = useRoute()
@@ -18,14 +17,16 @@ export const use_auth_verify_user = () => {
 
     const verifyUser = async () => {
         loading.value = true;
-        const route = useRoute()
+        const router = useRouter()
         const res = await auth_api.$_verify_user(credential.value) as any
+        console.log(res, 'res here')
         loading.value = false;
 
         if (res.type !== 'ERROR') {
+            router.push('/client/success')
             showToast({ title: 'Success', message: 'User verification successful.', toastType: 'success', duration: 3000 });
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
 

@@ -21,7 +21,7 @@ export const use_auth_reset_password = () => {
             showToast({ title: 'Success', message: 'Password reset successfully.', toastType: 'success', duration: 3000 });
             router.push('/login');
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, resetPassword, loading };

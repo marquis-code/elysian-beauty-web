@@ -19,7 +19,7 @@ export const use_auth_verify_identity = () => {
         if (res.type !== 'ERROR') {
             showToast({ title: 'Success', message: 'Identity verification successful.', toastType: 'success', duration: 3000 });
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, verifyIdentity, loading };

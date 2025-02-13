@@ -20,7 +20,7 @@ export const use_auth_change_password = () => {
             showToast({ title: 'Success', message: 'Password changed successfully.', toastType: 'success', duration: 3000 });
             router.push('/profile');
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, changePassword, loading };

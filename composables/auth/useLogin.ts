@@ -20,7 +20,7 @@ export const useLogin = () => {
             showToast({ title: 'Success', message: 'Login was successful.', toastType: 'success', duration: 3000 });
             router.push('/dashboard');
         } else {
-            showToast({ title: 'Error', message: res?.data?.error || 'Something went wrong', toastType: 'error', duration: 3000 });
+            showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
     };
     return { credential, login, loading, isFormDisabled };

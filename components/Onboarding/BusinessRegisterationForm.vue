@@ -119,8 +119,8 @@
                 @click="showPassword = !showPassword"
                 class="absolute right-4 top-1/2 -translate-y-1/2"
               >
-              <img v-if="!showPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
-              <img v-if="showPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+              <img v-if="!showPassword" src="@/assets/icons/eye-close.svg" class="h-6 w-6" />
+              <img v-if="showPassword" src="@/assets/icons/eye-open.svg" class="h-6 w-6" />
               </button>
             </div>
           </div>
@@ -147,8 +147,8 @@
                 @click="showConfirmPassword = !showConfirmPassword"
                 class="absolute right-4 top-1/2 -translate-y-1/2"
               >
-              <img v-if="!showConfirmPassword" src="@/assets/icons/eye-close.svg" class="h-8 w-8" />
-              <img v-if="showConfirmPassword" src="@/assets/icons/eye-open.svg" class="h-8 w-8" />
+              <img v-if="!showConfirmPassword" src="@/assets/icons/eye-close.svg" class="h-6 w-6" />
+              <img v-if="showConfirmPassword" src="@/assets/icons/eye-open.svg" class="h-6 w-6" />
               </button>
             </div>
           </div>
@@ -341,7 +341,7 @@
     otpCode: string[];
   }
   
-  const currentStep = ref(3)
+  const currentStep = ref(1)
   const showPassword = ref(false)
   const showConfirmPassword = ref(false)
   const newService = ref('')
@@ -371,7 +371,7 @@
       number: { required, minLength: minLength(10) }
     },
     password: { required, minLength: minLength(8) },
-    confirmPassword: { required, sameAs: sameAs(form.password) },
+    confirmPassword: { required, sameAs: sameAs(() => form.password) },
     businessName: { required },
     businessAddress: { required }
   }
