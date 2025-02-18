@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     },
   },
   plugins: ["~/plugins/aos.client.ts"],
+  build: {
+    transpile: ['chart.js', 'vue-cal', 'fullcalendar'],
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_BASE || 'http://localhost:3000/api',
+    },
+  },
   modules: ['@kevinmarrec/nuxt-pwa'],
   pwa: {
     workbox: {

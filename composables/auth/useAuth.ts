@@ -62,7 +62,8 @@ export function useAuth() {
       const authObj = {
         idToken: token,
         provider: providerName,
-        app: 'tenant-app',
+        app: 'CLIENT',
+        email: userObj.email,
         firstName,
         lastName,
         password,

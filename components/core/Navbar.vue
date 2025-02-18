@@ -18,12 +18,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
 
-          <button @click="router.push('/login')" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
+          <NuxtLink to="/login" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
             Login
-          </button>
-          <button @click="router.push('/register')" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
+          </NuxtLink>
+          <NuxtLink to="/login" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
             SignUp
-          </button>
+          </NuxtLink>
         </div>
       </header>
 
