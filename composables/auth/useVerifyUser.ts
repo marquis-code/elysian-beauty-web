@@ -22,9 +22,9 @@ export const use_auth_verify_user = () => {
         console.log(res, 'res here')
         loading.value = false;
 
-        if (res.type !== 'ERROR') {
+        if (res.status === 200 || res.status === 201) {
             router.push('/client/success')
-            showToast({ title: 'Success', message: 'User verification successful.', toastType: 'success', duration: 3000 });
+            showToast({ title: 'Success', message: res?.data?.message, toastType: 'success', duration: 3000 });
         } else {
             showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
         }
