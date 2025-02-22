@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-2xl mx-auto bg-white rounded-xl py-6 m-6 lg:m-0">
+    <div class="w-full max-w-lg mx-auto bg-white  rounded-xl py-6 m-6 lg:m-0">
     <h2 class="text-3xl font-semibold text-[#045940] mb-4 text-center">Hi, Welcome</h2>
     <p class="text-[#79807E] mb-6 text-center">Please login to your account</p>
     <form @submit.prevent="handleSubmit">

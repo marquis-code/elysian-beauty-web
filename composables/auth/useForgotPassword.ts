@@ -5,11 +5,10 @@ import { useUser } from '~/composables/auth/useUser';
 import { useCustomToast } from '@/composables/core/useCustomToast';
 
 const { showToast } = useCustomToast();
+const credential = ref({ email: '' });
 
 export const use_auth_forgot_password = () => {
     const loading = ref(false);
-    const credential = ref({ email: '' });
-
     const forgotPassword = async () => {
         loading.value = true;
         const res = await auth_api.$_forgot_password(credential.value) as any

@@ -25,7 +25,7 @@ export const auth_api = {
         return GATEWAY_ENDPOINT.post(url, credential)
     },
     $_forgot_password: (credential: any) => {
-        const url = '/auth/verify-identity'
+        const url = '/auth/reset-password-request'
         return GATEWAY_ENDPOINT.post(url, credential)
     },
     $_reset_password: (credential: any) => {
