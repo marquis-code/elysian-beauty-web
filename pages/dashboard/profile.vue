@@ -69,17 +69,17 @@
         </div>
   
         <!-- Navigation Tabs -->
-        <div class="mt-8 border-b">
-          <nav class="flex gap-6">
+        <div class="mt-8">
+          <nav class="flex gap-6 ">
             <button
               v-for="tab in tabs"
               :key="tab.id"
               @click="activeTab = tab.id"
               :class="[
-                'pb-4 px-2 text-sm font-medium relative',
+                'py-2.5 px-4 text-sm font-medium relative',
                 activeTab === tab.id
-                  ? 'text-gray-900 border-b-2 border-gray-900'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'text-white bg-[#282B2A] rounded-full'
+                  : 'text-[#A3A8A7] hover:text-gray-700'
               ]"
             >
               {{ tab.name }}
@@ -92,52 +92,129 @@
         </div>
   
         <!-- Form Section -->
-        <div class="py-8" v-if="activeTab === 'details'">
+        <div class="py-8 " v-if="activeTab === 'details'">
           <h3 class="text-lg font-semibold mb-2">Details</h3>
-          <p class="text-gray-600 mb-6">Please enter your name and email to update your details.</p>
+          <p class="text-[#475467] font-light mb-6">Please enter your name and email to update your details.</p>
           
-          <form @submit.prevent="updateProfile" class="space-y-6 max-w-2xl">
-            <div>
+          <form @submit.prevent="updateProfile" class="space-y-6 divide divide-y divide-gray-100 w-full">
+            <div class="flex justify-between items-center">
+             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+             </div>
+            <div class="max-w-2xl w-full">
               <input
                 v-model="form.firstName"
                 type="text"
-                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
                 placeholder="Olalekan"
               />
             </div>
-  
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-              <input
-                v-model="form.lastName"
-                type="text"
-                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
-                placeholder="Olasehinde"
-              />
             </div>
   
-            <div>
+            <div class="flex justify-between items-center pt-6">
+             <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+             </div>
+         <div class="max-w-2xl w-full">
+          <input
+                v-model="form.lastName"
+                type="text"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
+                placeholder="Olasehinde"
+              />
+         </div>
+            </div>
+  
+            <div class="flex justify-between items-center pt-6">
+             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+             </div>
+            <div class="max-w-2xl w-full">
               <input
                 v-model="form.email"
                 type="email"
-                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
                 placeholder="Olasehindeolalekan@example.com"
               />
             </div>
+            </div>
   
-            <div class="flex justify-end gap-2">
+            <div class="flex justify-end gap-2 pt-6">
               <button
                 type="button"
-                class="px-4 py-2 border rounded-lg hover:bg-gray-50"
+                class="px-6 py-3 text-sm border rounded-full hover:bg-gray-50"
                 @click="resetForm"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
+                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-green-800"
+              >
+                Update password
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="py-8 " v-if="activeTab === 'password'">
+          <h3 class="text-lg font-semibold mb-2">Details</h3>
+          <p class="text-[#475467] font-light mb-6">Please enter your name and email to update your details.</p>
+          
+          <form @submit.prevent="updateProfile" class="space-y-6 divide divide-y divide-gray-100 w-full">
+            <div class="flex justify-between items-center">
+             <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+             </div>
+            <div class="max-w-2xl w-full">
+              <input
+                v-model="form.firstName"
+                type="text"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
+                placeholder="Olalekan"
+              />
+            </div>
+            </div>
+  
+            <div class="flex justify-between items-center pt-6">
+             <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+             </div>
+         <div class="max-w-2xl w-full">
+          <input
+                v-model="form.lastName"
+                type="text"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
+                placeholder="Olasehinde"
+              />
+         </div>
+            </div>
+  
+            <div class="flex justify-between items-center pt-6">
+             <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+             </div>
+            <div class="max-w-2xl w-full">
+              <input
+                v-model="form.email"
+                type="email"
+                class="w-full px-4 py-4 border-[0.5px] border-gray-100 outline-none rounded-lg"
+                placeholder="Olasehindeolalekan@example.com"
+              />
+            </div>
+            </div>
+  
+            <div class="flex justify-end gap-2 pt-6">
+              <button
+                type="button"
+                class="px-6 py-3 text-sm border rounded-full hover:bg-gray-50"
+                @click="resetForm"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-green-800"
               >
                 Update password
               </button>
@@ -148,7 +225,7 @@
         <div v-if="activeTab === 'reviews'" class="py-8">
         <h2 class="text-3xl font-bold mb-8">120 Reviews</h2>
         
-        <div class="grid md:grid-cols-[300px,1fr] gap-8">
+         <div class="grid md:grid-cols-[300px,1fr] gap-8">
           <!-- Rating Overview -->
           <div class="space-y-6">
             <div>
@@ -198,6 +275,8 @@
           </div>
         </div>
       </div>
+
+       <Services v-if="activeTab === 'services'" />
       </div>
     </div>
   </template>
@@ -219,6 +298,7 @@
     { id: 'password', name: 'Password' },
     { id: 'billing', name: 'Billing' },
     { id: 'reviews', name: 'Reviews', count: 2 },
+    { id: 'services', name: 'Services', count: 2 },
   ]
 
   const reviews = [

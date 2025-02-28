@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  server: {
+    port: 3000, // Forcefully set the port to 3000
+  },
   plugins: ["~/plugins/aos.client.ts"],
   build: {
     transpile: ['chart.js', 'vue-cal', 'fullcalendar'],

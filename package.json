@@ -34,7 +34,7 @@
     "fullcalendar": "^6.1.15",
     "libphonenumber-js": "^1.11.19",
     "lodash": "^4.17.21",
-    "lucide-vue-next": "^0.475.0",
+    "lucide-vue-next": "^0.476.0",
     "nuxt-icon": "^1.0.0-beta.7",
     "sweetalert2": "^11.7.32",
     "vee-validate": "^4.15.0",

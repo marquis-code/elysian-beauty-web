@@ -1,6 +1,7 @@
 <template>
    <main>
-    <DashboardScheduleAppointmentsCalendar />
+    <HomeCalendar />
+    <!-- <DashboardScheduleAppointmentsCalendar /> -->
    </main>
 </template>
 

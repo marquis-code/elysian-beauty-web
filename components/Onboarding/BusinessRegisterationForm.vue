@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white p-4 md:p-6 w-full">
+  <div class="min-h-screen bg-white md:p-6 w-full">
     <!-- Progress Bar -->
     <div class="max-w-2xl space-y-4 mx-auto mb-8 w-full">
       <div class="flex items-center justify-between -mb-2">
@@ -462,7 +462,7 @@ interface Credential {
   provider: string
   password: string
   role: string
-  businessLocation?: string
+  // businessLocation?: string
   serviceProvider?: {
     serviceRole: string
     businessName?: string
@@ -666,29 +666,6 @@ onMounted(() => {
 const submitFormData = async () => {
   isSubmitting.value = true
   try {
-    // Prepare the credential data
-    // const mappedCredential: Credential = {
-    //   firstName: form.fullName.split(' ')[0],
-    //   lastName: form.fullName.split(' ').slice(1).join(' '),
-    //   email: form.email,
-    //   provider: "EMAIL",
-    //   password: form.password,
-    //   role: form.businessType === 'Freelancer' ? "CLIENT" : "SERVICEPROVIDER",
-    //   businessLocation: form.businessAddress,
-    // }
-
-    // // Add serviceProvider object only for SERVICEPROVIDER role
-    // if (form.businessType === 'Business') {
-    //   mappedCredential.serviceProvider = {
-    //     serviceRole: "REGISTEREDBUSINESS",
-    //     businessName: form.businessName,
-    //     serviceTypes: form.services.length > 0 ? form.services : ["Other"],
-    //     otherServiceType: form.services.length > 0 ? form.services.join(', ') : "",
-    //     businessLocationType: form.businessLocationType.toUpperCase(),
-    //     businessLocation: form.businessAddress,
-    //   }
-    // }
-
     const mappedCredential: Credential = {
       firstName: form.fullName.split(' ')[0],
       lastName: form.fullName.split(' ').slice(1).join(' '),
@@ -707,19 +684,15 @@ const submitFormData = async () => {
       }
     }
 
-    // Add serviceProvider object only for SERVICEPROVIDER role
-    // if (form.businessType === 'Business') {
- 
-    // }
-
-
     // Set credentials in the composable
     setCredentials(mappedCredential)
-    await register()
-    
-    // Move to OTP step
-    currentStep.value = 3
-    updateUrlStep(3)
+    await register().then((res) => {
+       if(res.type !== 'ERROR'){
+        currentStep.value = 3
+        updateUrlStep(3)
+       }
+    })
+     
   } catch (error) {
     console.error('Error submitting form data:', error)
     // Handle error (e.g., show error message to user)

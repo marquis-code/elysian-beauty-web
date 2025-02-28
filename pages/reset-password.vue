@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-2xl mx-auto bg-white rounded-xl py-6 m-6 lg:m-0">
+    <div class="w-full max-w-lg mx-auto bg-white rounded-xl py-6 m-6 lg:m-0">
       <h2 class="text-3xl font-semibold text-[#045940] mb-2 text-center">Create password</h2>
       <p class="text-[#79807E] mb-6 text-center">Please login to your account</p>
       <form @submit.prevent="handleSubmit">
@@ -8,12 +8,11 @@
           <label for="password" class="block text-[#045940] font-light text-sm mb-1">Password</label>
           <div class="relative">
             <input
-                v-model="form.password"
+                v-model="credential.password"
                 id="password"
                 :type="showPassword ? 'text' : 'password'"
                 placeholder="********"
                 class="w-full p-3 py-4 border rounded-full  text-[#045940] placeholder:text-[#A3A8A7] pl-10 outline-none text-sm py-3 "
-                :class="{ 'border-red-500': errors.password }"
             />
             <svg class="absolute top-3 left-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 8V8C17 5.23858 14.7614 3 12 3V3C9.23858 3 7 5.23858 7 8V8M12 12.5V16.5M9.5 21H14.5C16.8346 21 18.0019 21 18.8856 20.5277C19.5833 20.1548 20.1548 19.5833 20.5277 18.8856C21 18.0019 21 16.8346 21 14.5V14.5C21 12.1654 21 10.9981 20.5277 10.1144C20.1548 9.4167 19.5833 8.84525 18.8856 8.47231C18.0019 8 16.8346 8 14.5 8H9.5C7.16537 8 5.99805 8 5.11441 8.47231C4.4167 8.84525 3.84525 9.4167 3.47231 10.1144C3 10.9981 3 12.1654 3 14.5V14.5C3 16.8346 3 18.0019 3.47231 18.8856C3.84525 19.5833 4.4167 20.1548 5.11441 20.5277C5.99805 21 7.16537 21 9.5 21Z" stroke="#A3A8A7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -89,11 +88,11 @@
               </span>
             </button>
           </div>
-          <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
+          <!-- <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p> -->
         </div>
 
               <!-- Confirm Password -->
-              <div class="mt-4">
+              <!-- <div class="mt-4">
           <label for="password" class="block text-[#045940] font-light text-sm mb-1">New password</label>
           <div class="relative">
             <input
@@ -179,7 +178,7 @@
             </button>
           </div>
           <p v-if="errors.confirmPassword" class="text-red-500 text-sm mt-1">{{ errors.confirmPassword }}</p>
-        </div>
+        </div> -->
   
         <!-- Login Button -->
 <div class="pt-5">
@@ -192,7 +191,7 @@
 </div>
   
         <!-- Errors -->
-        <p v-if="errors.form" class="text-red-500 text-center text-sm mt-4">{{ errors.form }}</p>
+        <!-- <p v-if="errors.form" class="text-red-500 text-center text-sm mt-4">{{ errors.form }}</p> -->
       </form>
   
       <!-- Additional Links -->
@@ -220,8 +219,8 @@
     <CoreFullScreenLoader :visible="loading" />
   </template>
     <script setup lang="ts">
-    import  { use_auth_login } from '~/composables/auth/useLogin'
-    const { login, loading } = use_auth_login()
+    import  { use_auth_reset_password } from '@/composables/auth/useResetPassword'
+    const { credential, resetPassword, loading } = use_auth_reset_password()
     import { ref } from "vue";
   
     definePageMeta({
@@ -230,14 +229,14 @@
     
     const form = ref({
       password: "",
-      confirmPassword: ""
+      // confirmPassword: ""
     });
     
-    const errors = ref({
-      password: "",
-      confirmPassword: "",
-      form: "",
-    });
+    // const errors = ref({
+    //   password: "",
+    //   confirmPassword: "",
+    //   form: "",
+    // });
     
     const showPassword = ref(false);
 
@@ -252,16 +251,17 @@
     };
     
     const handleSubmit = () => {
-      errors.value = { confirmPassword: "", password: "", form: "" };
-      if (!form.value.password) {
-        errors.value.password = "Password is required";
-      }
+      // errors.value = { confirmPassword: "", password: "", form: "" };
+      // if (!form.value.password) {
+      //   errors.value.password = "Password is required";
+      // }
 
-      if (!form.value.confirmPassword) {
-        errors.value.confirmPassword = "Confirm Password is required";
-      }
-      if (!errors.value.confirmPassword && !errors.value.password) {
-        login()()
+      // if (!form.value.confirmPassword) {
+      //   errors.value.confirmPassword = "Confirm Password is required";
+      // }
+      // if (!errors.value.confirmPassword && !errors.value.password) {
+        // login()()
+        resetPassword
         // Simulate API call
         // setTimeout(() => {
         //   if (form.value.email === "test@example.com" && form.value.password === "password") {
@@ -270,7 +270,7 @@
         //     errors.value.form = "Your username or password is incorrect";
         //   }
         // }, 1000);
-      }
+      // }
     };
     </script>
     
