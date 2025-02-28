@@ -404,18 +404,18 @@
           v-if="currentStep === 3"
           type="submit"
           class="w-full max-w-lg mx-auto p-4 bg-[#282B2A] text-white rounded-full hover:bg-[#282B2A]"
-          :disabled="isSubmitting"
+          :disabled="processing"
         >
-          {{ isSubmitting ? 'Verifying...' : 'Verify' }}
+          {{ processing ? 'Verifying...' : 'Verify' }}
         </button>
         <button
           v-else
           type="button"
           @click="nextStep"
-          class="w-full p-4 bg-[#282B2A] text-white rounded-full hover:bg-[#282B2A]"
-          :disabled="isSubmitting"
+          class="w-full p-4 bg-[#282B2A] disabled:cursor-not-allowed disabled:opacity-25 text-white rounded-full hover:bg-[#282B2A]"
+          :disabled="processing"
         >
-          {{ isSubmitting ? 'Processing...' : 'Continue' }}
+          {{ processing ? 'Processing...' : 'Continue' }}
         </button>
       </div>
 
@@ -436,7 +436,12 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+  import { use_auth_verify_user } from '@/composables/auth/useVerifyUser'
+  import { use_auth_resend_verify_email } from '@/composables/auth/useResendEmail'
 import { useCreateBusiness } from '@/composables/auth/useCreateBusiness'
+
+const {  verifyUser, loading: processing, setPayload } = use_auth_verify_user()
+const { resendVerifyEmail, loading: resending } = use_auth_resend_verify_email()
 
 interface FormData {
   businessType: 'Freelancer' | 'Business'
@@ -725,9 +730,21 @@ const handleSubmit = async () => {
       isSubmitting.value = true
       try {
         // Verify OTP
-        await register(form.otpCode.join(''))
-        console.log('Registration complete!')
-        router.push('/dashboard')
+        const payloadOj = {
+            email: form.email,
+            otp: form.otpCode.join('')
+        }
+        // await register(form.otpCode.join(''))
+        setPayload(payloadOj)
+        await verifyUser().then((res: any) => {
+          console.log(res, 'Registration complete!')
+          if(res.type !== 'ERROR'){
+             window.location.href = '/business/success'
+            router.push('/business/success')
+          }
+          //  window.location.href = '/account-success'
+          // router.push('/dashboard')
+        })
       } catch (error) {
         console.error('Error during OTP verification:', error)
         // Handle error (e.g., show error message to user)

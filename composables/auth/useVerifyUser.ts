@@ -23,10 +23,14 @@ export const use_auth_verify_user = () => {
         loading.value = false;
 
         if (res.status === 200 || res.status === 201) {
-            router.push('/client/success')
+            router.push('/account-success')
+            window.location.href = '/account-success'
             showToast({ title: 'Success', message: res?.data?.message, toastType: 'success', duration: 3000 });
+            res
         } else {
+            window.location.href = '/account-success'
             showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
+            return res
         }
     };
 

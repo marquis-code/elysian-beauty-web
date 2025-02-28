@@ -24,7 +24,7 @@
         You're All Set! Start hiring your favourite beauty service providers now, at your convenience!
       </p>
   <div class="pt-6">
-    <button  class="mt-6 bg-black w-full text-white py-3.5 px-6 rounded-full hover:bg-gray-800">
+    <button @click="router.push('/login')"  class="mt-6 bg-black w-full text-white py-3.5 px-6 rounded-full hover:bg-gray-800">
         Login
       </button>
   </div>
@@ -36,6 +36,7 @@
     <script setup lang="ts">
     import  { useRegister } from '~/composables/auth/useRegister'
     const { register, loading } = useRegister()
+    const router = useRouter()
   
     definePageMeta({
       layout: "auth"
