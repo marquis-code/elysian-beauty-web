@@ -34,11 +34,11 @@
             <Search class="h-5 w-5 text-gray-400" />
             <Bell class="h-5 w-5 text-gray-400" />
             <div class="flex items-center space-x-2">
-              <img
+              <!-- <img
                 src="/placeholder.svg?height=40&width=40"
                 alt="Profile"
                 class="h-10 w-10 rounded-full"
-              />
+              /> -->
               <div>
                 <p class="font-medium">Olasehinde Olalekan</p>
                 <p class="text-sm text-gray-600">Professional</p>
@@ -78,7 +78,7 @@
             <!-- Appointments Timeline -->
             <div class="col-span-3">
               <template v-if="activeTab === 'today'">
-                <TimelineView :appointments="todayAppointments" />
+                <!-- <TimelineView :appointments="todayAppointments" /> -->
               </template>
               <template v-else-if="activeTab === 'week'">
                 <WeekView :appointments="weekAppointments" />

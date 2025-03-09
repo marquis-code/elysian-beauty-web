@@ -3,7 +3,7 @@
       <!-- Sidebar -->
       <aside class="w-64 bg-[#2A2F33] text-white hidden lg:block">
         <div class="p-6">
-          <img src="/placeholder.svg" alt="Elysian Beauty" class="h-8" />
+          <!-- <img src="/placeholder.svg" alt="Elysian Beauty" class="h-8" /> -->
         </div>
         <nav class="mt-6">
           <div v-for="item in menuItems" :key="item.label" 
@@ -31,11 +31,11 @@
           <div class="flex items-center gap-4">
             <Bell class="w-6 h-6 text-gray-600" />
             <div class="flex items-center gap-3">
-              <img 
+              <!-- <img 
                 src="/placeholder.svg" 
                 alt="Profile" 
                 class="w-10 h-10 rounded-full"
-              />
+              /> -->
               <div>
                 <div class="font-semibold">Olasehinde Olalekan</div>
                 <div class="text-sm text-gray-500">Professional</div>

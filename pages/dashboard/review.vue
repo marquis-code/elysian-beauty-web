@@ -40,11 +40,11 @@
               <BellIcon class="h-6 w-6 text-gray-600" />
             </button>
             <div class="flex items-center gap-2">
-              <img 
+              <!-- <img 
                 src="/placeholder.svg?height=40&width=40" 
                 alt="Profile" 
                 class="h-10 w-10 rounded-full"
-              />
+              /> -->
               <div>
                 <p class="font-medium">Olasehinde Olalekan</p>
                 <p class="text-sm text-gray-500">Professional</p>

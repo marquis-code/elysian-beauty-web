@@ -113,7 +113,7 @@
                   </td>
                   <td class="px-4 py-4">
                     <div class="flex items-center gap-2">
-                      <img src="/mastercard-icon.png" alt="Mastercard" class="h-5" />
+                      <!-- <img src="/mastercard-icon.png" alt="Mastercard" class="h-5" /> -->
                       <span class="text-sm text-gray-500">•••• 1234</span>
                     </div>
                   </td>

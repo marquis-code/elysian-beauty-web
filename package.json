@@ -26,7 +26,7 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^12.7.0",
-    "aos": "^3.0.0-beta.6",
+    "aos": "^2.3.4",
     "axios": "^1.7.7",
     "chart.js": "^4.4.7",
     "date-fns": "^4.1.0",

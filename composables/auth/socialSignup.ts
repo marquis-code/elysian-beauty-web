@@ -13,7 +13,7 @@ export const use_auth_social_signup = () => {
     email: ref(""),
     lastName: ref(""),
     password: ref(""),
-    location: ref(""),
+    location: ref("Lekki, Ajah"),
   };
 
   const loading = ref(false);
@@ -68,7 +68,8 @@ export const use_auth_social_signup = () => {
         lastName: credential.lastName.value,
         email: credential.email.value,
         // password: credential.password.value,
-        location: credential.location.value,
+        location: 'Lekki, Ajah'
+        // location: credential.location.value,
       });
 
       if (res.type !== "ERROR") {
