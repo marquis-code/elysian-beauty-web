@@ -21,20 +21,6 @@ export default defineNuxtConfig({
     transpile: ['chart.js', 'vue-cal', 'fullcalendar'],
   },
   modules: ['@kevinmarrec/nuxt-pwa'],
-  pwa: {
-    manifest: {
-      name: "Elysian Beauty",
-      short_name: "Elysian",
-      lang: 'en',
-      useWebmanifestExtension: false,
-      display: 'standalone',
-      theme_color: '#ffffff',
-      background_color: '#ffffff'
-    },
-    workbox: {
-      navigateFallback: '/'
-    }
-  },
   app: {
     head: {
       title: "Elysian Beauty - Your Journey to Timeless Beauty Begins Here",
