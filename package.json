@@ -1,5 +1,6 @@
 {
   "private": true,
+  "homepage": "https://www.elysian-beauty.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/ricardobalk/nuxt3-tailwindcss.git"
