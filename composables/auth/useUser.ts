@@ -73,8 +73,8 @@ export const useUser = () => {
     const createUser = (user: any) => {
         console.log(user, 'from cpomposebe')
         runtimeData.user.value = user?.user;
-        localStorageData.token.value = user?.accessToken;
-        runtimeData.token.value = user?.accessToken;
+        localStorageData.token.value = user?.data?.token;
+        runtimeData.token.value = user?.data?.token;
     };
 
     const updateUser = (newUser: any) => {
