@@ -222,6 +222,22 @@
           </form>
         </div>
 
+        <div>
+    <h1 class="text-2xl font-bold mb-4">Welcome to the Availability Page</h1>
+
+        <!-- Trigger to show the modal -->
+        <button
+          @click="isModalVisible = true"
+          class="px-4 py-2 bg-blue-500 text-white rounded-md"
+        >
+          Edit Availability
+        </button>
+
+        <!-- The Availability Modal Component -->
+        <AvailabilityModal v-if="isModalVisible" />
+      </div>
+
+
         <div v-if="activeTab === 'reviews'" class="py-8">
         <h2 class="text-3xl font-bold mb-8">120 Reviews</h2>
         
@@ -292,6 +308,8 @@
   const name = ref('Olalekan Peter')
   const title = ref('Masseur Therapist')
   const coverInput = ref<HTMLInputElement | null>(null)
+
+  const isModalVisible = ref(false); // Set to false initially (modal is hidden)
   
   const tabs = [
     { id: 'details', name: 'My Details' },
