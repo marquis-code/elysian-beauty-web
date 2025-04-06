@@ -132,7 +132,8 @@
 <path d="M5.55304 13.3315L3.29758 14.2318C2.80929 14.4267 2.56515 14.5241 2.42241 14.4361C2.37812 14.4088 2.34084 14.3716 2.31355 14.3273C2.22557 14.1845 2.32301 13.9404 2.51791 13.4521L3.41813 11.1966M5.55304 13.3315L12.9363 5.94826M5.55304 13.3315L5.33579 11.9156C5.30727 11.7298 5.29301 11.6368 5.24019 11.5686C5.22293 11.5463 5.20293 11.5263 5.18064 11.5091C5.1124 11.4563 5.01947 11.442 4.83361 11.4135L3.41813 11.1966M3.41813 11.1966L10.8014 3.81336M12.9363 5.94826L10.8014 3.81336M12.9363 5.94826L13.5992 5.28536C14.1888 4.69582 14.1888 3.74 13.5992 3.15046V3.15046C13.0097 2.56092 12.0539 2.56092 11.4643 3.15046L10.8014 3.81336M2 5.08301C3.33333 4.74967 4 4.08301 4.33333 2.74967C4.66667 4.08301 5.33333 4.74967 6.66667 5.08301C5.33333 5.41634 4.66667 6.08301 4.33333 7.41634C4 6.08301 3.33333 5.41634 2 5.08301ZM10 11.9163C10.6667 11.7497 11 11.4163 11.1667 10.7497C11.3333 11.4163 11.6667 11.7497 12.3333 11.9163C11.6667 12.083 11.3333 12.4163 11.1667 13.083C11 12.4163 10.6667 12.083 10 11.9163Z" stroke="#282B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-                      Edit Availability</li>
+                     <button @click="showAvailabilityModal = true" > Edit Availability</button>
+                    </li>
                     <li @click="goToAccountSettings" class="flex items-center gap-x-3 border-b">
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.63198 8.75C9.63198 9.64907 8.903 10.3779 8.00376 10.3779C7.10452 10.3779 6.37555 9.64907 6.37555 8.75C6.37555 7.85093 7.10452 7.12209 8.00376 7.12209C8.903 7.12209 9.63198 7.85093 9.63198 8.75Z" stroke="#282B2A" stroke-width="1.5" stroke-linejoin="round"/>
@@ -162,6 +163,11 @@
     </div>
   </div>
   <NotificationsPanel @close="closeNotifications" v-if="showNotifications" /> 
+  <UpdatedAvailabilityModal 
+        v-if="showAvailabilityModal" 
+        @close="showAvailabilityModal = false"
+        @save="handleSaveAvailability"
+      />
 </template>
 
 <script setup lang="ts">
@@ -183,6 +189,7 @@ const isMobileMenuOpen = ref(false)
 const currentPage = ref('Overview')
 const showNotifications = ref(false)
 const unreadNotifications = ref(3)
+const showAvailabilityModal = ref(false);
 
 // Dummy user profile object
 const userProfile = ref({
@@ -217,6 +224,11 @@ const userProfile = ref({
     details: []
   }
 })
+
+const handleSaveAvailability = (data: any) => {
+    console.log('Availability saved:', data);
+    showAvailabilityModal.value = false;
+  };
 
 // Calculate profile completion percentage
 const calculateProfileCompletion = () => {
