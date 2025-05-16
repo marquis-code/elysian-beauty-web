@@ -1,2 +1,7 @@
 export * from './auth'
+export * from './appointment'
+export * from './bookings'
+export * from './categories'
+export * from './reviews'
+export * from './service-types'
 export * from '../axios.config'
