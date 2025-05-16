@@ -12,7 +12,7 @@
       </p>
       <div class="lg:flex gap-4 space-y-3 lg:space-y-0">
      <div>
-       <button class="bg-[#FFD23F] text-[#045940] w-full lg:w-max text-sm rounded-full px-6 py-3.5 font-semibold">
+       <button @click="router.push('/explore')" class="bg-[#FFD23F] text-[#045940] w-full lg:w-max text-sm rounded-full px-6 py-3.5 font-semibold">
          Book Appointment
        </button>
      </div>
@@ -47,4 +47,5 @@ section {
 </style>
 
 <script setup lang="ts">
+const router = useRouter()
 </script>
