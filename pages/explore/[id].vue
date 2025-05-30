@@ -25,6 +25,9 @@
   
   <script setup lang="ts">
   import { ref, onMounted, watch } from 'vue';
+  import { useFetchServiceType } from  "@/composables/modules/serviceTypes/useFetchServiceType"
+  const { serviceType, loading } = useFetchServiceType()
+import { computed } from 'vue'
   
   // State management
   const currentStep = ref<string | null>(null);

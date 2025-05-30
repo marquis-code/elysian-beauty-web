@@ -202,37 +202,6 @@
           </div>
           <p v-if="errors.businessName" class="text-red-500 text-sm">{{ errors.businessName }}</p>
         </div>
-
-    
-        <!-- <div  class="space-y-2">
-          <label class="block text-gray-500 text-sm">What type of services do you offer?</label>
-          <div class="relative">
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span
-                v-for="service in form.services"
-                :key="service"
-                class="px-4 py-2 bg-[#A3A8A7] font-medium text-white rounded-full text-sm flex items-center gap-2"
-              >
-                {{ service }}
-                <button
-                  type="button"
-                  @click="removeService(service)"
-                  class="text-gray-500 hover:text-gray-700"
-                >
-  
-                </button>
-              </span>
-            </div>
-            <input
-              v-model="newService"
-              type="text"
-              class="w-full p-4 border rounded-full pl-12 outline-none border-[0.5px] bg-gray-50"
-              placeholder="Add a service"
-              @keyup.enter="addService"
-            />
-          </div>
-        </div> -->
-
         <div class="space-y-2">
   <label class="block text-gray-500 text-sm">What type of services do you offer?</label>
   
@@ -287,69 +256,10 @@
             v-model="form.businessLocationType"
             class="w-full p-4 border rounded-full appearance-none pl-12"
           >
-            <option value="Physical">Physical</option>
-            <option value="Virtual">Virtual</option>
+            <option value="PHYSICAL">Physical</option>
+            <option value="ONLINE">Virtual</option>
           </select>
         </div>
-<!--   
-        <div v-if="form.businessType === 'Business'" class="space-y-2">
-          <label class="block text-gray-500 text-sm">Business Name</label>
-          <div class="relative">
-            <input
-              v-model="form.businessName"
-              type="text"
-              class="w-full p-4 border rounded-full pl-12 outline-none border-[0.5px] bg-gray-50"
-              :class="{ 'border-red-500': errors.businessName }"
-            />
-            <span class="absolute left-4 top-1/2 -translate-y-1/2">
-
-            </span>
-          </div>
-          <p v-if="errors.businessName" class="text-red-500 text-sm">{{ errors.businessName }}</p>
-        </div>
-
-    
-        <div v-if="form.businessType === 'Business'" class="space-y-2">
-          <label class="block text-gray-500 text-sm">What type of services do you offer?</label>
-          <div class="relative">
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span
-                v-for="service in form.services"
-                :key="service"
-                class="px-4 py-2 bg-[#A3A8A7] font-medium text-white rounded-full text-sm flex items-center gap-2"
-              >
-                {{ service }}
-                <button
-                  type="button"
-                  @click="removeService(service)"
-                  class="text-gray-500 hover:text-gray-700"
-                >
-  
-                </button>
-              </span>
-            </div>
-            <input
-              v-model="newService"
-              type="text"
-              class="w-full p-4 border rounded-full pl-12 outline-none border-[0.5px] bg-gray-50"
-              placeholder="Add a service"
-              @keyup.enter="addService"
-            />
-            <span class="absolute left-4 top-1/2 -translate-y-1/2">💼</span>
-          </div>
-        </div>
-
-
-        <div v-if="form.businessType === 'Business'" class="space-y-2">
-          <label class="block text-gray-500 text-sm">Business Location Type</label>
-          <select
-            v-model="form.businessLocationType"
-            class="w-full p-4 border rounded-full appearance-none pl-12"
-          >
-            <option value="Physical">Physical</option>
-            <option value="Virtual">Virtual</option>
-          </select>
-        </div> -->
 
 
         <div class="space-y-2">
@@ -519,9 +429,6 @@ const errors = reactive({
 
 const countries = [
   { name: 'Nigeria', code: '+234' },
-  // { name: 'United States', code: '+1' },
-  // { name: 'United Kingdom', code: '+44' },
-  // Add more countries as needed
 ]
 
 const validateForm = () => {
@@ -590,17 +497,6 @@ const validateForm = () => {
 
   return isValid
 }
-
-// const addService = () => {
-//   if (newService.value.trim() && !form.services.includes(newService.value.trim())) {
-//     form.services.push(newService.value.trim())
-//     newService.value = ''
-//   }
-// }
-
-// const removeService = (service: string) => {
-//   form.services = form.services.filter(s => s !== service)
-// }
 
 const allowedServices = [
   "HairStyling",
