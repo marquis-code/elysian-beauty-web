@@ -54,7 +54,7 @@
           <!-- Submit Button -->
           <button
               type="submit"
-              class="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-green-800 focus:outline-none"
+              class="w-full bg-green-700 text-white py-3 rounded-lg hover:bg-[#045940]00 focus:outline-none"
           >
             Send a Message
           </button>

@@ -25,9 +25,8 @@
   
   <script setup lang="ts">
   import { ref, onMounted, watch } from 'vue';
-  import { useFetchServiceType } from  "@/composables/modules/serviceTypes/useFetchServiceType"
-  const { serviceType, loading } = useFetchServiceType()
-import { computed } from 'vue'
+  import { useFetchCategories } from "@/composables/modules/categories/useFetchCategories"
+import { useFetchServiceTypes } from  "@/composables/modules/serviceTypes/useFetchServiceTypes"
   
   // State management
   const currentStep = ref<string | null>(null);
@@ -46,6 +45,23 @@ import { computed } from 'vue'
     }
   });
   
+  // Define types
+interface Category {
+  icon: string;
+  name: string;
+}
+
+interface Salon {
+  name: string;
+  price: number;
+  image: string;
+  rating: number;
+  reviews: number;
+  level: string;
+  isNew?: boolean;
+}
+
+
   // Save state when it changes
   watch(currentStep, (newValue) => {
     if (newValue) {
