@@ -2,6 +2,8 @@
     <div>
        <CoreNavbar />
         <NuxtPage />
-        <CoreFooter />
+        <Newsletter />
+        <FooterSection />
+        <!-- <CoreFooter /> -->
     </div>
 </template>

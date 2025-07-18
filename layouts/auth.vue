@@ -15,7 +15,7 @@
     </div>
 
     <!-- Form Container -->
-    <div class="w-full md:w-1/2 h-full flex items-center justify-center bg-white p-8">
+    <div class="w-full md:w-1/2 h-full flex items-center justify-center bg-white">
       <slot />
     </div>
   </div>

@@ -10,23 +10,23 @@ interface Category {
 
 export const categories_api = {
   $_create_category: (payload: Category) => {
-    const url = "/category";
+    const url = "/categories";
     return GATEWAY_ENDPOINT.post(url, payload);
   },
   $_update_category: (payload: Category) => {
-    const url = "/category";
+    const url = "/categories";
     return GATEWAY_ENDPOINT.put(url, payload);
   },
   $_delete_category: (id: string) => {
-    const url = `/category/${id}`;
+    const url = `/categories/${id}`;
     return GATEWAY_ENDPOINT.delete(url);
   },
   $_fetch_category: (id: string) => {
-    const url = `/category/${id}`;
+    const url = `/categories/${id}`;
     return GATEWAY_ENDPOINT.get(url);
   },
   $_fetch_categories: () => {
-    const url = "/category";
+    const url = "/categories";
     return GATEWAY_ENDPOINT.get(url);
   },
 };

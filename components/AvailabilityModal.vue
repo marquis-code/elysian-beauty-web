@@ -84,7 +84,7 @@
         </div>
   
         <div v-if="availabilityStatus === 'within-days'" class="mb-6">
-          <p class="text-gray-600">Choose your preferred working days</p>
+          <p class="text-gray-600">Choose your preferred working days sss</p>
           <div class="space-x-4 mt-2">
             <div class="inline-flex items-center space-x-2">
               <input
