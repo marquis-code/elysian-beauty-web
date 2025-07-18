@@ -64,7 +64,7 @@
           <div 
             v-for="(salon, index) in value" 
             :key="index" 
-            @click="`/explore/${salon.id}`"
+            @click="router.push(`/explore/${salon.id}`)"
             class="relative group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
           >
             <div  @click="`/explore/${salon.id}`" class="relative rounded-lg overflow-hidden shadow-sm">
@@ -123,6 +123,7 @@ import { computed } from 'vue'
 
 const { categories: categoriesList, loading } = useFetchCategories()
 const {  serviceTypes, loading: fetchingServiceTypes } = useFetchServiceTypes()
+const router = useRouter()
 
 // Define types
 interface Category {

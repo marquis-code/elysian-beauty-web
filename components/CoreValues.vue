@@ -13,7 +13,7 @@
 
             Our Core Value</span>
       </div>
-      <h1 class="text-4xl lg:text-5xl font-semibold text-[#045940] mb-4">
+      <h1 class="text-4xl lg:text-7xl font-semibold text-[#045940] mb-4">
         What We Stand For
       </h1>
       <p class="text-lg text-[#505554]">

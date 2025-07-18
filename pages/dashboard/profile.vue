@@ -149,7 +149,7 @@
               </button>
               <button
                 type="submit"
-                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-green-800"
+                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-[#045940]00"
               >
                 Update password
               </button>
@@ -214,7 +214,7 @@
               </button>
               <button
                 type="submit"
-                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-green-800"
+                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-[#045940]00"
               >
                 Update password
               </button>
@@ -226,12 +226,12 @@
     <h1 class="text-2xl font-bold mb-4">Welcome to the Availability Page</h1>
 
         <!-- Trigger to show the modal -->
-        <button
-          @click="isModalVisible = true"
+        <NuxtLink
+          to="/dashboard/salon/availability"
           class="px-4 py-2 bg-blue-500 text-white rounded-md"
         >
           Edit Availability
-        </button>
+        </NuxtLink>
 
         <!-- The Availability Modal Component -->
         <AvailabilityModal v-if="isModalVisible" />
