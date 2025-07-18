@@ -23,11 +23,10 @@
 
 <script setup lang="ts">
 import background1 from '@/assets/img/signup.png';
-import background2 from '@/assets/img/login.png';
-import background3 from '@/assets/img/auth.png';
+// import background3 from '@/assets/img/auth.png';
 import { ref, onMounted } from 'vue';
 
-const backgrounds = [background1, background2, background3];
+const backgrounds = [background1];
 const currentBackground = ref(backgrounds[0]);
 
 onMounted(() => {

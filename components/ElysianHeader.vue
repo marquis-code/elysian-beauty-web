@@ -43,7 +43,7 @@
         <!-- Profile -->
         <div class="flex items-center">
           <div class="h-8 w-8 rounded-full bg-gray-800 flex-shrink-0 overflow-hidden">
-            <img src="/profile-placeholder.png" alt="Profile" class="h-full w-full object-cover" />
+            <!-- <img src="/profile-placeholder.png" alt="Profile" class="h-full w-full object-cover" /> -->
           </div>
           <div class="ml-2 hidden md:block">
             <div class="flex items-center">

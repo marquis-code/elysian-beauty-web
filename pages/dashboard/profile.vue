@@ -17,11 +17,11 @@
   
       <!-- Cover Image Section -->
       <div class="relative h-64 bg-gray-200">
-        <img
+        <!-- <img
           :src="coverImage"
           alt="Cover"
           class="w-full h-full object-cover"
-        />
+        /> -->
         <button
           @click="handleCoverChange"
           class="absolute top-4 right-4 px-4 py-2 bg-white rounded-full text-sm flex items-center gap-2 shadow-sm hover:bg-gray-50"
@@ -300,7 +300,7 @@
   <script setup lang="ts">
   import { ref } from 'vue'
   import { BellIcon, CameraIcon, ChevronDownIcon, StarIcon, ShareIcon } from 'lucide-vue-next'
-  import coverImage from '@/assets/img/login.png'
+  // import coverImage from '@/assets/img/login.png'
   import profileImage from '@/assets/img/avatar.svg'
   
 //   const coverImage = ref('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-18%20at%2010.14.52%E2%80%AFAM-KkW8oBalL2vbs1NpgoO8f7XI4almkA.png')
@@ -372,7 +372,7 @@ const activeTab = ref('reviews')
     if (input.files && input.files[0]) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        coverImage.value = e.target?.result as string
+        // coverImage.value = e.target?.result as string
       }
       reader.readAsDataURL(input.files[0])
     }
