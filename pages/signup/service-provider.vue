@@ -3,6 +3,7 @@
     <!-- Header with Progress -->
     <header class="p-4 md:p-6 bg-white/90 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-20">
       <div class="max-w-md mx-auto">
+        <!-- {{ banks }} -->
         <!-- Top Row -->
         <div class="flex items-center justify-between mb-4">
           <button @click="handleBack" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -597,9 +598,11 @@
 </template>
 
 <script setup lang="ts">
+import { useFetchBanksList } from "@/composables/modules/transactions/useFetchBanksList"
 import { useCreateBusiness } from '@/composables/auth/useCreateBusiness'
 // Composables
 const { setCredentials, register, loading } = useCreateBusiness()
+const {  banks, loading: fetchingBanksList } = useFetchBanksList()
 const router = useRouter()
 
 // Form state
