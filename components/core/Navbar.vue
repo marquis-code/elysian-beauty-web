@@ -21,7 +21,7 @@
           <NuxtLink to="/login" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
             Login
           </NuxtLink>
-          <NuxtLink to="/login" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
+          <NuxtLink to="/signup" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
             SignUp
           </NuxtLink>
         </div>
