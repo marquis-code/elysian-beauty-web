@@ -38,29 +38,29 @@
           <!-- Social Media Icons -->
           <div class="flex justify-center space-x-6 mb-8">
             <!-- Facebook -->
-            <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
+            <!-- <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
              <img src="@/assets/img/socials1.png" class="h-10 w-10" />
-            </a>
+            </a> -->
             
             <!-- Twitter/X -->
-            <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
+            <!-- <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
                 <img src="@/assets/img/socials2.png" class="h-10 w-10" />
-            </a>
+            </a> -->
             
             <!-- LinkedIn -->
-            <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
+            <a href="https://www.instagram.com/elysian.beauty_co?igsh=MW5qdDU3NjZtM3NlOQ%3D%3D&utm_source=qr" class="text-white hover:text-elysian-gold transition-colors duration-300">
                 <img src="@/assets/img/socials3.png" class="h-10 w-10" />
             </a>
             
             <!-- Instagram -->
-            <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
-                <img src="@/assets/img/socials4.png" class="h-10 w-10" />
+            <a href="https://www.tiktok.com/@elysian.beauty_co?_t=ZM-8yOvNDNbVm1&_r=1" class="text-white hover:text-elysian-gold transition-colors duration-300">
+                <img src="@/assets/icons/socials6.svg" class="h-10 w-10" />
             </a>
             
             <!-- YouTube -->
-            <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
+            <!-- <a href="#" class="text-white hover:text-elysian-gold transition-colors duration-300">
                 <img src="@/assets/img/socials5.png" class="h-10 w-10" />
-            </a>
+            </a> -->
           </div>
         </div>
         

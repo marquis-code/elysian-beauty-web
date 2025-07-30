@@ -742,8 +742,10 @@
   import { ref, reactive, computed, onMounted, watch } from 'vue'
   import { useAvailability } from '~/composables/useAvailability'
   import { formatTime, formatTimeRange, formatDate, formatDateShort, getDaysInMonth, getFirstDayOfMonth, isToday, isPastDate } from '~/utils/dateHelpers'
+  import { useUpdateAvailability } from "@/composables/modules/availability/useUpdateAvailability"
   import type { TimeSlot, DateRangeAvailability } from '~/types/availability'
-  
+  import { useFetchAvailabilityByProvider } from "@/composables/modules/availability/useFetchAvailabilityByProvider"
+  import { useCreateAvailability } from "@/composables/modules/availability/useCreateAvailability"
   // Composables
   const {
     availability,
@@ -766,6 +768,10 @@
     checkTimeSlotConflicts,
     createTimeSlot
   } = useAvailability()
+
+  const { fetchAvailabilityByProvider, availabilities, loading: fetchingAvailability } = useFetchAvailabilityByProvider()
+  const { updateAvailability, loading: updatingAvailability } = useUpdateAvailability()
+  const { createAvailability, loading: creatingAvailability } = useCreateAvailability()
   
   // Local state
   const activeTab = ref('weekly')

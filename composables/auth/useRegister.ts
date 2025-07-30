@@ -48,8 +48,12 @@ export const useRegister = () => {
           toastType: "success",
           duration: 3000,
         });
+        router.push({
+          path: "/signup/verify",
+          query: { email: credential.value.email },
+        });
         // Optionally navigate after successful registration
-        router.push({path: '/client/otp-verification',  query: { email: credential?.value?.email}});
+        // router.push({path: '/client/otp-verification',  query: { email: credential?.value?.email}});
       } else {
         showToast({
           title: "Error",
