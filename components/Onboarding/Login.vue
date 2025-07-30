@@ -104,8 +104,8 @@
     <!-- Sign Up Link -->
     <div class="text-center mt-6">
       <p class="text-[#0D0D12] text-sm">
-        Don’t have an account? <NuxtLink to="/waitlist" class="text-[#045940]">Sign Up</NuxtLink>
-        <!-- Don’t have an account? <NuxtLink to="/signup" class="text-[#045940]">Sign Up</NuxtLink> -->
+        <!-- Don’t have an account? <NuxtLink to="/waitlist" class="text-[#045940]">Sign Up</NuxtLink> -->
+        Don’t have an account? <NuxtLink to="/signup" class="text-[#045940]">Sign Up</NuxtLink>
       </p>
     </div>
 

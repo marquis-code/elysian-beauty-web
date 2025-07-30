@@ -18,18 +18,18 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
 
-          <!-- <NuxtLink to="/login" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
+          <NuxtLink to="/login" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
             Login
           </NuxtLink>
           <NuxtLink to="/signup" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
             SignUp
-          </NuxtLink> -->
-          <NuxtLink to="/waitlist" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
+          </NuxtLink>
+          <!-- <NuxtLink to="/waitlist" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
             Login
           </NuxtLink>
           <NuxtLink to="/waitlist" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
             SignUp
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
       </header>
 
@@ -118,12 +118,12 @@
                         </a>
                       </li>
                       <li>
-                        <!-- <NuxtLink @click="isOpenSidebar = false" to="/login" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
-                          Login
-                        </NuxtLink> -->
-                        <NuxtLink @click="isOpenSidebar = false" to="/waitlist" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
+                        <NuxtLink @click="isOpenSidebar = false" to="/login" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
                           Login
                         </NuxtLink>
+                        <!-- <NuxtLink @click="isOpenSidebar = false" to="/waitlist" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
+                          Login
+                        </NuxtLink> -->
                       </li>
                     </ul>
                   </li>

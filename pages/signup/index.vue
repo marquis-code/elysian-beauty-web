@@ -62,8 +62,8 @@
         <!-- Login Link -->
         <div class="text-center">
           <span class="text-gray-600">Already have an account? </span>
-          <!-- <NuxtLink to="/login" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink> -->
-          <NuxtLink to="/waitlist" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink>
+          <NuxtLink to="/login" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink>
+          <!-- <NuxtLink to="/waitlist" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink> -->
         </div>
       </div>
     </div>
@@ -93,12 +93,12 @@
 const router = useRouter()
 
 const selectAccountType = (type: 'CLIENT' | 'SERVICE_PROVIDER') => {
-  router.push('/waitlist')
-  // if (type === 'CLIENT') {
-  //   router.push('/signup/client')
-  // } else {
-  //   router.push('/signup/service-provider')
-  // }
+  // router.push('/waitlist')
+  if (type === 'CLIENT') {
+    router.push('/signup/client')
+  } else {
+    router.push('/signup/service-provider')
+  }
 }
 
 // SEO
