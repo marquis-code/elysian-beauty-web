@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
       <div class="flex flex-col items-center justify-center min-h-screen p-4">
     <div class="text-3xl font-semibold text-[#282B2A] flex items-center gap-2">
       Success <span class="text-lg">😊🎉</span>
@@ -43,4 +43,55 @@
     })
 
     </script>
+   -->
+
+   <template>
+    <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-6">
+      <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+        <!-- Success Icon -->
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircleIcon class="w-12 h-12 text-green-600" />
+        </div>
   
+        <!-- Success Message -->
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">Registration Successful!</h1>
+        <p class="text-gray-600 mb-8">
+          Welcome to our platform! Your business account has been created successfully. 
+          You can now start offering your services to customers.
+        </p>
+  
+        <!-- Action Buttons -->
+        <div class="space-y-4">
+          <NuxtLink
+            to="/dashboard"
+            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium py-3 px-6 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 inline-block"
+          >
+            Go to Dashboard
+          </NuxtLink>
+          
+          <NuxtLink
+            to="/profile/setup"
+            class="w-full border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-xl hover:bg-gray-50 transition-all duration-200 inline-block"
+          >
+            Complete Profile Setup
+          </NuxtLink>
+        </div>
+  
+        <!-- Additional Info -->
+        <div class="mt-8 p-4 bg-blue-50 rounded-xl">
+          <p class="text-sm text-blue-800">
+            <strong>Next Steps:</strong> Complete your profile setup to start receiving bookings and showcase your services.
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script setup lang="ts">
+  import { CheckCircleIcon } from '@heroicons/vue/24/outline'
+  
+  // Set page meta
+  definePageMeta({
+    layout: 'auth'
+  })
+  </script>

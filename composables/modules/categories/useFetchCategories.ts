@@ -16,5 +16,9 @@ export const useFetchCategories = () => {
 		loading.value = false;
 	};
 
+	onMounted(() => {
+		fetchCategories()
+	})
+
 	return { fetchCategories, categories, loading };
 };

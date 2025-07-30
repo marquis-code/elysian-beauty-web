@@ -4,10 +4,11 @@ import { ref } from "vue";
 export const useFetchServiceType = () => {
 	const loading = ref(false);
 	const serviceType = ref(null);
+	const route = useRoute()
 
-	const fetchServiceType = async (id: string) => {
+	const fetchServiceType = async () => {
 		loading.value = true;
-		const res = await serviceType_api.$_fetch_serviceType(id) as any;
+		const res = await serviceType_api.$_fetch_serviceType(route?.params?.id) as any;
 
 		if (res.type !== "ERROR") {
 			serviceType.value = res.data;
@@ -16,5 +17,8 @@ export const useFetchServiceType = () => {
 		loading.value = false;
 	};
 
+	onMounted(() => {
+		fetchServiceType()
+	})
 	return { fetchServiceType, serviceType, loading };
 };

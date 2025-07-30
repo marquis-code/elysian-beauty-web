@@ -21,7 +21,7 @@
         <!-- Login Button -->
         <button
             type="submit"
-            class="w-full bg-[#045940] text-white p-3 py-3.5 rounded-full mt-6 hover:bg-green-800"
+            class="w-full bg-[#045940] text-white p-3 py-3.5 rounded-full mt-6 hover:bg-[#045940]00"
         >
           Submit
         </button>
@@ -34,7 +34,7 @@
       <!-- Sign Up Link -->
       <div class="text-center mt-6">
         <p class="text-[#0D0D12] text-sm">
-          Don’t have an account? <NuxtLink to="/register" class="text-[#045940]">Sign Up</NuxtLink>
+          Don’t have an account? <NuxtLink to="/signup" class="text-[#045940]">Sign Up</NuxtLink>
         </p>
       </div>
     </div>
