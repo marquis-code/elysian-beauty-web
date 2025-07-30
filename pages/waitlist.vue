@@ -555,7 +555,7 @@
   
   const redirectToWhatsApp = () => {
     console.log('Redirecting to WhatsApp...')
-    const whatsappNumber = '2348123456789' // Replace with your WhatsApp number
+    const whatsappNumber = '2348029778733' // Replace with your WhatsApp number
     const message = encodeURIComponent(
       `Hi! I just joined the Elysian Beauty waitlist. My name is ${formData.value.name} and I'm excited to experience your beauty services! 🌟`
     )
