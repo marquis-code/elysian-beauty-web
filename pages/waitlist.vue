@@ -553,15 +553,23 @@
     }, 1000)
   }
   
+  // const redirectToWhatsApp = () => {
+  //   console.log('Redirecting to WhatsApp...')
+  //   const whatsappNumber = '2348029778733' // Replace with your WhatsApp number
+  //   const message = encodeURIComponent(
+  //     `Hi! I just joined the Elysian Beauty waitlist. My name is ${formData.value.name} and I'm excited to experience your beauty services! 🌟`
+  //   )
+  //   window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank')
+  //   closeModal()
+  // }
+
   const redirectToWhatsApp = () => {
-    console.log('Redirecting to WhatsApp...')
-    const whatsappNumber = '2348123456789' // Replace with your WhatsApp number
-    const message = encodeURIComponent(
-      `Hi! I just joined the Elysian Beauty waitlist. My name is ${formData.value.name} and I'm excited to experience your beauty services! 🌟`
-    )
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank')
-    closeModal()
-  }
+  console.log('Redirecting to WhatsApp Community...')
+  const communityLink = 'https://chat.whatsapp.com/Buf1XsJTA8kHgoMe0BBA9p?mode=ac_t'
+  window.open(communityLink, '_blank')
+  closeModal()
+}
+
   
   const resetForm = () => {
     console.log('Resetting form...')
