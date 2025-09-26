@@ -12,8 +12,8 @@ export const serviceType_api = {
     const url = "/service-types";
     return GATEWAY_ENDPOINT.post(url, payload);
   },
-  $_update_serviceType: (payload: ServiceType) => {
-    const url = "/service-types";
+  $_update_serviceType: (id: string, payload: ServiceType) => {
+    const url = `/service-types/${id}`;
     return GATEWAY_ENDPOINT.put(url, payload);
   },
   $_delete_serviceType: (id: string) => {

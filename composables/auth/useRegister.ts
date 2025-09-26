@@ -22,15 +22,15 @@ export const useRegister = () => {
   const loading = ref(false);
 
   // Disable form if certain fields are empty or if the request is loading
-  const isFormDisabled = computed(() => 
-    !credential.value.firstName || 
-    !credential.value.lastName || 
-    !credential.value.email || 
-    !credential.value.password || 
-    !credential.value.location || 
-    !credential.value.phoneNum || 
-    !credential.value.provider || 
-    !credential.value.role || 
+  const isFormDisabled = computed(() =>
+    !credential.value.firstName ||
+    !credential.value.lastName ||
+    !credential.value.email ||
+    !credential.value.password ||
+    !credential.value.location ||
+    !credential.value.phoneNum ||
+    !credential.value.provider ||
+    !credential.value.role ||
     loading.value
   );
 
@@ -41,7 +41,7 @@ export const useRegister = () => {
       console.log(res, 'res here')
       loading.value = false;
 
-      if (res.type !== "ERROR") {
+      if ([200, 201].includes(res.status) && !res.data.data.emailIsVerified) {
         showToast({
           title: "Success",
           message: "Registration successful. Please check your email.",
@@ -53,7 +53,7 @@ export const useRegister = () => {
           query: { email: credential.value.email },
         });
         // Optionally navigate after successful registration
-        // router.push({path: '/client/otp-verification',  query: { email: credential?.value?.email}});
+        // router.push({ path: '/client/otp-verification', query: { email: credential?.value?.email }});
       } else {
         showToast({
           title: "Error",
@@ -62,6 +62,7 @@ export const useRegister = () => {
           duration: 3000,
         });
       }
+
     } catch (error: any) {
       loading.value = false;
       showToast({

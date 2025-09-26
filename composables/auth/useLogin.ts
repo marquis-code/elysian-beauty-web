@@ -15,8 +15,8 @@ export const useLogin = () => {
         const res = await auth_api.$_login(credential.value) as any
         loading.value = false;
 
-        if (res.type !== 'ERROR') {
-            useUser().createUser(res.data);
+        if ([200, 201].includes(res.status)) {
+            useUser().createUser(res.data.data);
             showToast({ title: 'Success', message: 'Login was successful.', toastType: 'success', duration: 3000 });
             router.push('/dashboard');
         } else {

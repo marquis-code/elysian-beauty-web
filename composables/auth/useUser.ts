@@ -1,103 +1,60 @@
-import { ref, watch } from "vue";
+import { ref, computed } from "vue";
 import { useStorage } from "@vueuse/core";
-const user = ref(null);
 
+// Runtime-only state
 const runtimeData = {
-    auth: ref(),
-    user: ref({} as any),
-    token: ref(""),
-    // tempOtp: ref(''),
+  auth: ref(),
+  userId: ref<string>(""),
+  token: ref<string>(""),
 };
+
+// Persistent state (stored in localStorage)
 const localStorageData = {
-    auth: ref(),
-    user: useStorage("user", {} as any),
-    token: useStorage("token", ""),
-    // tempOtp: useStorage('tempOtp', '')
+  userId: useStorage("userId", ""),
+  token: useStorage("token", ""),
 };
 
-const error = ref<string | null>(null);
-
-// Guard against null or undefined runtimeData.user.value
-watch(
-    runtimeData.user,
-    (val) => {
-        if (val && typeof val === "object") {
-            Object.keys(val).forEach((key) => {
-                localStorageData.user.value[key] = val[key];
-            });
-        }
-    },
-    { deep: true }
-);
-
+// Initialize runtime data from storage
 (() => {
-    runtimeData.auth.value = localStorageData.auth.value;
-    runtimeData.user.value = localStorageData.user.value;
-    runtimeData.token.value = localStorageData.token.value;
+  runtimeData.userId.value = localStorageData.userId.value;
+  runtimeData.token.value = localStorageData.token.value;
 })();
 
 export const REDIRECT_URL = import.meta.env.VITE_REDIRECT_URL as string;
 
 export const useUser = () => {
-    const id = computed({
-        get: () => runtimeData?.auth?.value?.id ?? "",
-        set: () => {},
-    });
+  const id = computed(() => runtimeData.userId.value ?? "");
 
+  const isLoggedIn = computed(() => {
+    return Boolean(runtimeData.token.value && runtimeData.userId.value);
+  });
 
-    const isLoggedIn = computed({
-        get: () => {
-            if (!runtimeData.token?.value) return false;
-            return (
-                runtimeData?.user?.value != null &&
-                typeof runtimeData.user.value === "object"
-            );
-        },
-        set: () => {},
-    });
+  const logOut = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+    runtimeData.userId.value = "";
+    runtimeData.token.value = "";
+  };
 
-    const isEmailVerified = computed(() => {
-        return runtimeData?.user?.value.isEmailVerified;
-    });
+  const setToken = (token: string) => {
+    runtimeData.token.value = token;
+    localStorageData.token.value = token;
+  };
 
-    const logOut = () => {
-        localStorage.clear();
-        runtimeData.user.value = null;
-        // location.href = '/login'
-    };
+  const createUser = (data: { userId: string; token: string }) => {
+    runtimeData.userId.value = data.userId;
+    runtimeData.token.value = data.token;
 
-    const setToken = (token: string) => {
-        runtimeData.token.value = token;
-        localStorageData.token.value = token;
-    };
-    const createUser = (user: any) => {
-        console.log(user, 'from cpomposebe')
-        runtimeData.user.value = user?.user;
-        localStorageData.token.value = user?.data?.token;
-        runtimeData.token.value = user?.data?.token;
-    };
+    localStorageData.userId.value = data.userId;
+    localStorageData.token.value = data.token;
+  };
 
-    const updateUser = (newUser: any) => {
-        // Retrieve the existing user data from local storage
-        const existingUser = JSON.parse(localStorage.getItem('user') || '{}');
-
-        // Merge the existing user data with the new user data
-        const updatedUser = { ...existingUser, ...newUser };
-
-        // Update the runtimeData and localStorage with the new user data
-        runtimeData.user.value = updatedUser;
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        localStorageData.user.value = updatedUser;
-    };
-
-    return {
-        id,
-        isLoggedIn,
-        isEmailVerified,
-        createUser,
-        ...runtimeData,
-        logOut,
-        updateUser,
-        setToken
-    };
+  return {
+    id,
+    isLoggedIn,
+    ...runtimeData,
+    logOut,
+    createUser,
+    setToken,
+  };
 };

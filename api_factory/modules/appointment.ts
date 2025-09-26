@@ -10,19 +10,19 @@ interface Appointment {
 
 export const appointment_api = {
   $_create_appointment: (payload: Appointment) => {
-    const url = "/appointments";
+    const url = "/appoinments";
     return GATEWAY_ENDPOINT.post(url, payload);
   },
-  $_update_appointment: (payload: Appointment) => {
-    const url = "/appointments";
+  $_update_appointment: (id, payload: Appointment) => {
+   const url = `/appoinments/${id}`;
     return GATEWAY_ENDPOINT.put(url, payload);
   },
   $_delete_appointment: (id: string) => {
-    const url = `/appointments/${id}`;
+    const url = `/appoinments/${id}`;
     return GATEWAY_ENDPOINT.delete(url);
   },
   $_fetch_appointment: (id: string) => {
-    const url = `/appointments/${id}`;
+    const url = `/appoinments/${id}`;
     return GATEWAY_ENDPOINT.get(url);
   },
   $_fetch_appointments: () => {

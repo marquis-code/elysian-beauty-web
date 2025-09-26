@@ -107,7 +107,6 @@
 </template>
 
 <script setup lang="ts">
-// Composables
 import { use_auth_verify_user } from '@/composables/auth/useVerifyUser'
 import { use_auth_resend_verify_email } from '@/composables/auth/useResendEmail'
 const { verifyUser, loading, setPayload } = use_auth_verify_user()
@@ -224,25 +223,61 @@ const resendOtp = async () => {
   }
 }
 
+// // Lifecycle
+// onMounted(() => {
+//   // Get email from localStorage
+//   const storedEmail = localStorage.getItem('client_signup_form')
+//   if (storedEmail) {
+//     email.value = storedEmail
+//   } else {
+//     // Redirect back to signup if no email found
+//     router.push('/signup')
+//     return
+//   }
+  
+//   // Focus first input
+//   nextTick(() => {
+//     if (otpInputs.value[0]) {
+//       otpInputs.value[0].focus()
+//     }
+//   })
+// })
+
 // Lifecycle
 onMounted(() => {
   // Get email from localStorage
-  const storedEmail = localStorage.getItem('signup_email')
-  if (storedEmail) {
-    email.value = storedEmail
+  const storedData = localStorage.getItem("client_signup_form");
+
+  if (storedData) {
+    try {
+      const parsedData = JSON.parse(storedData);
+
+      if (parsedData?.form?.email) {
+        email.value = parsedData.form.email;
+      } else {
+        // Redirect back to signup if email is missing
+        window.location.href = "/signup";
+        return;
+      }
+    } catch (e) {
+      console.error("Invalid localStorage data:", e);
+      window.location.href = "/signup";
+      return;
+    }
   } else {
-    // Redirect back to signup if no email found
-    router.push('/signup')
-    return
+    // Redirect back to signup if no data found
+    window.location.href = "/signup";
+    return;
   }
-  
+
   // Focus first input
   nextTick(() => {
     if (otpInputs.value[0]) {
-      otpInputs.value[0].focus()
+      otpInputs.value[0].focus();
     }
-  })
-})
+  });
+});
+
 
 // SEO
 useHead({

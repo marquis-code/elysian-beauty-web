@@ -8,10 +8,10 @@ export const useFetchServiceTypes = () => {
 	const fetchServiceTypes = async () => {
 		loading.value = true;
 		const res = await serviceType_api.$_fetch_serviceTypes() as any;
-		console.log(res, 'serves heres')
+		console.log(res.data, 'serves heres')
 
 		if (res.type !== "ERROR") {
-			serviceTypes.value = res?.data?.data?.serviceTypes || [];
+			serviceTypes.value = res?.data?.data?.serviceTypes;
 		}
 
 		loading.value = false;

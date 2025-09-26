@@ -10,6 +10,8 @@ const { showToast } = useCustomToast();
 export const use_auth_verify_user = () => {
     const loading = ref(false);
     const route = useRoute()
+    const router = useRouter()
+    const { createUser } = useUser()
     const credential = ref({
         email: "",
         otp: ""
@@ -17,16 +19,16 @@ export const use_auth_verify_user = () => {
 
     const verifyUser = async () => {
         loading.value = true;
-        const router = useRouter()
         const res = await auth_api.$_verify_user(credential.value) as any
         console.log(res, 'res here')
         loading.value = false;
 
-        if (res.status === 200 || res.status === 201) {
+        if ([200, 201].includes(res.status)) {
+            createUser(res?.data?.data)
             router.push('/account-success')
-            window.location.href = '/account-success'
+            localStorage.removeItem('client_signup_form')
             showToast({ title: 'Success', message: res?.data?.message, toastType: 'success', duration: 3000 });
-            res
+            // res
         } else {
             window.location.href = '/account-success'
             showToast({ title: 'Error', message: res?.data?.message || 'Something went wrong', toastType: 'error', duration: 3000 });
