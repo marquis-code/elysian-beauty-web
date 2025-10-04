@@ -10,12 +10,12 @@
             id="email"
             type="email"
             placeholder="Input your email address"
-            class="w-full p-3 text-base border rounded-full placeholder:text-[#A3A8A7] pl-10 outline-none py-4"
+           class="custom-input"
             :class="{ 'border-red-500': errors.email }"
         />
-        <svg class="absolute top-10 left-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg class="absolute top-10 left-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M17 8V8C17 5.23858 14.7614 3 12 3V3C9.23858 3 7 5.23858 7 8V8M12 12.5V16.5M9.5 21H14.5C16.8346 21 18.0019 21 18.8856 20.5277C19.5833 20.1548 20.1548 19.5833 20.5277 18.8856C21 18.0019 21 16.8346 21 14.5V14.5C21 12.1654 21 10.9981 20.5277 10.1144C20.1548 9.4167 19.5833 8.84525 18.8856 8.47231C18.0019 8 16.8346 8 14.5 8H9.5C7.16537 8 5.99805 8 5.11441 8.47231C4.4167 8.84525 3.84525 9.4167 3.47231 10.1144C3 10.9981 3 12.1654 3 14.5V14.5C3 16.8346 3 18.0019 3.47231 18.8856C3.84525 19.5833 4.4167 20.1548 5.11441 20.5277C5.99805 21 7.16537 21 9.5 21Z" stroke="#A3A8A7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        </svg> -->
 
         <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
       </div>
@@ -29,12 +29,12 @@
               id="password"
               :type="showPassword ? 'text' : 'password'"
               placeholder="********"
-              class="w-full p-3 border text-base rounded-full  placeholder:text-[#A3A8A7] pl-10 outline-none py-4"
+             class="custom-input"
               :class="{ 'border-red-500': errors.password }"
           />
-          <svg class="absolute top-5 left-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- <svg class="absolute top-5 left-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17 8V8C17 5.23858 14.7614 3 12 3V3C9.23858 3 7 5.23858 7 8V8M12 12.5V16.5M9.5 21H14.5C16.8346 21 18.0019 21 18.8856 20.5277C19.5833 20.1548 20.1548 19.5833 20.5277 18.8856C21 18.0019 21 16.8346 21 14.5V14.5C21 12.1654 21 10.9981 20.5277 10.1144C20.1548 9.4167 19.5833 8.84525 18.8856 8.47231C18.0019 8 16.8346 8 14.5 8H9.5C7.16537 8 5.99805 8 5.11441 8.47231C4.4167 8.84525 3.84525 9.4167 3.47231 10.1144C3 10.9981 3 12.1654 3 14.5V14.5C3 16.8346 3 18.0019 3.47231 18.8856C3.84525 19.5833 4.4167 20.1548 5.11441 20.5277C5.99805 21 7.16537 21 9.5 21Z" stroke="#A3A8A7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          </svg> -->
           <button
               type="button"
               @click="togglePassword"
@@ -51,7 +51,7 @@
       <!-- Login Button -->
       <button
           type="submit"
-          class="w-full bg-[#045940] text-white p-3 py-3.5 rounded-full mt-6 hover:bg-[#045940]00"
+          class="w-full bg-[#045940] text-white p-3 py-3 text-sm rounded-full mt-6 hover:bg-[#045940]00"
       >
         Login
       </button>
@@ -65,16 +65,16 @@
       <!--        <label class="flex items-center text-[#79807E]">-->
       <!--          <input type="checkbox" class="form-checkbox text-green-600" /> Remember me-->
       <!--        </label>-->
-      <div class="remember-me-container">
+      <div class="remember-me-container flex items-center">
         <!-- Custom Checkbox -->
         <input type="checkbox" id="remember" class="custom-checkbox" />
-        <label for="remember" class="text-[#79807E]">Remember me</label>
+        <label for="remember" class="text-[#79807E] pl-3">Remember me</label>
       </div>
 
       <NuxtLink to="/forgot" class="text-[#79807E]">Forgot Password?</NuxtLink>
     </div>
 
-    <div class="remember-me-container mt-8">
+    <div class="remember-me-container mt-8 flex items-center space-x-3">
         <!-- Custom Checkbox -->
         <input type="checkbox" id="remember" class="custom-checkbox" />
         <label for="remember" class="text-[#79807E] text-sm">By using this app, you agree to our Terms and Conditions. Please read them carefully.</label>

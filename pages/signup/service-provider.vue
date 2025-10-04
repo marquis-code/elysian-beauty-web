@@ -49,7 +49,7 @@
             <button
               @click="signupWithGoogle"
               :disabled="googleLoading"
-              class="w-full flex items-center justify-center px-4 py-4 border border-gray-300 rounded-2xl shadow-sm bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-2xl shadow-sm bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               <svg v-if="!googleLoading" class="w-5 h-5 mr-3" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -128,12 +128,12 @@
                   v-model="form.fullName"
                   type="text"
                   placeholder="Enter your full name"
-                  class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.fullName }"
                 />
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+                </svg> -->
               </div>
               <p v-if="errors.fullName" class="text-red-500 text-xs mt-1">{{ errors.fullName }}</p>
             </div>
@@ -146,12 +146,12 @@
                   v-model="form.email"
                   type="email"
                   placeholder="Enter your email"
-                  class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.email }"
                 />
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
+                </svg> -->
               </div>
               <p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
             </div>
@@ -163,7 +163,7 @@
                 <div class="w-20">
                   <select
                     v-model="form.countryCode"
-                    class="w-full px-2 py-4 text-sm border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white"
+                    class="custom-input"
                   >
                     <option value="+234">🇳🇬 +234</option>
                   </select>
@@ -173,7 +173,7 @@
                     v-model="form.phoneNumber"
                     type="tel"
                     placeholder="Enter phone number"
-                    class="w-full px-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                   class="custom-input"
                     :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.phoneNumber }"
                   />
                 </div>
@@ -189,13 +189,13 @@
                   v-model="form.location"
                   type="text"
                   placeholder="Enter your city/location"
-                  class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.location }"
                 />
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
+                </svg> -->
               </div>
               <p v-if="errors.location" class="text-red-500 text-xs mt-1">{{ errors.location }}</p>
             </div>
@@ -208,12 +208,12 @@
                   v-model="form.password"
                   :type="showPassword ? 'text' : 'password'"
                   placeholder="Create a strong password"
-                  class="w-full px-4 py-4 pl-12 pr-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.password }"
                 />
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
+                </svg> -->
                 <button
                   type="button"
                   @click="showPassword = !showPassword"
@@ -239,12 +239,12 @@
                   v-model="form.confirmPassword"
                   :type="showConfirmPassword ? 'text' : 'password'"
                   placeholder="Confirm your password"
-                  class="w-full px-4 py-4 pl-12 pr-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.confirmPassword }"
                 />
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <!-- <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
+                </svg> -->
                 <button
                   type="button"
                   @click="showConfirmPassword = !showConfirmPassword"
@@ -265,8 +265,7 @@
             <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full py-4 text-white font-semibold rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] mt-8"
-              style="background: linear-gradient(135deg, #045940 0%, #059669 100%);"
+              class="w-full py-3 text-white bg-primary font-semibold rounded-2xl focus:outline-none transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] mt-8"
             >
               Continue
             </button>
@@ -294,7 +293,7 @@
                   v-model="form.businessName"
                   type="text"
                   placeholder="Enter your business name"
-                  class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                  class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.businessName }"
                 />
                 <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -442,7 +441,7 @@
                   v-model="form.businessLocation"
                   type="text"
                   placeholder="Enter your business address"
-                  class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                 class="custom-input"
                   :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.businessLocation }"
                 />
                 <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -474,7 +473,7 @@
                 <div class="relative">
                   <select
                     v-model="form.bankDetails.bankName"
-                    class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 appearance-none"
+                   class="custom-input"
                     :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.bankName }"
                   >
                     <option value="">Select your bank</option>
@@ -498,7 +497,7 @@
                     type="text"
                     placeholder="10-digit account number"
                     maxlength="10"
-                    class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                    class="custom-input"
                     :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.accountNumber }"
                   />
                   <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -516,7 +515,7 @@
                     v-model="form.bankDetails.accountName"
                     type="text"
                     placeholder="Account holder name"
-                    class="w-full px-4 py-4 pl-12 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+                    class="custom-input"
                     :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.accountName }"
                   />
                   <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -536,7 +535,7 @@
                     placeholder="3-digit bank code"
                     maxlength="3"
                     readonly
-                    class="w-full px-4 py-4 pl-12 bg-gray-50 border border-gray-300 rounded-2xl focus:outline-none transition-all duration-200"
+                   class="custom-input"
                   />
                   <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -551,15 +550,14 @@
               <button
                 type="button"
                 @click="previousStep"
-                class="flex-1 py-4 text-sm bg-gray-200 text-gray-700 font-semibold rounded-2xl hover:bg-gray-300 transition-colors"
+                class="flex-1 py-3 text-sm bg-gray-200 text-gray-700 font-semibold rounded-2xl hover:bg-gray-300 transition-colors"
               >
                 Back
               </button>
               <button
                 type="submit"
                 :disabled="loading"
-                class="flex-1 py-4 text-sm text-white font-semibold rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-                style="background: linear-gradient(135deg, #045940 0%, #059669 100%);"
+                class="flex-1 py-3 text-sm bg-primary text-white font-semibold rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span v-if="loading" class="flex items-center justify-center">
                   <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">

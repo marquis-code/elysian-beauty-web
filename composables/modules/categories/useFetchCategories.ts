@@ -8,10 +8,10 @@ export const useFetchCategories = () => {
 	const fetchCategories = async () => {
 		loading.value = true;
 		const res = await categories_api.$_fetch_categories() as any;
-		console.log(res.data, 'fetch categoreis response')
+		console.log(res?.data?.data, 'fetch categoreis response')
 
 		if (res.type !== "ERROR") {
-			categories.value = res.data.result;
+			categories.value = res?.data?.data?.result;
 		}
 
 		loading.value = false;

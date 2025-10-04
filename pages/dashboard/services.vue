@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen">
-    <div class="container mx-auto px-4 py-6">
+    <div class="container mx-auto">
       <!-- Header with slide-in animation -->
       <div class="mb-8 animate-fade-in-up">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -10,7 +10,7 @@
           </div>
           <button
             @click="openCreateModal"
-            class="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 self-start sm:self-auto"
+            class="group inline-flex items-center gap-2 bg-primary text-sm text-white px-6 py-2.5 rounded-full font-medium transform hover:scale-105 transition-all duration-200 self-start sm:self-auto"
           >
             <svg class="w-5 h-5 transition-transform group-hover:rotate-90 duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -22,14 +22,14 @@
 
       <!-- Search and Filter Section with glass morphism -->
       <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
-        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl border-[0.5px] border-gray-100 p-6">
           <div class="flex flex-col lg:flex-row gap-4">
             <div class="flex-1">
               <div class="relative group">
                 <input
                   v-model="searchQuery"
                   placeholder="Search services..."
-                  class="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 placeholder-gray-500"
+                  class="w-full pl-12 pr-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 placeholder-gray-500"
                 >
                 <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors duration-200">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@
             <div class="flex gap-3">
               <select
                 v-model="sortBy"
-                class="px-4 py-4 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[140px]"
+                class="px-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[140px]"
               >
                 <option v-for="option in sortOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -49,7 +49,7 @@
               </select>
               <select
                 v-model="sortOrder"
-                class="px-4 py-4 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[120px]"
+                class="px-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[120px]"
               >
                 <option v-for="option in orderOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -70,11 +70,11 @@
 
       <!-- Services Content -->
       <div v-else class="animate-fade-in-up" style="animation-delay: 0.2s">
-        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+        <div class="bg-white/70 backdrop-blur-sm border-[0.5px] bodrer-gray-100 rounded-2xl overflow-hidden">
           <!-- Header -->
           <div class="px-6 py-5 border-b border-gray-200/50 bg-gradient-to-r from-gray-50/50 to-white/50">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <h2 class="text-xl font-bold text-gray-900">
+              <h2 class="text-lg font-bold text-gray-900">
                 All Services <span class="text-emerald-600">({{ totalServices }})</span>
               </h2>
               <div class="flex items-center gap-3 text-sm text-gray-600">
@@ -92,7 +92,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
               {{ searchQuery ? 'No matching services' : 'No services yet' }}
             </h3>
             <p class="text-gray-500 mb-8 max-w-md mx-auto">
@@ -101,7 +101,7 @@
             <button
               v-if="!searchQuery"
               @click="openCreateModal"
-              class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-200"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-6 py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-200"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -177,7 +177,7 @@
           </div>
 
           <!-- Desktop Table View -->
-          <div v-else class="hidden lg:block overflow-x-auto">
+          <div v-else class="overflow-x-auto">
             <table class="min-w-full">
               <thead class="bg-gradient-to-r from-gray-50 to-gray-100/50">
                 <tr>
@@ -189,7 +189,7 @@
                   <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-gray-100">
+              <tbody class="divide-y-[0.5px] divide-gray-100">
                 <tr
                   v-for="(service, index) in paginatedServices"
                   :key="service.id"
@@ -199,7 +199,7 @@
                   @click="openViewModal(service)"
                 >
                   <td class="px-6 py-5">
-                    <div class="font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors duration-200">
+                    <div class="font-medium text-sm text-gray-900 group-hover:text-emerald-600 transition-colors duration-200">
                       {{ service.serviceType }}
                     </div>
                   </td>
@@ -209,12 +209,12 @@
                     </div>
                   </td>
                   <td class="px-6 py-5">
-                    <div class="text-lg font-bold text-emerald-600">
+                    <div class="text-sm font-bold text-emerald-600">
                       ₦{{ service?.price?.toLocaleString() }}
                     </div>
                   </td>
                   <td class="px-6 py-5">
-                    <div class="flex items-center gap-1 text-sm text-gray-700">
+                    <div class="flex  items-center gap-1 text-sm text-gray-700">
                       <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -227,7 +227,7 @@
                     </div>
                   </td>
                   <td class="px-6 py-5">
-                    <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div class="flex items-center gap-2">
                       <button
                         @click.stop="openEditModal(service)"
                         class="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all duration-200 transform hover:scale-110"
@@ -278,7 +278,7 @@
                       :class="[
                         'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 transform hover:scale-105',
                         page === currentPage
-                          ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white'
                           : 'text-gray-700 bg-white border border-gray-300 hover:bg-emerald-50 hover:border-emerald-300'
                       ]"
                     >
@@ -354,7 +354,7 @@
               <div
                 v-if="selectedService"
                 @click.stop
-                class="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl transform transition-all"
+                class="relative w-full max-w-2xl bg-white rounded-2xl transform transition-all"
               >
                 <!-- Modal Header -->
                 <div class="relative px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-emerald-100/50">
@@ -387,7 +387,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                             </svg>
                           </div>
-                          <h4 class="font-semibold text-gray-900">Price</h4>
+                          <h4 class="font-medium text-gray-900">Price</h4>
                         </div>
                         <p class="text-3xl font-bold text-emerald-600">₦{{ selectedService?.price?.toLocaleString() }}</p>
                       </div>
@@ -400,7 +400,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
-                          <h4 class="font-semibold text-gray-900">Duration</h4>
+                          <h4 class="font-medium text-gray-900">Duration</h4>
                         </div>
                         <p class="text-2xl font-bold text-blue-600">
                           {{ selectedService.duration }} hour{{ selectedService.duration !== 1 ? 's' : '' }}
@@ -410,7 +410,7 @@
 
                     <!-- Description -->
                     <div class="bg-gray-50 rounded-xl p-5 border border-gray-200/50">
-                      <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -421,13 +421,13 @@
 
                     <!-- Provider Info -->
                     <div v-if="selectedService.ServiceProvider" class="bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-xl p-5 border border-purple-200/50">
-                      <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-14 0h2m0 0h2m-2 0V9a2 2 0 012-2h2a2 2 0 012 2v12" />
                         </svg>
                         Service Provider
                       </h4>
-                      <p class="text-lg font-semibold text-purple-700">{{ selectedService.ServiceProvider.businessName }}</p>
+                      <p class="text-lg font-medium text-purple-700">{{ selectedService.ServiceProvider.businessName }}</p>
                     </div>
 
                     <!-- Additional Details -->
@@ -449,11 +449,11 @@
                 </div>
 
                 <!-- Modal Actions -->
-                <div class="px-6 py-4 border-t border-gray-200 bg-gray-50/50">
+                <div class="px-6 py-2.5 border-t border-gray-200 bg-gray-50/50">
                   <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
                     <button
                       @click="showViewModal = false; openEditModal(selectedService)"
-                      class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 order-2 sm:order-1"
+                      class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl transition-all duration-200 transform hover:scale-105 order-2 sm:order-1"
                     >
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -462,7 +462,7 @@
                     </button>
                     <button
                       @click="showViewModal = false"
-                      class="px-6 py-3 text-gray-700 font-semibold rounded-xl border border-gray-300 hover:bg-gray-50 transition-all duration-200 transform hover:scale-105 order-1 sm:order-2"
+                      class="px-6 py-3 text-gray-700 font-medium rounded-xl border border-gray-300 hover:bg-gray-50 transition-all duration-200 transform hover:scale-105 order-1 sm:order-2"
                     >
                       Close
                     </button>
@@ -503,7 +503,7 @@
             >
               <div
                 @click.stop
-                class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl transform transition-all"
+                class="relative w-full max-w-md bg-white rounded-2xl transform transition-all"
               >
                 <div class="p-6">
                   <div class="flex items-center gap-4 mb-4">
@@ -519,14 +519,14 @@
                   </div>
                   
                   <p class="text-gray-700 mb-6">
-                    Are you sure you want to delete <span class="font-semibold text-gray-900">'{{ selectedService?.serviceType }}'</span>? This will permanently remove the service from your system.
+                    Are you sure you want to delete <span class="font-medium text-gray-900">'{{ selectedService?.serviceType }}'</span>? This will permanently remove the service from your system.
                   </p>
                   
                   <div class="flex gap-3">
                     <button
                       @click="handleDeleteService"
                       :disabled="deleting"
-                      class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
+                      class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-medium rounded-xl transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
                     >
                       <svg v-if="deleting" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -540,7 +540,7 @@
                     <button
                       @click="showDeleteModal = false"
                       :disabled="deleting"
-                      class="flex-1 px-4 py-3 text-gray-700 font-semibold rounded-xl border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
+                      class="flex-1 px-4 py-3 text-gray-700 font-medium rounded-xl border border-gray-300 hover:bg-gray-50 disabled:opacity-50 transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
                     >
                       Cancel
                     </button>

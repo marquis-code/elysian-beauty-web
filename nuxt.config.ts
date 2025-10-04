@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['chart.js', 'vue-cal', 'fullcalendar'],
   },
+  css: ['~/assets/css/stylesheet.css', "/assets/css/main.css", '~/assets/css/fonts.css'],
   modules: ['@kevinmarrec/nuxt-pwa'],
   app: {
     head: {
@@ -143,6 +144,12 @@ export default defineNuxtConfig({
       script:[
         {
           src:"https://cdn.jsdelivr.net/npm/pwacompat@2.0.6/pwacompat.min.js",
+          integrity:"sha384-GOaSLecPIMCJksN83HLuYf9FToOiQ2Df0+0ntv7ey8zjUHESXhthwvq9hXAZTifA",
+          crossorigin:"anonymous",
+          defer:true
+        },
+        {
+          src:"https://js.paystack.co/v1/inline.js",
           integrity:"sha384-GOaSLecPIMCJksN83HLuYf9FToOiQ2Df0+0ntv7ey8zjUHESXhthwvq9hXAZTifA",
           crossorigin:"anonymous",
           defer:true

@@ -1,16 +1,16 @@
 <template>
-  <div class="min-h-screen bg-gray-50 p-6">
+  <div class="min-h-screen ">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <div class="mb-8">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-3xl font-bold text-gray-900">Category Management</h1>
-            <p class="text-gray-600 mt-2">Organize your services into categories</p>
+            <h1 class="text-xl font-extrabold text-gray-900">Category Management</h1>
+            <p class="text-gray-600 text-sm mt-2">Organize your services into categories</p>
           </div>
           <button
             @click="openCreateModal"
-            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            class="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-primary  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -26,8 +26,8 @@
       </div>
 
       <!-- Categories Table -->
-      <div v-else class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-200">
+      <div v-else class="bg-white rounded-lg shadow-sm border-[0.5px] border-gray-100 overflow-hidden">
+        <div class="px-6 py-4 border-b-[0.5px] border-gray-100">
           <h2 class="text-lg font-semibold text-gray-900">All Categories</h2>
         </div>
         
@@ -41,7 +41,7 @@
           <div class="mt-6">
             <button
               @click="openCreateModal"
-              class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+              class="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-primary "
             >
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -53,7 +53,7 @@
 
         <!-- Categories Table -->
         <div v-else class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
+          <table class="min-w-full divide-y-[0.5px] divide-gray-100">
             <thead class="bg-gray-50">
               <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -73,8 +73,8 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="category in categories" :key="category.id" class="hover:bg-gray-50">
+            <tbody class="bg-white divide-y-[0.5px] divide-gray-100">
+              <tr v-for="category in categories" :key="category.id" class="hover:bg-gray-25">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm font-medium text-gray-900">{{ category.name }}</div>
                 </td>
@@ -206,7 +206,7 @@
             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="button"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 @click="closeViewModal"
               >
                 Close
@@ -245,7 +245,7 @@
                       id="name"
                       v-model="categoryForm.name"
                       type="text"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                     class="custom-input"
                       placeholder="e.g., Hair Services"
                       required
                     />
@@ -260,7 +260,7 @@
                       id="description"
                       v-model="categoryForm.description"
                       rows="3"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      class="custom-input"
                       placeholder="Describe what services this category includes..."
                       required
                     ></textarea>
@@ -271,7 +271,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                       Select Services *
                     </label>
-                    <div class="border border-gray-300 rounded-md p-3 max-h-48 overflow-y-auto">
+                    <div class="border-[0.5px] border-gray-100 rounded-md p-3 max-h-48 overflow-y-auto">
                       <div v-if="!serviceOptions.length" class="text-sm text-gray-500 italic">
                         Loading services...
                       </div>
@@ -279,13 +279,13 @@
                         <label
                           v-for="service in serviceOptions"
                           :key="service.id"
-                          class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded"
+                          class="flex items-center cursor-pointer hover:bg-gray-25 p-2 rounded"
                         >
                           <input
                             type="checkbox"
                             :value="service.id"
                             v-model="categoryForm.services"
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            class="custom-checkbox"
                           />
                           <span class="ml-2 text-sm text-gray-900">{{ service.serviceType }}</span>
                         </label>
@@ -302,7 +302,7 @@
               <button
                 type="button"
                 :disabled="creating || updating"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 @click="handleCategorySubmit"
               >
                 <span v-if="creating || updating" class="mr-2">
@@ -339,13 +339,12 @@
             class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
             @click.stop
           >
-            <div class="sm:flex sm:items-start">
+            <div class="flex justify-center items-center flex-col">
               <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                 <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5C2.962 18.333 3.924 20 5.464 20z" />
                 </svg>
               </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                   Delete Category
                 </h3>
@@ -358,7 +357,6 @@
                     <p class="text-sm text-gray-600">{{ categoryToDelete.services?.length || 0 }} services will be unassigned</p>
                   </div>
                 </div>
-              </div>
             </div>
             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button

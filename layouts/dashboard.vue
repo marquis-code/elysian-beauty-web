@@ -150,8 +150,8 @@
                     @error="handleImageError"
                   />
                   <div class="hidden sm:block text-left">
-                    <p class="font-medium text-sm text-gray-900 truncate max-w-20">{{ userProfile.name }}</p>
-                    <span class="text-xs text-gray-600">{{ userProfile.role }}</span>
+                    <p class="font-medium text-sm text-gray-900 truncate max-w-20">{{ user?.firstName }}</p>
+                    <span class="text-xs text-gray-600">{{ user?.email }}</span>
                   </div>
                   <ChevronDownIcon class="w-4 h-4 text-gray-600 transition-transform" :class="{ 'rotate-180': dropdownVisible }" />
                 </button>
@@ -171,8 +171,8 @@
                       @error="handleImageError"
                     />
                     <div>
-                      <h3 class="text-[#282B2A] text-sm font-semibold">{{ userProfile.fullName || 'Olasehinde Olalekan' }}</h3>
-                      <p class="text-[#282B2A] text-xs">{{ userProfile.role }}</p>
+                      <h3 class="text-[#282B2A] text-sm font-semibold">{{ `${user?.firstName} ${user?.lastName}` }}</h3>
+                      <p class="text-[#282B2A] text-xs">{{ user?.email }}</p>
                     </div>
                   </div>
 
@@ -308,11 +308,13 @@
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLogOut } from '@/composables/core/useLogout'
+import { useUser } from "@/composables/auth/useUser"
 import { 
   Home, Calendar, Clock, Mail, Settings, 
   HelpCircle, LogOut, ShoppingCart, Menu,
   Search, Bell, ChevronRight, ChevronDownIcon
 } from 'lucide-vue-next'
+const { user } = useUser()
 
 // Composables
 const router = useRouter()
@@ -371,6 +373,7 @@ const userProfile = ref({
 const menuItems = ref([
   { label: 'Overview', path: '/dashboard', icon: Home, active: true },
   { label: 'Appointment', path: '/dashboard/appointments', icon: Calendar },
+   { label: 'Availability', path: '/dashboard/availability', icon: Calendar },
   { label: 'Services', path: '/dashboard/services', icon: Clock },
   { label: 'Categories', path: '/dashboard/categories', icon: ShoppingCart },
   { label: 'Recent Bookings', path: '/dashboard/recent-bookings', icon: Clock },

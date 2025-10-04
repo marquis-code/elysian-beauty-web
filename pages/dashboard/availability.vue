@@ -1,7 +1,7 @@
-<template>
+<!-- <template>
   <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
     <div class="max-w-7xl mx-auto">
-      <!-- Header -->
+
       <div class="mb-8">
         <div class="flex items-center justify-between">
           <div>
@@ -9,22 +9,28 @@
             <p class="text-gray-600 mt-2">Manage your working hours and studio bookings</p>
           </div>
           <button
-            @click="openCreateModal"
-            :disabled="createLoading || updateLoading"
-            class="bg-[#045940] hover:bg-[#034a37] disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center space-x-2"
+            @click="showModal = true"
+            class="bg-[#045940] text-sm hover:bg-[#034a37] disabled:bg-gray-400 text-white px-6 py-2.5 rounded-full font-medium transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center space-x-2"
           >
-            <div v-if="createLoading" class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
             <span>Create Availability</span>
           </button>
         </div>
       </div>
 
-      <!-- Loading State -->
+    
+      <CreateAvailabilityModal
+        :service-provider-id="user?.userId"
+        :show="showModal"
+        @close="showModal = false"
+        @success="handleSuccess"
+      />
+
+
       <div v-if="fetchLoading" class="flex justify-center items-center h-64">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#045940]"></div>
       </div>
 
-      <!-- Calendar Navigation -->
+
       <div v-else class="bg-white rounded-xl shadow-lg p-6 mb-6">
         <div class="flex items-center justify-between mb-6">
           <button
@@ -44,14 +50,14 @@
           </button>
         </div>
 
-        <!-- Calendar Grid -->
+
         <div class="grid grid-cols-7 gap-4">
-          <!-- Day Headers -->
+
           <div v-for="day in dayHeaders" :key="day" class="text-center font-medium text-gray-700 py-2">
             {{ day }}
           </div>
 
-          <!-- Calendar Days -->
+
           <div
             v-for="day in calendarDays"
             :key="day.date"
@@ -65,7 +71,7 @@
           >
             <div class="text-sm font-medium text-gray-700 mb-1">{{ day.day }}</div>
             
-            <!-- Availability indicators -->
+
             <div v-if="day.availabilities.length > 0" class="space-y-1">
               <div
                 v-for="availability in day.availabilities.slice(0, 3)"
@@ -86,7 +92,7 @@
       </div>
     </div>
 
-    <!-- Day Details Modal -->
+
     <Teleport to="body">
       <div
         v-if="selectedDay"
@@ -155,7 +161,7 @@
       </div>
     </Teleport>
 
-    <!-- Create/Edit Availability Modal -->
+
     <Teleport to="body">
       <div
         v-if="showCreateModal || showEditModal"
@@ -180,7 +186,7 @@
           </div>
 
           <form @submit.prevent="saveAvailability" class="space-y-6">
-            <!-- Service Provider ID Input -->
+
             <UiCustomInput
               v-model="form.serviceProviderId"
               label="Service Provider ID"
@@ -209,7 +215,7 @@
                   class="p-4 border border-gray-200 rounded-lg"
                 >
                   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Day Dropdown -->
+
                     <div>
                       <CustomDropdown
                         v-model="workingDay.day"
@@ -221,7 +227,7 @@
                       />
                     </div>
 
-                    <!-- Start Time Input -->
+
                     <div>
                       <UiCustomTimeInput
                         v-model="workingDay.startTime"
@@ -231,7 +237,7 @@
                       />
                     </div>
 
-                    <!-- End Time Input -->
+     
                     <div>
                       <UiCustomTimeInput
                         v-model="workingDay.endTime"
@@ -241,7 +247,7 @@
                       />
                     </div>
 
-                    <!-- Remove Button -->
+     
                     <div class="flex items-end">
                       <button
                         type="button"
@@ -255,7 +261,7 @@
                   </div>
                 </div>
 
-                <!-- Empty state -->
+      
                 <div v-if="form.workingDays.length === 0" class="text-center py-8 border-2 border-dashed border-gray-300 rounded-lg">
                   <CalendarIcon class="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <p class="text-gray-600 mb-4">No working days added yet</p>
@@ -293,7 +299,7 @@
       </div>
     </Teleport>
 
-    <!-- Confirmation Modal -->
+
     <Teleport to="body">
       <div
         v-if="showConfirmModal"
@@ -345,6 +351,8 @@ import {
   CalendarIcon,
   ExclamationTriangleIcon
 } from '@heroicons/vue/24/outline'
+import { useUser } from "@/composables/auth/useUser"
+const { user } = useUser()
 
 // Import composables
 import { useCreateAvailability } from "@/composables/modules/availability/useCreateAvailability"
@@ -392,6 +400,18 @@ const showEditModal = ref(false)
 const showConfirmModal = ref(false)
 const editingAvailability = ref<Availability | null>(null)
 const deletingAvailability = ref<any>(null)
+
+
+import CreateAvailabilityModal from '@/components/CreateAvailabilityModal.vue'
+
+const showModal = ref(false)
+const providerId = '717c0dd6-34f2-41da-a92f-4c319e42cd6e'
+
+const handleSuccess = () => {
+  console.log('Availability created successfully!')
+  showModal.value = false
+  // Refresh data, show notification, etc.
+}
 
 // Form data
 const form = ref<Availability>({
@@ -604,4 +624,24 @@ onMounted(async () => {
 definePageMeta({
   layout: 'dashboard'
 })
+</script> -->
+
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import AvailabilityCalendar from '@/components/AvailabilityCalendar.vue'
+
+// Your service provider ID - could come from auth, route params, etc.
+const serviceProviderId = ref('3e7a75e5-2434-4ea2-9984-8d541bdaaee6')
+
+definePageMeta({
+  layout: 'dashboard'
+})
+
 </script>
+
+<template>
+  <div>
+    <AvailabilityCalendar :service-provider-id="serviceProviderId" />
+  </div>
+</template>

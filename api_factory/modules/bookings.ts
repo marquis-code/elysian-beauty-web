@@ -21,12 +21,12 @@ export const bookings_api = {
     const url = `/bookingss/${id}`;
     return GATEWAY_ENDPOINT.delete(url);
   },
-  $_fetch_bookings: (id: string) => {
-    const url = `/bookingss/${id}`;
+  $_fetch_booking: (id: string) => {
+    const url = `/bookings/${id}`;
     return GATEWAY_ENDPOINT.get(url);
   },
-  $_fetch_bookingss: () => {
-    const url = "/bookingss";
+  $_fetch_bookings: () => {
+    const url = "/bookings";
     return GATEWAY_ENDPOINT.get(url);
   },
 };

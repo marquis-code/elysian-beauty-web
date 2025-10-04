@@ -3,13 +3,14 @@ import { useStorage } from "@vueuse/core";
 
 // Runtime-only state
 const runtimeData = {
-  auth: ref(),
+  user: ref({}),
   userId: ref<string>(""),
   token: ref<string>(""),
 };
 
 // Persistent state (stored in localStorage)
 const localStorageData = {
+  user: useStorage("user", {}),
   userId: useStorage("userId", ""),
   token: useStorage("token", ""),
 };
@@ -17,6 +18,7 @@ const localStorageData = {
 // Initialize runtime data from storage
 (() => {
   runtimeData.userId.value = localStorageData.userId.value;
+  runtimeData.user.value = localStorageData.user.value;
   runtimeData.token.value = localStorageData.token.value;
 })();
 
@@ -33,6 +35,7 @@ export const useUser = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     runtimeData.userId.value = "";
+    runtimeData.user.value = {};
     runtimeData.token.value = "";
   };
 
@@ -41,10 +44,12 @@ export const useUser = () => {
     localStorageData.token.value = token;
   };
 
-  const createUser = (data: { userId: string; token: string }) => {
+  const createUser = (data: { userId: string; token: string; firstName: string; lastName: string; email: string }) => {
     runtimeData.userId.value = data.userId;
     runtimeData.token.value = data.token;
+    runtimeData.user.value = data;
 
+    localStorageData.user.value = data;
     localStorageData.userId.value = data.userId;
     localStorageData.token.value = data.token;
   };
