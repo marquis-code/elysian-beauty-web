@@ -1,6 +1,6 @@
 <template>
     <div>
-       <ElysianHeader />
+       <!-- <ElysianHeader /> -->
         <NuxtPage />
     </div>
 </template>

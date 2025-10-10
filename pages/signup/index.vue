@@ -5,13 +5,13 @@
       <div class="">
         <!-- Header -->
         <div class="text-center mb-12">
-          <div class="w-16 h-16 mx-auto mb-6 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+          <div class="w-14 h-14 mx-auto mb-6 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
           </div>
-          <h1 class="text-2xl font-bold text-gray-900 mb-3">Sign up</h1>
-          <p class="text-gray-600">Please choose your account category</p>
+          <h1 class="text-xl font-bold text-gray-900 mb-3">Sign up</h1>
+          <p class="text-gray-600 text-sm">Please choose your account category</p>
         </div>
 
         <!-- Account Type Selection -->

@@ -83,7 +83,7 @@
                 <input 
                   type="text" 
                   placeholder="Search product, customer, etc..." 
-                  class="pl-10 pr-4 py-2 w-64 md:w-80 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                  class="pl-10 pr-4 py-3 w-64 md:w-80 rounded-full border-[0.5px] border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
                 />
               </div>
             </div>
@@ -144,11 +144,17 @@
                   class="flex items-center gap-2 p-1 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <img 
-                    :src="profileImage" 
+                    src="@/assets/img/avatar.png" 
                     alt="Profile" 
                     class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
                     @error="handleImageError"
                   />
+                  <!-- <img 
+                    :src="profileImage" 
+                    alt="Profile" 
+                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
+                    @error="handleImageError"
+                  /> -->
                   <div class="hidden sm:block text-left">
                     <p class="font-medium text-sm text-gray-900 truncate max-w-20">{{ user?.firstName }}</p>
                     <span class="text-xs text-gray-600">{{ user?.email }}</span>
@@ -160,18 +166,18 @@
                 <div 
                   v-if="dropdownVisible" 
                   ref="dropdownMenu"
-                  class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50 dropdown-menu"
+                  class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border-[0.5px] border-gray-50 py-1 z-50 dropdown-menu"
                 >
                   <!-- User Info Header -->
-                  <div class="flex items-center gap-3 px-4 py-3 bg-[#E3E5E5] border-b">
+                  <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b-[0.5px]">
                     <img 
                       src="@/assets/img/avatar-male.png" 
                       alt="Avatar"
-                      class="w-10 h-10 rounded-full object-cover"
+                      class="w-7 h-7 rounded-full object-cover"
                       @error="handleImageError"
                     />
                     <div>
-                      <h3 class="text-[#282B2A] text-sm font-semibold">{{ `${user?.firstName} ${user?.lastName}` }}</h3>
+                      <h3 class="text-[#282B2A] text-xs font-semibold">{{ `${user?.firstName} ${user?.lastName}` }}</h3>
                       <p class="text-[#282B2A] text-xs">{{ user?.email }}</p>
                     </div>
                   </div>
@@ -180,7 +186,7 @@
                   <div class="py-1">
                     <button 
                       @click="goToProfile" 
-                      class="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-100"
+                      class="w-full flex items-center text-sm gap-3 px-4 py-3 text-left hover:bg-gray-25 transition-colors border-b-[0.5px] border-gray-50"
                     >
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.99316 8.75H7.00619C5.17792 8.75 3.52114 9.8267 2.77861 11.4974C2.09877 13.027 3.21846 14.75 4.8924 14.75H11.1069C12.7809 14.75 13.9006 13.027 13.2207 11.4974C12.4782 9.8267 10.8214 8.75 8.99316 8.75Z" stroke="#282B2A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -192,7 +198,7 @@
 
                     <button 
                       @click="editAvailability" 
-                      class="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-100"
+                      class="w-full flex items-center text-sm gap-3 px-4 py-3 text-left hover:bg-gray-25 transition-colors border-b-[0.5px] border-gray-50"
                     >
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.55304 13.3315L3.29758 14.2318C2.80929 14.4267 2.56515 14.5241 2.42241 14.4361C2.37812 14.4088 2.34084 14.3716 2.31355 14.3273C2.22557 14.1845 2.32301 13.9404 2.51791 13.4521L3.41813 11.1966M5.55304 13.3315L12.9363 5.94826M5.55304 13.3315L5.33579 11.9156C5.30727 11.7298 5.29301 11.6368 5.24019 11.5686C5.22293 11.5463 5.20293 11.5263 5.18064 11.5091C5.1124 11.4563 5.01947 11.442 4.83361 11.4135L3.41813 11.1966M3.41813 11.1966L10.8014 3.81336M12.9363 5.94826L10.8014 3.81336M12.9363 5.94826L13.5992 5.28536C14.1888 4.69582 14.1888 3.74 13.5992 3.15046V3.15046C13.0097 2.56092 12.0539 2.56092 11.4643 3.15046L10.8014 3.81336M2 5.08301C3.33333 4.74967 4 4.08301 4.33333 2.74967C4.66667 4.08301 5.33333 4.74967 6.66667 5.08301C5.33333 5.41634 4.66667 6.08301 4.33333 7.41634C4 6.08301 3.33333 5.41634 2 5.08301ZM10 11.9163C10.6667 11.7497 11 11.4163 11.1667 10.7497C11.3333 11.4163 11.6667 11.7497 12.3333 11.9163C11.6667 12.083 11.3333 12.4163 11.1667 13.083C11 12.4163 10.6667 12.083 10 11.9163Z" stroke="#282B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -202,7 +208,7 @@
 
                     <button 
                       @click="goToAccountSettings" 
-                      class="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-100"
+                      class="w-full flex items-center text-sm gap-3 px-4 py-3 text-left hover:bg-gray-25 transition-colors border-b-[0.5px] border-gray-50"
                     >
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.63198 8.75C9.63198 9.64907 8.903 10.3779 8.00376 10.3779C7.10452 10.3779 6.37555 9.64907 6.37555 8.75C6.37555 7.85093 7.10452 7.12209 8.00376 7.12209C8.903 7.12209 9.63198 7.85093 9.63198 8.75Z" stroke="#282B2A" stroke-width="1.5" stroke-linejoin="round"/>
@@ -213,7 +219,7 @@
 
                     <button 
                       @click="handleLogout" 
-                      class="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-red-50 transition-colors text-red-600"
+                      class="w-full flex items-center text-sm gap-3 px-4 py-3 text-left hover:bg-red-25 transition-colors text-red-600"
                     >
                       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.6667 12.0833L14 8.75M14 8.75L10.6667 5.41667M14 8.75H6M6 2.75H5.2C4.0799 2.75 3.51984 2.75 3.09202 2.96799C2.7157 3.15973 2.40973 3.46569 2.21799 3.84202C2 4.26984 2 4.82989 2 5.95V11.55C2 12.6701 2 13.2302 2.21799 13.658C2.40973 14.0343 2.71569 14.3403 3.09202 14.532C3.51984 14.75 4.0799 14.75 5.2 14.75H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -297,11 +303,18 @@
     @close="closeNotifications" 
   />
   
-  <UpdatedAvailabilityModal 
+  <!-- <UpdatedAvailabilityModal 
     v-if="showAvailabilityModal" 
     @close="showAvailabilityModal = false"
     @save="handleSaveAvailability"
-  />
+  /> -->
+  <EditAvailability
+      :show="showAvailabilityModal"
+      :availability-id="availabilityId"
+      :working-day="selectedWorkingDay"
+      @close="handleModalClose"
+      @success="handleSuccess"
+    />
 </template>
 
 <script setup lang="ts">
@@ -316,6 +329,42 @@ import {
 } from 'lucide-vue-next'
 const { user } = useUser()
 
+// State
+const showAvailabilityModal = ref(false)
+const availabilityId = ref('')
+const selectedWorkingDay = ref(null)
+
+// Open modal for creating new availability
+const openCreateModal = () => {
+  availabilityId.value = 'YOUR_AVAILABILITY_ID' // Get this from your API
+  selectedWorkingDay.value = null // null means create new
+  showAvailabilityModal.value = true
+}
+
+// Open modal for editing existing availability
+const openEditModal = (workingDay: any, availId: string) => {
+  selectedWorkingDay.value = workingDay
+  availabilityId.value = availId
+  showAvailabilityModal.value = true
+}
+
+// Handle modal close
+const handleModalClose = () => {
+  showAvailabilityModal.value = false
+  selectedWorkingDay.value = null
+}
+
+// Handle successful save
+const handleSuccess = () => {
+  showAvailabilityModal.value = false
+  // Refresh your availability data here
+  loadAvailability()
+}
+
+const loadAvailability = async () => {
+  // Fetch latest availability data
+}
+
 // Composables
 const router = useRouter()
 const { logout } = useLogOut()
@@ -326,7 +375,7 @@ const currentPage = ref('Overview')
 const showNotifications = ref(false)
 const showMobileSearch = ref(false)
 const unreadNotifications = ref(3)
-const showAvailabilityModal = ref(false)
+// const showAvailabilityModal = ref(false)
 const dropdownVisible = ref(false)
 const dropdownMenu = ref<HTMLElement | null>(null)
 const mobileSearchInput = ref<HTMLInputElement | null>(null)
@@ -373,9 +422,9 @@ const userProfile = ref({
 const menuItems = ref([
   { label: 'Overview', path: '/dashboard', icon: Home, active: true },
   { label: 'Appointment', path: '/dashboard/appointments', icon: Calendar },
-   { label: 'Availability', path: '/dashboard/availability', icon: Calendar },
-  { label: 'Services', path: '/dashboard/services', icon: Clock },
-  { label: 'Categories', path: '/dashboard/categories', icon: ShoppingCart },
+  //  { label: 'Availability', path: '/dashboard/availability', icon: Calendar },
+  // { label: 'Services', path: '/dashboard/services', icon: Clock },
+  // { label: 'Categories', path: '/dashboard/categories', icon: ShoppingCart },
   { label: 'Recent Bookings', path: '/dashboard/recent-bookings', icon: Clock },
   { label: 'Messages', path: '/dashboard/message', icon: Mail },
   { label: 'Settings', path: '/dashboard/settings', icon: Settings },

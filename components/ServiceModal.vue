@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <Teleport to="body">
     <div
       v-if="isOpen"
@@ -162,5 +162,215 @@ const closeModal = () => {
 
 const handleSubmit = () => {
   emit('submit', { ...form })
+}
+</script> -->
+
+
+<template>
+  <Teleport to="body">
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="modelValue"
+        class="fixed inset-0 z-50 overflow-y-auto"
+        @click="closeModal"
+      >
+        <div class="flex min-h-full items-center justify-center p-4">
+          <div class="fixed inset-0 bg-black/40 backdrop-blur-sm"></div>
+          
+          <Transition
+            enter-active-class="transition duration-300 ease-out"
+            enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-to-class="opacity-100 translate-y-0 sm:scale-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="opacity-100 translate-y-0 sm:scale-100"
+            leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          >
+            <div
+              @click.stop
+              class="relative w-full max-w-lg bg-white rounded-2xl transform transition-all"
+            >
+              <div class="px-6 py-5 border-b-[0.5px] border-gray-100">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-black text-gray-900">
+                    {{ service ? 'Edit Service' : 'New Service' }}
+                  </h3>
+                  <button
+                    @click="closeModal"
+                    class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <form @submit.prevent="handleSubmit" class="px-6 py-6 space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Service Name *
+                  </label>
+                  <input
+                    v-model="formData.serviceType"
+                    type="text"
+                    required
+                    class="custom-input"
+                    placeholder="e.g., Haircut"
+                  />
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Description *
+                  </label>
+                  <textarea
+                    v-model="formData.description"
+                    required
+                    rows="3"
+                    class="custom-input"
+                    placeholder="Describe the service..."
+                  ></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Price (₦) *
+                    </label>
+                    <input
+                      v-model.number="formData.price"
+                      type="number"
+                      required
+                      min="0"
+                      step="0.01"
+                      class="custom-input"
+                      placeholder="1500.00"
+                    />
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Duration (hours) *
+                    </label>
+                    <input
+                      v-model.number="formData.duration"
+                      type="number"
+                      required
+                      min="0.5"
+                      step="0.5"
+                      class="custom-input"
+                      placeholder="1"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    v-model="formData.categoryId"
+                    class="custom-input"
+                  >
+                    <option value="">Select a category</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </div>
+              </form>
+
+              <div class="px-6 py-4 border-t-[0.5px] border-gray-100 flex justify-between">
+                <button
+                  v-if="service"
+                  @click="handleDelete"
+                  type="button"
+                  class="px-4 py-2 text-red-600 bg-red-50 text-sm rounded-lg transition-colors"
+                >
+                  Delete
+                </button>
+                <div class="flex gap-3 ml-auto">
+                  <button
+                    @click="closeModal"
+                    type="button"
+                    class="px-6 py-2 border border-gray-300 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    @click="handleSubmit"
+                    type="submit"
+                    class="px-6 py-2 bg-gray-900 text-white text-sm rounded-lg hover:bg-gray-800 transition-colors"
+                  >
+                    {{ service ? 'Update' : 'Create' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
+</template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+
+const props = defineProps({
+  modelValue: Boolean,
+  service: Object,
+  categories: Array
+})
+
+const emit = defineEmits(['update:modelValue', 'save', 'delete'])
+
+const formData = ref({
+  serviceType: '',
+  description: '',
+  price: 0,
+  duration: 1,
+  categoryId: ''
+})
+
+watch(() => props.service, (newService) => {
+  if (newService) {
+    formData.value = {
+      serviceType: newService.serviceType || '',
+      description: newService.description || '',
+      price: newService.price || 0,
+      duration: newService.duration || 1,
+      categoryId: newService.categoryId || ''
+    }
+  } else {
+    formData.value = {
+      serviceType: '',
+      description: '',
+      price: 0,
+      duration: 1,
+      categoryId: ''
+    }
+  }
+}, { immediate: true })
+
+const closeModal = () => {
+  emit('update:modelValue', false)
+}
+
+const handleSubmit = () => {
+  emit('save', formData.value)
+}
+
+const handleDelete = () => {
+  if (confirm('Are you sure you want to delete this service?')) {
+    emit('delete', props.service.id)
+  }
 }
 </script>

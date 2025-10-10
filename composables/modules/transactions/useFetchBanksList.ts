@@ -9,8 +9,8 @@ export const useFetchBanksList = () => {
 		loading.value = true;
 		try {
 			const res = await transactions_api.$_fetch_banks_list() as any;
-			banks.value = res?.data || [];
-			return res;
+			banks.value = res?.data?.data
+			return res?.data?.data
 		} finally {
 			loading.value = false;
 		}

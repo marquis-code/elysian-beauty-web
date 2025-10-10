@@ -18,13 +18,13 @@
       <div class="w-full max-w-2xl">
         <!-- Header -->
         <div class="text-center mb-8">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #045940 0%, #059669 100%);">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #045940 0%, #059669 100%);">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
           </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Create an Account</h2>
-          <p class="text-gray-600">Join as a client to book beauty services</p>
+          <h2 class="text-lg font-bold text-gray-900 mb-2">Create an Account</h2>
+          <p class="text-gray-600 text-sm">Join as a client to book beauty services</p>
         </div>
 
         <!-- Signup Methods -->
@@ -33,7 +33,7 @@
           <button
             @click="signupWithGoogle"
             :disabled="googleLoading"
-            class="w-full flex items-center justify-center px-4 py-4 border border-gray-300 rounded-2xl shadow-sm bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            class="w-full flex items-center text-sm justify-center px-4 py-3 border-[0.5px] border-gray-100 rounded-2xl shadow-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
             <svg v-if="!googleLoading" class="w-5 h-5 mr-3" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -102,22 +102,19 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
             <div class="flex space-x-3">
               <div class="w-20">
-                <select
-                  v-model="form.countryCode"
-                  class="custom-input"
-                >
-                  <option value="+234">🇳🇬 +234</option>
-                </select>
-              </div>
-              <div class="flex-1">
-                <input
-                  v-model="form.phoneNumber"
-                  type="tel"
-                  placeholder="Enter phone number"
-                 class="custom-input"
-                  :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.phoneNumber }"
-                />
-              </div>
+                  <select v-model="form.countryCode" class="border-[0.5px] bg-[#1A1A1B09] rounded-l-xl py-3.5 px-3 border-gray-100 text-sm">
+                    <option value="+234">🇳🇬 +234</option>
+                  </select>
+                </div>
+             <div class="flex-1">
+                  <input
+                    v-model="form.phoneNumber"
+                    type="tel"
+                    placeholder="Enter phone number"
+                    class="w-full px-4 py-3.5 text-sm outline-none focus:border focus:border-[#045940] rounded-r-xl bg-[#1A1A1B09]  focus:bg-white pr-10"
+                    :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.phoneNumber }"
+                  />
+                </div>
             </div>
             <p v-if="errors.phoneNumber" class="text-red-500 text-xs mt-1">{{ errors.phoneNumber }}</p>
           </div>
@@ -392,9 +389,9 @@ const signupWithGoogle = async () => {
     const result = await register()
     
     if (result.type !== 'ERROR') {
-      localStorage.setItem('signup_email', 'john.doe@gmail.com')
+      // localStorage.setItem('signup_email', 'john.doe@gmail.com')
       clearFormCache()
-      router.push('/signup/verify')
+      // router.push('/signup/verify')
     } else {
       console.error('Google signup failed:', result)
     }
@@ -431,7 +428,7 @@ const handleSubmit = async () => {
     if (result.type !== 'ERROR') {
       localStorage.setItem('signup_email', form.email)
       clearFormCache()
-      router.push('/signup/verify')
+      // router.push('/signup/verify')
     } else {
       console.error('Registration failed:', result)
     }

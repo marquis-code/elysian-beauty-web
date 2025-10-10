@@ -11,7 +11,7 @@ export const useFetchServiceType = () => {
 		const res = await serviceType_api.$_fetch_serviceType(route?.params?.id) as any;
 
 		if (res.type !== "ERROR") {
-			serviceType.value = res.data;
+			serviceType.value = res?.data?.data?.serviceType;
 		}
 
 		loading.value = false;

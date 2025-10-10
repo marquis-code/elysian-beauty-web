@@ -4,7 +4,7 @@
     <p class="text-[#79807E] mb-6 text-center">Please login to your account</p>
     <form @submit.prevent="handleSubmit">
       <div class="mt-4 relative">
-        <label for="email" class="block text-[#045940] font-light text-sm mb-1">Email</label>
+        <label for="email" class="block text-gray-800 font-medium text-sm mb-1">Email</label>
         <input
             v-model="form.email"
             id="email"
@@ -22,7 +22,7 @@
 
       <!-- Password -->
       <div class="mt-4">
-        <label for="password" class="block text-[#045940] font-light text-sm mb-1">Password</label>
+        <label for="password" class="block text-gray-800 font-medium text-sm mb-1">Password</label>
         <div class="relative">
           <input
               v-model="form.password"

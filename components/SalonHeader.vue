@@ -1,6 +1,7 @@
 <template>
-    <header class="p-6">
-      <h1 class="text-3xl font-bold text-[#282B2A]">House of Love Salon</h1>
+    <header class="p-6 lg:flex space-y-3 lg:space-y-0 justify-between items-center">
+   <div>
+       <h1 class="text-2xl font-black text-[#282B2A]"> {{ serviceProvider?.ServiceProvider?.businessName ?? 'Nil' }}</h1>
       <div class="flex items-center mt-2">
         <div class="flex items-center">
           <span class="text-sm font-medium text-gray-900">5.0</span>
@@ -17,12 +18,35 @@
           Closed, opens at 9:00am
         </div>
         <div class="ml-4 text-sm text-[#282B2A]">
-          Verified
+         {{ serviceProvider?.ServiceProvider?.businessVerified ? 'Verified' : 'Not Verified' }}
         </div>
       </div>
+   </div>
+
+
+
+      <div class="">
+          <button 
+            class="bg-[#045940] text-xs text-white px-10 py-3 rounded-full font-medium hover:bg-[#045940] transition-colors duration-200"
+            @click="handleNavigationToBookingPage"
+          >
+            BOOK NOW
+          </button>
+        </div>
     </header>
   </template>
   
   <script setup lang="ts">
   import { StarIcon } from 'lucide-vue-next';
+  const route = useRoute()
+  const handleNavigationToBookingPage = () => {
+    navigateTo(`/explore/${route?.params?.id}/book`)
+  }
+
+  const props = defineProps({
+    serviceProvider: {
+      type: Object,
+      default: {}
+    }
+  })
   </script>

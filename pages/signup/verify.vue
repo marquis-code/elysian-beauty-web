@@ -18,14 +18,14 @@
       <div class="w-full max-w-md">
         <!-- Header -->
         <div class="text-center mb-12">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-lg animate-pulse" style="background: linear-gradient(135deg, #045940 0%, #059669 100%);">
+          <div class="w-14 h-14 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-lg animate-pulse" style="background: linear-gradient(135deg, #045940 0%, #059669 100%);">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">Enter verification code</h2>
-          <p class="text-gray-600 mb-2">Almost there! We've sent a 4-digit code to</p>
-          <p class="font-semibold mb-2" style="color: #045940;">{{ email }}</p>
+          <h2 class="text-xl font-bold text-gray-900 mb-4">Enter verification code</h2>
+          <p class="text-gray-600 text-sm mb-2">Almost there! We've sent a 4-digit code to</p>
+          <p class="font-semibold text-sm mb-2" style="color: #045940;">{{ email }}</p>
           <p class="text-sm text-gray-500">Enter it below to verify your account</p>
         </div>
 
@@ -39,7 +39,7 @@
               v-model="otpCode[index]"
               type="text"
               maxlength="1"
-              class="w-16 h-16 text-center text-2xl font-bold bg-white border-2 border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
+              class="w-16 h-16 text-center text-2xl font-bold bg-white border-[0.5px] border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200"
               :class="{ 'border-red-300 focus:ring-red-500/20 focus:border-red-500': errors.otpCode }"
               @input="handleOtpInput($event, index)"
               @keydown.delete="handleOtpDelete($event, index)"
@@ -53,7 +53,7 @@
           <button
             type="submit"
             :disabled="loading || otpCode.join('').length !== 4"
-            class="w-full py-4 text-white font-semibold rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
+            class="w-full py-3 text-white font-semibold rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
             style="background: linear-gradient(135deg, #045940 0%, #059669 100%);"
           >
             <span v-if="loading" class="flex items-center justify-center">
@@ -112,9 +112,10 @@ import { use_auth_resend_verify_email } from '@/composables/auth/useResendEmail'
 const { verifyUser, loading, setPayload } = use_auth_verify_user()
 const { resendVerifyEmail, loading: resending } = use_auth_resend_verify_email()
 const router = useRouter()
+const route = useRoute()
 
 // State
-const email = ref('')
+const email = ref(route.query.email)
 const otpCode = ref(['', '', '', ''])
 const otpInputs = ref<HTMLInputElement[]>([])
 const resendCooldown = ref(0)
@@ -194,7 +195,7 @@ const handleSubmit = async () => {
       // Clear stored email
       localStorage.removeItem('signup_email')
       // Redirect to success page or dashboard
-      router.push('/dashboard')
+      // router.push('/dashboard')
     } else {
       errors.otpCode = 'Invalid verification code. Please try again.'
     }
@@ -264,11 +265,13 @@ onMounted(() => {
       window.location.href = "/signup";
       return;
     }
-  } else {
-    // Redirect back to signup if no data found
-    window.location.href = "/signup";
-    return;
   }
+  
+  // else {
+  //   // Redirect back to signup if no data found
+  //   window.location.href = "/signup";
+  //   return;
+  // }
 
   // Focus first input
   nextTick(() => {

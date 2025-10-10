@@ -12,7 +12,7 @@ export const useInitializeTransaction = () => {
 		loading.value = true;
 		try {
 			const res = await transactions_api.$_initalize_transactions(payload) as any;
-			return res;
+			return res?.data;
 		} finally {
 			loading.value = false;
 		}

@@ -41,7 +41,7 @@ export const useRegister = () => {
       console.log(res, 'res here')
       loading.value = false;
 
-      if ([200, 201].includes(res.status) && !res.data.data.emailIsVerified) {
+      if ([200, 201].includes(res.status)) {
         showToast({
           title: "Success",
           message: "Registration successful. Please check your email.",
@@ -52,6 +52,7 @@ export const useRegister = () => {
           path: "/signup/verify",
           query: { email: credential.value.email },
         });
+        return res
         // Optionally navigate after successful registration
         // router.push({ path: '/client/otp-verification', query: { email: credential?.value?.email }});
       } else {

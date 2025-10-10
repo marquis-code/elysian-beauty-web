@@ -18,16 +18,16 @@
               {{ slide.description }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-              <button @click="router.push('/explore')" 
+              <button v-if="slide.primaryButton " @click="router.push(slide.primaryButton === 'Learn More' ? '/about' : '/login')" 
                       class="bg-[#FFD23F] text-[#045940] text-sm rounded-full px-8 py-4 font-semibold hover:bg-yellow-400 transition-colors">
                 {{ slide.primaryButton }}
               </button>
-              <button class="flex items-center justify-center gap-2 text-sm rounded-full border border-white px-8 py-4 hover:bg-white hover:text-emerald-700 transition-colors">
+              <!-- <button v-if="slide.secondaryButton" @click="router.push('/login')" class="flex items-center justify-center gap-2 text-sm rounded-full border border-white px-8 py-4 hover:bg-white hover:text-emerald-700 transition-colors">
                 {{ slide.secondaryButton }}
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.91667 3.75V5.41667H13.4083L3.75 15.075L4.925 16.25L14.5833 6.59167V12.0833H16.25V3.75H7.91667Z" fill="currentColor"/>
                 </svg>
-              </button>
+              </button> -->
             </div>
           </div>
           
@@ -89,24 +89,24 @@ const slides = ref([
   {
     title: "Book Trusted Beauty Experts Near You — Anytime, Anywhere in Nigeria",
     description: "Find and book verified hairstylists, makeup artists, nail technicians, and more. Enjoy stress-free beauty appointments from the comfort of your home or at your favorite salon.",
-    primaryButton: "Find Beauty Experts",
-    secondaryButton: "Join as a Professional",
+    // primaryButton: "Find Beauty Experts",
+    primaryButton: "Join as a Professional",
     image: advertImage,
     alt: "Beauty Expert"
   },
   {
     title: "Experience  Awesome Beauty Treatments at Your Doorstep.",
     description: "Catch a break on the salon fuss and experience convenient beauty services brought to you in the comforts of your own home with Elysian Beauty. Deluxe services and goods, right at your door step.",
-    primaryButton: "Browse Services",
-    secondaryButton: "View Portfolio",
+    primaryButton: "Join as a client",
+    // secondaryButton: "View Portfolio",
     image: advertImage2,
     alt: "Beauty Transformation"
   },
   {
     title: "Convenient Self-Care, Made Available Nationwide in Nigeria",
     description: " Elysian Beauty links you to confirmed, professional beauty experts and genuine products in a variety of categories, all on one easy to use site.",
-    primaryButton: "Book Now",
-    secondaryButton: "How It Works",
+    primaryButton: "Learn More",
+    // secondaryButton: "How It Works",
     image: advertImage3,
     alt: "Beauty Session"
   }

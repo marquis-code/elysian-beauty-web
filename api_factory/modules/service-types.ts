@@ -28,4 +28,8 @@ export const serviceType_api = {
     const url = "/service-types";
     return GATEWAY_ENDPOINT.get(url);
   },
+    $_fetch_serviceProvider_services: (id: string) => {
+   const url = `/service-types/sp/${id}`;
+    return GATEWAY_ENDPOINT.get(url);
+  },
 };

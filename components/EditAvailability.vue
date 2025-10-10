@@ -1,248 +1,298 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useUpdateAvailability } from '@/composables/modules/availability/useUpdateAvailability'
-
-interface WorkingDay {
-  id: string
-  day: string
-  startTime: string
-  endTime: string
-  availabilityId: string
-  createdAt: string
-  updatedAt: string
-}
-
-interface Props {
-  workingDay: WorkingDay
-  availabilityId: string
-  show: boolean
-}
-
-interface Emits {
-  (e: 'close'): void
-  (e: 'success'): void
-}
-
-const props = defineProps<Props>()
-const emit = defineEmits<Emits>()
-
-const { updateAvailability, loading: updateLoading } = useUpdateAvailability()
-
-const startTime = ref('')
-const endTime = ref('')
-const errorMessage = ref('')
-const successMessage = ref('')
-
-// Initialize form with working day data
-watch(() => props.workingDay, (newVal) => {
-  if (newVal) {
-    startTime.value = newVal.startTime
-    endTime.value = newVal.endTime
-  }
-}, { immediate: true })
-
-const validateTimes = (): boolean => {
-  if (!startTime.value || !endTime.value) {
-    errorMessage.value = 'Please fill in all time fields'
-    return false
-  }
-  
-  const start = startTime.value.split(':').map(Number)
-  const end = endTime.value.split(':').map(Number)
-  const startMinutes = start[0] * 60 + start[1]
-  const endMinutes = end[0] * 60 + end[1]
-  
-  if (startMinutes >= endMinutes) {
-    errorMessage.value = 'End time must be after start time'
-    return false
-  }
-  
-  return true
-}
-
-const handleSubmit = async () => {
-  errorMessage.value = ''
-  successMessage.value = ''
-  
-  if (!validateTimes()) {
-    return
-  }
-  
-  try {
-    const payload = {
-      availabilityId: props.availabilityId,
-      workingDayId: props.workingDay.id,
-      day: props.workingDay.day,
-      startTime: startTime.value,
-      endTime: endTime.value
-    }
-    
-    await updateAvailability(payload)
-    
-    successMessage.value = 'Availability updated successfully!'
-    
-    setTimeout(() => {
-      emit('success')
-      handleClose()
-    }, 1500)
-  } catch (error: any) {
-    errorMessage.value = error?.message || 'Failed to update availability. Please try again.'
-  }
-}
-
-const handleClose = () => {
-  if (!updateLoading.value) {
-    resetForm()
-    emit('close')
-  }
-}
-
-const resetForm = () => {
-  errorMessage.value = ''
-  successMessage.value = ''
-}
-</script>
-
 <template>
   <Teleport to="body">
     <Transition name="modal">
       <div
         v-if="show"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
-        @click.self="handleClose"
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 px-4"
       >
-        <div
-          class="relative w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col"
-        >
-          <!-- Header -->
-          <div class="p-6 border-b border-gray-100">
-            <div class="flex items-start justify-between">
-              <div>
-                <h2 class="text-2xl font-bold text-gray-900">
-                  Edit Availability
-                </h2>
-                <p class="mt-1 text-sm text-gray-500">
-                  Update working hours for {{ workingDay.day }}
-                </p>
-              </div>
-              <button
-                type="button"
-                :disabled="updateLoading"
-                class="text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 p-1 hover:bg-gray-100 rounded-lg"
-                @click="handleClose"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
+        <div class="bg-white rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
+          <!-- Modal Header with Close Button -->
+          <div class="px-6 relative">
 
-          <!-- Body -->
-          <div class="p-6 space-y-5">
-            <!-- Day Display -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Day
-              </label>
-              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3">
-                <div class="text-center font-semibold text-blue-900">
-                  {{ workingDay.day }}
+            <!-- Modal Content -->
+            <div class="py-4">
+<div class="flex justify-between items-center">
+                <h2 class="text-lg font-black text-gray-900">Edit Availability</h2>
+            <button
+              @click="handleClose"
+              :disabled="isLoading"
+              class="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+</div>
+
+              <p class="text-gray-600 text-sm mb-6">
+                Stay booked with
+                <span class="font-semibold">real-time availability</span>. Set your
+                <span class="font-semibold">working hours</span>, and let clients see
+                open slots instantly.
+              </p>
+
+              <!-- Availability Options -->
+              <div class="bg-gray-25 p-6 rounded-2xl mb-6">
+                <h3 class="text-base font-semibold text-gray-900 mb-4">
+                  When are you available?
+                </h3>
+
+                <div class="space-y-4">
+                  <label class="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      v-model="availabilityOption"
+                      value="now"
+                      :disabled="isLoading"
+                      class="h-5 w-5 text-gray-900 disabled:opacity-50"
+                    />
+                    <span class="ml-3 text-sm text-gray-700">Now</span>
+                  </label>
+
+                  <label class="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      v-model="availabilityOption"
+                      value="not_available"
+                      :disabled="isLoading"
+                      class="h-5 w-5 text-gray-900 disabled:opacity-50"
+                    />
+                    <span class="ml-3 text-sm text-gray-700">Not available</span>
+                  </label>
+
+                  <label class="flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      v-model="availabilityOption"
+                      value="custom"
+                      :disabled="isLoading"
+                      class="h-5 w-5 text-gray-900 disabled:opacity-50"
+                    />
+                    <span class="ml-3 text-sm text-gray-700">Custom</span>
+                  </label>
                 </div>
               </div>
-            </div>
 
-            <!-- Time Inputs -->
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                  Start Time
-                </label>
-                <input
-                  v-model="startTime"
-                  type="time"
-                  :disabled="updateLoading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
+              <!-- Working Days Section - Only for custom -->
+              <div v-if="availabilityOption === 'custom'" class="mb-6">
+                <div
+                  class="border-[0.5px] border-gray-25 rounded-xl p-4 flex justify-between items-center cursor-pointer hover:bg-gray-25 transition-colors"
+                  @click="workingDaysOpen = !workingDaysOpen"
                 >
+                  <div>
+                    <h3 class="text-base font-black text-gray-900">Working days</h3>
+                    <p class="text-gray-600 text-sm">Choose your preferred working days</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 transform transition-transform"
+                    :class="{ 'rotate-180': workingDaysOpen }"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+
+                <!-- Working Days Content -->
+                <div v-if="workingDaysOpen" class="border-x-[0.5px] border-gray-50 border-b-[0.5px] rounded-b-lg p-4 space-y-4">
+                  <!-- Day Selector Buttons -->
+                  <div class="flex justify-between gap-2 mb-4">
+                    <button
+                      v-for="day in dayButtons"
+                      :key="day.short"
+                      @click="toggleDay(day.long)"
+                      :disabled="isLoading"
+                      :class="[
+                        'flex-1 h-10 rounded-md flex items-center justify-center font-medium transition-colors disabled:opacity-50',
+                        isSelectedDay(day.long)
+                          ? 'bg-gray-900 text-white'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+                      ]"
+                    >
+                      {{ day.short }}
+                    </button>
+                  </div>
+
+                  <!-- Apply to All Toggle (shown only if days selected) -->
+                  <div v-if="workingDays.length > 0" class="border-t pt-4">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <span class="mr-3 text-gray-700 text-sm">Apply to all</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            v-model="applyToAll"
+                            :disabled="isLoading"
+                            class="sr-only peer"
+                            @change="handleApplyToAllChange"
+                          />
+                          <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-900"
+                          ></div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Working Days List -->
+                  <div v-if="workingDays.length > 0" class="space-y-4 pt-2">
+                    <div
+                      v-for="(day, index) in workingDays"
+                      :key="day.day"
+                      class="border-[0.5px] border-gray-50 rounded-lg p-4 bg-white hover:bg-gray-25 transition-colors"
+                    >
+                      <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-base font-semibold text-gray-900">{{ day.day }}</h4>
+                        <button
+                          @click="removeDay(day.day)"
+                          :disabled="isLoading"
+                          class="text-red-600 hover:text-red-700 p-1 hover:bg-red-100 rounded disabled:opacity-50 transition-colors"
+                        >
+                          <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <!-- Working Hours Section -->
+                      <div>
+                        <h5 class="text-gray-700 text-sm font-medium mb-3">Working Hours</h5>
+                        <div class="flex items-center gap-3">
+                          <!-- Start Time Picker -->
+                          <div class="flex-1">
+                            <label class="block text-xs text-gray-600 mb-1">Start Time</label>
+                            <div class="relative">
+                              <input
+                                type="time"
+                                v-model="day.startTime"
+                                :disabled="isLoading || (applyToAll && index !== 0)"
+                                class="custom-input disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                              />
+                            </div>
+                          </div>
+
+                          <span class="text-gray-600 font-medium pt-6">to</span>
+
+                          <!-- End Time Picker -->
+                          <div class="flex-1">
+                            <label class="block text-xs text-gray-600 mb-1">End Time</label>
+                            <div class="relative">
+                              <input
+                                type="time"
+                                v-model="day.endTime"
+                                :disabled="isLoading || (applyToAll && index !== 0)"
+                                class="custom-input disabled:opacity-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Time validation error -->
+                        <div
+                          v-if="getTimeError(day.day)"
+                          class="mt-2 text-xs text-red-600"
+                        >
+                          {{ getTimeError(day.day) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Empty State -->
+                  <div v-else class="text-center flex justify-center items-center flex-col py-8 text-gray-500">
+                    <img src="@/assets/img/empty-state.svg" class="h-20 w-20" />
+                    <p class="font-medium">No days selected</p>
+                    <p class="text-sm mt-1">Click a day button above to add working hours</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                  End Time
-                </label>
-                <input
-                  v-model="endTime"
-                  type="time"
-                  :disabled="updateLoading"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm"
+              <!-- Error Message -->
+              <Transition name="fade">
+                <div
+                  v-if="errorMessage"
+                  class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3"
                 >
-              </div>
-            </div>
+                  <svg
+                    class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <p class="text-sm text-red-800">{{ errorMessage }}</p>
+                </div>
+              </Transition>
 
-            <!-- Duration Display -->
-            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-600">Duration:</span>
-                <span class="font-semibold text-gray-900">
-                  {{ startTime }} - {{ endTime }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Messages -->
-            <Transition name="fade">
-              <div
-                v-if="errorMessage"
-                class="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3"
-              >
-                <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-sm text-red-800">{{ errorMessage }}</p>
-              </div>
-            </Transition>
-
-            <Transition name="fade">
-              <div
-                v-if="successMessage"
-                class="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3"
-              >
-                <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <p class="text-sm text-green-800">{{ successMessage }}</p>
-              </div>
-            </Transition>
-          </div>
-
-          <!-- Footer -->
-          <div class="p-6 border-t border-gray-100 bg-gray-50">
-            <div class="flex items-center justify-end gap-3">
-              <button
-                type="button"
-                :disabled="updateLoading"
-                class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
-                @click="handleClose"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                :disabled="updateLoading"
-                class="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[140px] justify-center"
-                @click="handleSubmit"
-              >
-                <svg
-                  v-if="updateLoading"
-                  class="w-4 h-4 animate-spin"
-                  fill="none"
-                  viewBox="0 0 24 24"
+              <!-- Action Buttons -->
+              <div class="flex space-x-4 mt-8">
+                <button
+                  @click="handleSave"
+                  :disabled="isLoading"
+                  class="bg-primary text-white px-6 py-3 text-sm rounded-full font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center flex-1"
                 >
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                <span>{{ updateLoading ? 'Updating...' : 'Update' }}</span>
-              </button>
+                  <svg
+                    v-if="isLoading"
+                    class="w-4 h-4 animate-spin"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    />
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  <span>{{ isLoading ? 'Saving...' : 'Save' }}</span>
+                </button>
+                <button
+                  @click="handleClose"
+                  :disabled="isLoading"
+                  class="bg-gray-200 text-gray-700 px-6 text-sm py-3 rounded-full font-medium hover:bg-gray-300 transition-colors disabled:opacity-50 flex-1"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -251,15 +301,286 @@ const resetForm = () => {
   </Teleport>
 </template>
 
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue'
+import { useCreateAvailability }  from '@/composables/modules/availability/useCreateAvailability'
+import { useUpdateAvailability } from '@/composables/modules/availability/useUpdateAvailability'
+import { useUser } from "@/composables/auth/useUser"
+const { createAvailability, loading } = useCreateAvailability()
+const { user } = useUser()
+interface WorkingDay {
+  day: string
+  startTime: string
+  endTime: string
+}
+
+interface Props {
+  show: boolean
+  workingDay?: {
+    id: string
+    day: string
+    startTime: string
+    endTime: string
+    availabilityId: string
+  } | null
+  availabilityId: string
+}
+
+interface Emits {
+  (e: 'close'): void
+  (e: 'success'): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  workingDay: null,
+})
+
+const emit = defineEmits<Emits>()
+
+const { updateAvailability, loading: updateLoading } = useUpdateAvailability()
+
+// Days of week mapping
+const dayButtons = [
+  { short: 'Mo', long: 'Monday' },
+  { short: 'Tu', long: 'Tuesday' },
+  { short: 'We', long: 'Wednesday' },
+  { short: 'Th', long: 'Thursday' },
+  { short: 'Fr', long: 'Friday' },
+  { short: 'Sat', long: 'Saturday' },
+  { short: 'Su', long: 'Sunday' },
+]
+
+const standardWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
+// State
+const availabilityOption = ref<'now' | 'not_available' | 'custom'>('now')
+const workingDaysOpen = ref(false)
+const workingDays = ref<WorkingDay[]>([])
+const applyToAll = ref(false)
+const errorMessage = ref('')
+const timeErrors = ref<Record<string, string>>({})
+const isLoading = computed(() => updateLoading.value)
+
+// Initialize working days based on availability option
+const initializeWorkingDays = () => {
+  if (props.workingDay) {
+    // Editing existing - load as custom
+    workingDays.value = [
+      {
+        day: props.workingDay.day,
+        startTime: props.workingDay.startTime,
+        endTime: props.workingDay.endTime,
+      },
+    ]
+    availabilityOption.value = 'custom'
+    workingDaysOpen.value = true
+  } else {
+    // Creating new - default to "now"
+    workingDays.value = []
+    availabilityOption.value = 'now'
+    workingDaysOpen.value = false
+  }
+  applyToAll.value = false
+  errorMessage.value = ''
+  timeErrors.value = {}
+}
+
+// Watch for show prop and availability option changes
+watch(
+  () => props.show,
+  (newVal) => {
+    if (newVal) {
+      initializeWorkingDays()
+    }
+  }
+)
+
+watch(
+  () => availabilityOption.value,
+  (newVal) => {
+    errorMessage.value = ''
+    timeErrors.value = {}
+
+    // Only preserve working days when in custom mode
+    if (newVal !== 'custom') {
+      workingDaysOpen.value = false
+      workingDays.value = []
+      applyToAll.value = false
+    } else if (newVal === 'custom' && workingDays.value.length === 0) {
+      workingDaysOpen.value = true
+    }
+  }
+)
+
+const isSelectedDay = (day: string): boolean => {
+  return workingDays.value.some((wd) => wd.day === day)
+}
+
+const toggleDay = (day: string) => {
+  const index = workingDays.value.findIndex((wd) => wd.day === day)
+
+  if (index === -1) {
+    // Add day with default times
+    workingDays.value.push({
+      day,
+      startTime: '09:00',
+      endTime: '17:00',
+    })
+    // Keep working days in week order
+    sortWorkingDays()
+  } else {
+    // Remove day
+    workingDays.value.splice(index, 1)
+    if (workingDays.value.length === 0) {
+      applyToAll.value = false
+    }
+  }
+}
+
+const sortWorkingDays = () => {
+  const dayOrder = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
+  workingDays.value.sort(
+    (a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day)
+  )
+}
+
+const removeDay = (day: string) => {
+  const index = workingDays.value.findIndex((wd) => wd.day === day)
+  if (index !== -1) {
+    workingDays.value.splice(index, 1)
+    if (workingDays.value.length === 0) {
+      applyToAll.value = false
+    }
+  }
+}
+
+const handleApplyToAllChange = () => {
+  if (applyToAll.value && workingDays.value.length > 0) {
+    // Apply first day's times to all days
+    const firstDayTime = {
+      startTime: workingDays.value[0].startTime,
+      endTime: workingDays.value[0].endTime,
+    }
+    workingDays.value.forEach((day) => {
+      day.startTime = firstDayTime.startTime
+      day.endTime = firstDayTime.endTime
+    })
+  }
+}
+
+const getTimeError = (day: string): string => {
+  return timeErrors.value[day] || ''
+}
+
+const validateTimes = (): boolean => {
+  timeErrors.value = {}
+  errorMessage.value = ''
+
+  for (const day of workingDays.value) {
+    if (!day.startTime || !day.endTime) {
+      timeErrors.value[day.day] = 'Please fill in all time fields'
+      errorMessage.value = 'Please fill in all time fields'
+      return false
+    }
+
+    const start = day.startTime.split(':').map(Number)
+    const end = day.endTime.split(':').map(Number)
+    const startMinutes = start[0] * 60 + start[1]
+    const endMinutes = end[0] * 60 + end[1]
+
+    if (startMinutes >= endMinutes) {
+      timeErrors.value[day.day] = 'End time must be after start time'
+      errorMessage.value = 'Please check time fields for errors'
+      return false
+    }
+  }
+  return true
+}
+
+const buildPayload = () => {
+  let days: WorkingDay[] = []
+
+  if (availabilityOption.value === 'now') {
+    // Monday to Friday, 9 AM to 5 PM
+    days = standardWeekdays.map((day) => ({
+      day,
+      startTime: '09:00',
+      endTime: '17:00',
+    }))
+  } else if (availabilityOption.value === 'not_available') {
+    // Empty array
+    days = []
+  } else if (availabilityOption.value === 'custom') {
+    // Use selected working days
+    days = workingDays.value.map((day) => ({
+      day: day.day,
+      startTime: day.startTime,
+      endTime: day.endTime,
+    }))
+  }
+
+  return {
+    availabilityId: props.availabilityId,
+    workingDays: days,
+  }
+}
+
+const handleSave = async () => {
+  errorMessage.value = ''
+  timeErrors.value = {}
+
+  // Validate based on availability option
+  if (availabilityOption.value === 'custom') {
+    if (workingDays.value.length === 0) {
+      errorMessage.value = 'Please select at least one working day'
+      return
+    }
+
+    if (!validateTimes()) {
+      return
+    }
+  }
+
+  try {
+    const payload = buildPayload()
+    // await updateAvailability(props.availabilityId, payload)
+    const payloadObj = {
+      serviceProviderId: user?.value?.id,
+       workingDays: payload?.workingDays
+    }
+    await createAvailability(payloadObj).then(() => {
+      emit('success')
+      handleClose()
+    })
+  } catch (error: any) {
+    errorMessage.value = error?.message || 'Failed to update availability. Please try again.'
+  }
+}
+
+const handleClose = () => {
+  if (!isLoading.value) {
+    emit('close')
+  }
+}
+</script>
+
 <style scoped>
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.modal-enter-active .relative,
-.modal-leave-active .relative {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+.modal-enter-active > div,
+.modal-leave-active > div {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modal-enter-from,
@@ -267,10 +588,9 @@ const resetForm = () => {
   opacity: 0;
 }
 
-.modal-enter-from .relative,
-.modal-leave-to .relative {
-  transform: scale(0.9);
-  opacity: 0;
+.modal-enter-from > div,
+.modal-leave-to > div {
+  transform: scale(0.95);
 }
 
 .fade-enter-active,
