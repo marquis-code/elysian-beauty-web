@@ -280,16 +280,7 @@ const handleGoogleLogin = async () => {
   try {
     loginLoading.value = true
     
-    // TODO: Implement Google OAuth login
-    // Example implementation:
-    // const response = await $fetch('/api/auth/google')
-    // if (response.success) {
-    //   localStorage.setItem('token', response.data.token)
-    //   localStorage.setItem('userEmail', response.data.email)
-    //   userEmail.value = response.data.email
-    //   showAuthModal.value = false
-    //   proceedToPayment()
-    // }
+
     
     console.log('Google login not implemented yet')
     alert('Google login coming soon!')
