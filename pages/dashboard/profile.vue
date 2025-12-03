@@ -194,9 +194,10 @@
               </button>
               <button
                 type="submit"
-                class="px-6 py-3 text-sm bg-[#045940] text-white rounded-full hover:bg-[#034530]"
+                :disabled="loading"
+                class="px-6 py-3 disabled:cursor-not-allowed disabled:opacity-25 text-sm bg-[#045940] text-white rounded-full hover:bg-[#034530]"
               >
-                Update Password
+                 {{  loading ? 'updating..' : 'Update Password' }}
               </button>
             </div>
           </form>
@@ -346,10 +347,12 @@
 import { ref, onMounted } from 'vue'
 import ServicesCategories from '@/components/ServicesCategories.vue'
 import { useFetchServiceProvidersReview } from "@/composables/modules/reviews/useFetchServiceProvidersReviews"
+import { use_auth_change_password } from "@/composables/auth/useChangePassword"
 import { useUser } from "@/composables/auth/useUser";
 import { definePageMeta } from '#imports'
 const { user } = useUser()
 const { reviews: reviewsList, loading: fetchingReviews } = useFetchServiceProvidersReview()
+const { credential, changePassword, loading } = use_auth_change_password()
 
 const coverInput = ref<HTMLInputElement | null>(null)
 
@@ -448,7 +451,9 @@ const updateProfile = () => {
   console.log('Form submitted:', form.value)
 }
 
-const updatePassword = () => {
+const updatePassword = async () => {
+
+  await changePassword(passwordForm.value)
   console.log('Password update:', passwordForm.value)
 }
 

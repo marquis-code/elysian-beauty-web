@@ -11,9 +11,13 @@ export const use_auth_change_password = () => {
     const loading = ref(false);
     const credential = ref({ currentPassword: '', newPassword: '' });
 
-    const changePassword = async () => {
+    const changePassword = async (paylaod: any) => {
         loading.value = true;
-        const res = await auth_api.$_change_password(credential.value) as any
+        const paylaodObj = {
+            currentPassword: paylaod.currentPassword, 
+            newPassword: paylaod.newPassword, 
+        }
+        const res = await auth_api.$_change_password(paylaodObj) as any
         loading.value = false;
 
         if (res.type !== 'ERROR') {
