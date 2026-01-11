@@ -4,11 +4,11 @@ import { useNuxtApp, useRuntimeConfig } from '#app'
 import { useCreateBooking } from "@/composables/modules/bookings/useCreateBooking"
 import { useInitializeTransaction } from "@/composables/modules/transactions/useInitializeTransaction"
 import { useVerifyTransaction } from "@/composables/modules/transactions/useVerifyTransaction"
-
+import { useUser }  from "@/composables/auth/useUser"
 const { initializeTransaction, loading: initializing } = useInitializeTransaction()
 const { verifyTransaction, loading: verifying } = useVerifyTransaction()
 const { createBooking, loading: creatingBooking } = useCreateBooking()
-
+const { user } = useUser()
 interface ServiceCategory {
   id: string
   name: string
@@ -366,8 +366,8 @@ const proceedToPayment = async () => {
   
   try {
     const paymentPayload = {
-      email: userEmail.value || 'abahmarquis@gmail.com',
-      amount: totalPrice.value,
+      email: user.value?.email || 'abahmarquis@gmail.com',
+      amount: totalPrice.value * 100, // Convert to kobo
       subaccount: "ACCT_f0qa1mpt73miwf6"
     } as any
 

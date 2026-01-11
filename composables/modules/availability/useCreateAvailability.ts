@@ -5,8 +5,18 @@ import { ref } from "vue";
 export const useCreateAvailability = () => {
   const loading = ref(false);
 
+  type AvailabilityTypeEnum = "IMMEDIATELY" | "NOT_AVAILABLE" | "FEW_DAYS"; 
+
+interface WorkingDays {
+  day: string;
+  startTime: string;
+  endTime: string;
+}
+
+
   const createAvailability = async (payload: {
     serviceProviderId: string;
+    availabilityType: AvailabilityTypeEnum;
     workingDays: Array<{
       day: string;
       startTime: string;
