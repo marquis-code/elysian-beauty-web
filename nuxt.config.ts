@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/200.html', '/services', '/article', '/about', '/404.html'],
+      routes: ['/', '/services', '/article', '/about', '/404.html'],  // Changed: Added '/' to generate index.html
       ignore: ['/dynamic-routes', '/api'],
       failOnError: false
     }
