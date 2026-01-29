@@ -2,7 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/elysgohr/public_html/
-    - /bin/cp -R * $DEPLOYPATH
-    - /bin/cp -R .output $DEPLOYPATH 2>/dev/null || true
-    - /bin/cp .htaccess $DEPLOYPATH 2>/dev/null || true
+    - /bin/cp -R .output/public/* $DEPLOYPATH/
+    - /bin/cp .htaccess $DEPLOYPATH/ 2>/dev/null || true
     - /bin/cp .env.production $DEPLOYPATH/.env 2>/dev/null || true
