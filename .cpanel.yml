@@ -1,0 +1,22 @@
+---
+deployment:
+  tasks:
+    # Set deployment path for develop subdomain
+    - export DEPLOYPATH=/home/elysgohr/develop.elysian-beauty.org/
+    
+    # Build your Nuxt app (if needed for static generation)
+    # - npm install
+    # - npm run generate
+    
+    # Deploy the built files (.output folder for Nuxt 3)
+    - /bin/cp -R .output/public/* $DEPLOYPATH
+    
+    # Copy server files if using SSR
+    - /bin/cp -R .output/server $DEPLOYPATH
+    
+    # Copy nuxt config and other necessary files
+    - /bin/cp nuxt.config.ts $DEPLOYPATH 2>/dev/null || true
+    - /bin/cp package.json $DEPLOYPATH 2>/dev/null || true
+    
+    # Copy .htaccess if exists
+    - /bin/cp .htaccess $DEPLOYPATH 2>/dev/null || true
