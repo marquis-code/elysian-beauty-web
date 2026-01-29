@@ -115,7 +115,7 @@
       <div
         v-if="showDropdown"
         ref="dropdown"
-        class="fixed z-50 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+        class="fixed z-50 mt-2 bg-white border-[0.5px] border-gray-100 rounded-lg shadow-lg max-h-60 overflow-y-auto"
         :style="dropdownStyle"
       >
         <div class="p-3 border-b border-gray-100">

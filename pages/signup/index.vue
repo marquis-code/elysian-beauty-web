@@ -19,7 +19,7 @@
           <!-- Client Option -->
           <button
             @click="selectAccountType('CLIENT')"
-            class="w-full flex items-center justify-between p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
+            class="w-full flex items-center justify-between p-6 bg-white border-[0.5px] border-gray-100 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
           >
             <div class="flex items-center space-x-4">
               <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
@@ -40,7 +40,7 @@
           <!-- Service Provider Option -->
           <button
             @click="selectAccountType('SERVICE_PROVIDER')"
-            class="w-full flex items-center justify-between p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
+            class="w-full flex items-center justify-between p-6 bg-white border-[0.5px] border-gray-100 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
           >
             <div class="flex items-center space-x-4">
               <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">

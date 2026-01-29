@@ -168,7 +168,7 @@
       </div>
 
       <!-- Empty State -->
-      <div v-else class="bg-white border border-gray-200 rounded-2xl p-12">
+      <div v-else class="bg-white border-[0.5px] border-gray-100 rounded-2xl p-12">
         <div class="flex flex-col items-center justify-center">
           <div class="mb-6">
             <h4 class="text-xl font-bold text-gray-900 mb-2">Categories</h4>

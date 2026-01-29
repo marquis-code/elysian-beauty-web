@@ -29,7 +29,7 @@
                 <input
                   v-model="searchQuery"
                   placeholder="Search services..."
-                  class="w-full pl-12 pr-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 placeholder-gray-500"
+                  class="w-full pl-12 pr-4 py-2.5 bg-gray-50/50 border-[0.5px] border-gray-100/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 placeholder-gray-500"
                 >
                 <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors duration-200">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@
             <div class="flex gap-3">
               <select
                 v-model="sortBy"
-                class="px-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[140px]"
+                class="px-4 py-2.5 bg-gray-50/50 border-[0.5px] border-gray-100/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[140px]"
               >
                 <option v-for="option in sortOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -49,7 +49,7 @@
               </select>
               <select
                 v-model="sortOrder"
-                class="px-4 py-2.5 bg-gray-50/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[120px]"
+                class="px-4 py-2.5 bg-gray-50/50 border-[0.5px] border-gray-100/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all duration-300 text-gray-900 min-w-[120px]"
               >
                 <option v-for="option in orderOptions" :key="option.value" :value="option.value">
                   {{ option.label }}
@@ -64,7 +64,8 @@
       <div v-if="fetching" class="flex justify-center items-center h-64 animate-fade-in">
         <div class="relative">
           <div class="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin"></div>
-          <div class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-emerald-400 rounded-full animate-spin animate-pulse" style="animation-delay: 0.1s"></div>
+          <!-- Only one animation class at a time -->
+          <div class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-emerald-400 rounded-full animate-pulse" style="animation-delay: 0.1s"></div>
         </div>
       </div>
 
@@ -111,7 +112,7 @@
           </div>
 
           <!-- Mobile Card View -->
-          <div v-else class="block lg:hidden">
+          <div v-else-if="paginatedServices.length > 0" class="block lg:hidden">
             <div class="divide-y divide-gray-100">
               <div
                 v-for="(service, index) in paginatedServices"
@@ -273,7 +274,7 @@
                 <div class="hidden sm:flex items-center gap-1">
                   <template v-for="page in visiblePages" :key="page">
                     <button
-                      v-if="page !== '...'"
+                      v-if="typeof page === 'number'"
                       @click="goToPage(page)"
                       :class="[
                         'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 transform hover:scale-105',
@@ -408,7 +409,7 @@
                     </div>
 
                     <!-- Description -->
-                    <div class="bg-gray-50 rounded-xl p-5 border border-gray-200/50">
+                    <div class="bg-gray-50 rounded-xl p-5 border-[0.5px] border-gray-100/50">
                       <h4 class="font-medium text-gray-900 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -556,7 +557,23 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import type { Service, CreateServicePayload } from '~/types';
+import type { CreateServicePayload } from '~/types';
+
+interface ServiceProvider {
+  businessName: string;
+  // Add other fields as needed
+}
+
+interface Service {
+  id: string;
+  serviceType: string;
+  description: string;
+  price: number;
+  duration: number;
+  createdAt?: string;
+  updatedAt?: string;
+  ServiceProvider?: ServiceProvider;
+}
 import { useCreateServiceType } from "@/composables/modules/serviceTypes/useCreateServiceType";
 import { useDeleteServiceType } from "@/composables/modules/serviceTypes/useDeleteServiceType";
 import { useUpdateServiceType } from "@/composables/modules/serviceTypes/useUpdateServiceType";
@@ -604,10 +621,9 @@ const itemsPerPageOptions = [
 ];
 
 // Computed properties
-const filteredServices = computed(() => {
+const filteredServices = computed<Service[]>(() => {
   if (!services.value) return [];
-  
-  let filtered = services.value.filter(service => {
+  const filtered = (services.value as Service[]).filter((service: Service) => {
     const searchLower = searchQuery.value.toLowerCase();
     return (
       service.serviceType.toLowerCase().includes(searchLower) ||
@@ -615,11 +631,8 @@ const filteredServices = computed(() => {
       service.ServiceProvider?.businessName?.toLowerCase().includes(searchLower)
     );
   });
-
-  // Sort services
-  filtered.sort((a, b) => {
+  filtered.sort((a: Service, b: Service) => {
     let aValue, bValue;
-    
     switch (sortBy.value) {
       case 'price':
         aValue = a.price;
@@ -637,21 +650,19 @@ const filteredServices = computed(() => {
         aValue = a.serviceType.toLowerCase();
         bValue = b.serviceType.toLowerCase();
     }
-
     if (sortOrder.value === 'desc') {
       return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
     } else {
       return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
     }
   });
-
   return filtered;
 });
 
 const totalServices = computed(() => filteredServices.value.length);
 const totalPages = computed(() => Math.ceil(totalServices.value / itemsPerPage.value));
 
-const paginatedServices = computed(() => {
+const paginatedServices = computed<Service[]>(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
   return filteredServices.value.slice(start, end);
@@ -832,6 +843,7 @@ definePageMeta({
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

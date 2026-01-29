@@ -52,7 +52,7 @@
     >
       <div 
         v-if="isOpen"
-        class="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden"
+        class="absolute z-50 w-full mt-2 bg-white border-[0.5px] border-gray-100 rounded-2xl shadow-lg overflow-hidden"
       >
         <div class="max-h-80 overflow-y-auto p-2">
           <div 

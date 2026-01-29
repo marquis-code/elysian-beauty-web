@@ -248,7 +248,7 @@
             <input 
               type="text" 
               placeholder="Search product, customer, etc..." 
-              class="pl-10 pr-4 py-3 w-full rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              class="pl-10 pr-4 py-3 w-full rounded-lg border-[0.5px] border-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               ref="mobileSearchInput"
             />
           </div>
