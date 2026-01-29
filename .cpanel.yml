@@ -2,5 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/elysgohr/public_html/
+    # Copy all built files from .output/public
     - /bin/cp -R .output/public/* $DEPLOYPATH/
-    - /bin/cp $DEPLOYPATH/200.html $DEPLOYPATH/index.html
+    # Fallback: If index.html doesn't exist, copy 200.html to index.html
+    - test -f $DEPLOYPATH/index.html || /bin/cp $DEPLOYPATH/200.html $DEPLOYPATH/index.html 2>/dev/null || true
