@@ -26,7 +26,7 @@ export const appointment_api = {
     return GATEWAY_ENDPOINT.get(url);
   },
   $_fetch_appointments: () => {
-    const url = "/appointments";
+    const url = "/appoinments";
     return GATEWAY_ENDPOINT.get(url);
   },
 };

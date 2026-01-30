@@ -397,13 +397,14 @@ const isLoading = computed(() => createLoading.value || updateLoading.value)
 
 // Fetch existing availability data
 const loadExistingAvailability = async () => {
-  if (!user?.value?.id) return
+  if (!user.value.serviceProvider?.id) return
 
   try {
-    const result = await fetchAvailabilityByProvider(user.value.id)
+    const result = await fetchAvailabilityByProvider(user.value.serviceProvider?.id || '')
     
-    if (result && result.data) {
-      const availability = result.data
+    // The API returns data at res.data.data
+    if (result && result.type !== 'ERROR' && result.data?.data) {
+      const availability = result.data.data
       
       // Store the availability ID for updates
       existingAvailabilityId.value = availability.id || availability._id || ''
@@ -414,7 +415,7 @@ const loadExistingAvailability = async () => {
 
       // Load working days if they exist
       if (availability.workingDays && availability.workingDays.length > 0) {
-        workingDays.value = availability.workingDays.map((day: WorkingDay) => ({
+        workingDays.value = availability.workingDays.map((day: any) => ({
           day: day.day,
           startTime: day.startTime,
           endTime: day.endTime,
@@ -621,7 +622,7 @@ const handleSave = async () => {
     } else {
       // Create new availability
       const createPayload = {
-        serviceProviderId: user?.value?.id,
+        serviceProviderId: user.value.serviceProvider?.id || '',
         availabilityType: availabilityOption.value,
         workingDays: workingDaysPayload
       }

@@ -71,8 +71,8 @@
   
 <script setup lang="ts">
 import avatar from '@/assets/img/avatar.png'
-  import { ref, computed } from 'vue'
-  import { PlusCircleIcon, ChevronDownIcon, CalendarIcon } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import { PlusCircleIcon, ChevronDownIcon, CalendarIcon } from 'lucide-vue-next'
   
   // Types
   interface Appointment {
@@ -97,6 +97,9 @@ import avatar from '@/assets/img/avatar.png'
     completed: boolean;
     description: string;
   }
+
+
+
   
   // State
   const activeView = ref<'today' | 'week'>('today')

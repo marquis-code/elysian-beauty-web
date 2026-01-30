@@ -179,7 +179,7 @@
 import { useCreateAvailability } from "@/composables/modules/availability/useCreateAvailability"
 import { useUpdateAvailability } from "@/composables/modules/availability/useUpdateAvailability"
 import { useFetchAvailabilityByProvider } from "@/composables/modules/availability/useFetchAvailabilityByProvider"
-
+import { useUser } from "@/composables/auth/useUser"
 // Define emits
 const emit = defineEmits<{
   (e: 'close'): void
@@ -195,7 +195,7 @@ const props = defineProps<{
 const { createAvailability, loading: creating } = useCreateAvailability()
 const { fetchAvailabilityByProvider, availabilities, loading } = useFetchAvailabilityByProvider()
 const { updateAvailability, loading: updating } = useUpdateAvailability()
-
+const { user } = useUser()
 // State
 const availabilityOption = ref<string>('now')
 const workingDaysOpen = ref<boolean>(true)
@@ -243,7 +243,7 @@ onMounted(async () => {
 // Load existing availability
 const loadExistingAvailability = async () => {
   try {
-    await fetchAvailabilityByProvider(props.serviceProviderId)
+    await fetchAvailabilityByProvider(user?.value?.serviceProvider?.id)
     
     if (availabilities.value && availabilities.value.data) {
       const availability = availabilities.value.data
@@ -350,6 +350,7 @@ const handleSave = async () => {
     if (existingAvailabilityId.value) {
       // Update existing availability
       const updatePayload = {
+        serviceProviderId: 'e2bb20fe-a64f-4543-93fb-8052b7a6872b',
         availabilityType: getAvailabilityType(),
         workingDays
       }
@@ -358,7 +359,7 @@ const handleSave = async () => {
     } else {
       // Create new availability
       const createPayload = {
-        serviceProviderId: props.serviceProviderId,
+        serviceProviderId: 'e2bb20fe-a64f-4543-93fb-8052b7a6872b',
         availabilityType: getAvailabilityType(),
         workingDays
       }

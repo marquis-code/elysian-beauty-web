@@ -1,16 +1,43 @@
 import { ref, computed } from "vue";
 import { useStorage } from "@vueuse/core";
 
+// Service Provider interface
+export interface ServiceProvider {
+  id: string;
+  businessName: string;
+  businessIsVerified: boolean;
+  identityIsVerified: boolean;
+  identityNumber: string | null;
+  otherServiceType: string | null;
+  businessLocationType: string;
+  businessLocation: string;
+  userId: string;
+  serviceRole: string;
+  accountId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// User data interface
+export interface UserData {
+  token: string;
+  email: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  serviceProvider?: ServiceProvider;
+}
+
 // Runtime-only state
 const runtimeData = {
-  user: ref({}),
+  user: ref<UserData | {}>({} as UserData),
   userId: ref<string>(""),
   token: ref<string>(""),
 };
 
 // Persistent state (stored in localStorage)
 const localStorageData = {
-  user: useStorage("user", {}),
+  user: useStorage<UserData | {}>("user", {} as UserData),
   userId: useStorage("userId", ""),
   token: useStorage("token", ""),
 };
@@ -44,7 +71,7 @@ export const useUser = () => {
     localStorageData.token.value = token;
   };
 
-  const createUser = (data: { userId: string; token: string; firstName: string; lastName: string; email: string }) => {
+  const createUser = (data: UserData) => {
     runtimeData.userId.value = data.userId;
     runtimeData.token.value = data.token;
     runtimeData.user.value = data;
@@ -54,6 +81,16 @@ export const useUser = () => {
     localStorageData.token.value = data.token;
   };
 
+  const getServiceProvider = computed(() => {
+    const user = runtimeData.user.value as UserData;
+    return user?.serviceProvider || null;
+  });
+
+  const isServiceProvider = computed(() => {
+    const user = runtimeData.user.value as UserData;
+    return Boolean(user?.serviceProvider);
+  });
+
   return {
     id,
     isLoggedIn,
@@ -61,5 +98,7 @@ export const useUser = () => {
     logOut,
     createUser,
     setToken,
+    getServiceProvider,
+    isServiceProvider,
   };
 };
