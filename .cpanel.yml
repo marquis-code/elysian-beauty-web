@@ -15,19 +15,5 @@ deployment:
     # Install dependencies and build
     - /usr/bin/npm install
     - /usr/bin/npm run build
-    # Backup and clear public_html (except source code and git)
-    - mkdir -p /home/elysgohr/_build_backup
-    - /bin/cp -R .output/public/* /home/elysgohr/_build_backup/
-    # Remove old built files from public_html root (but keep source folders)
-    - find $DEPLOYPATH -maxdepth 1 -type f -name "*.html" -delete
-    - find $DEPLOYPATH -maxdepth 1 -type f -name "*.js" -delete
-    - rm -rf $DEPLOYPATH/_nuxt 2>/dev/null || true
-    - rm -rf $DEPLOYPATH/.well-known 2>/dev/null || true
-    - rm -rf $DEPLOYPATH/about 2>/dev/null || true
-    - rm -rf $DEPLOYPATH/article 2>/dev/null || true
-    - rm -rf $DEPLOYPATH/cgi-bin 2>/dev/null || true
-    - rm -rf $DEPLOYPATH/services 2>/dev/null || true
-    # Copy new built files to public_html root
-    - /bin/cp -R /home/elysgohr/_build_backup/* $DEPLOYPATH/
-    # Clean up
-    - rm -rf /home/elysgohr/_build_backup
+    # Copy built files to public_html root
+    - /bin/cp -R .output/public/* $DEPLOYPATH/
