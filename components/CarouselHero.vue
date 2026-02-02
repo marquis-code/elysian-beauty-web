@@ -18,11 +18,11 @@
               {{ slide.description }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-              <button @click="router.push('/explore')" 
-                      class="bg-[#FFD23F] text-[#045940] text-sm rounded-full px-8 py-4 font-semibold hover:bg-yellow-400 transition-colors">
+              <button @click="router.push('/waitlist')" 
+                      class="bg-[#FFD23F] text-[#045940] text-sm rounded-full px-8 py-4 font-semibold hover:bg-yellow-400 hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                 {{ slide.primaryButton }}
               </button>
-              <button class="flex items-center justify-center gap-2 text-sm rounded-full border border-white px-8 py-4 hover:bg-white hover:text-emerald-700 transition-colors">
+              <button @click="router.push('/waitlist')" class="flex items-center justify-center gap-2 text-sm rounded-full border border-white px-8 py-4 hover:bg-white hover:text-emerald-700 transition-all duration-300 transform hover:scale-105">
                 {{ slide.secondaryButton }}
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.91667 3.75V5.41667H13.4083L3.75 15.075L4.925 16.25L14.5833 6.59167V12.0833H16.25V3.75H7.91667Z" fill="currentColor"/>

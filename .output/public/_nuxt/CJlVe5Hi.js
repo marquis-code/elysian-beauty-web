@@ -1,0 +1,1 @@
+import{_ as n}from"./BqccZi4v.js";import{e as o,c as t,b as a,o as s}from"./AHKmFle3.js";const i=o({__name:"settings",setup(r){return(c,_)=>{const e=n;return s(),t("main",null,[a(e)])}}});export{i as default};

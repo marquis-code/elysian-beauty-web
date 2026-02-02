@@ -102,13 +102,12 @@
             </div>
           </div>
           
-          <button class="group inline-flex items-center gap-3 px-8 py-4 border border-gray-800 rounded-full text-[#505554] font-medium text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 transform hover:scale-105">
+          <NuxtLink to="/about" class="group inline-flex items-center gap-3 px-8 py-4 border border-gray-800 rounded-full text-[#505554] font-medium text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 transform hover:scale-105">
             Learn More
-            <svg class="ml-3" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.91667 0.75V2.41667H10.4083L0.75 12.075L1.925 13.25L11.5833 3.59167V9.08333H13.25V0.75H4.91667Z" fill="#121212"/>
-              </svg>
-
-          </button>
+            <svg class="ml-3 group-hover:fill-white transition-colors duration-300" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.91667 0.75V2.41667H10.4083L0.75 12.075L1.925 13.25L11.5833 3.59167V9.08333H13.25V0.75H4.91667Z" fill="currentColor"/>
+            </svg>
+          </NuxtLink>
         </div>
       </div>
     </div>

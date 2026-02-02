@@ -217,12 +217,12 @@
             We're Serving major cities across Nigeria — with new professionals joining every week.
           </p>
           
-          <button class="group inline-flex items-center gap-3 px-8 py-4 border border-[#121212] rounded-full text-gray-800 font-medium text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 transform hover:scale-105">
+          <NuxtLink to="/about" class="group inline-flex items-center gap-3 px-8 py-4 border border-[#121212] rounded-full text-gray-800 font-medium text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 transform hover:scale-105">
             Learn more about our company
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.41667 0.488281V2.15495H9.90833L0.25 11.8133L1.425 12.9883L11.0833 3.32995V8.82161H12.75V0.488281H4.41667Z" fill="#121212"/>
-                </svg>
-          </button>
+            <svg class="group-hover:fill-white transition-colors duration-300" width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.41667 0.488281V2.15495H9.90833L0.25 11.8133L1.425 12.9883L11.0833 3.32995V8.82161H12.75V0.488281H4.41667Z" fill="currentColor"/>
+            </svg>
+          </NuxtLink>
         </div>
       </div>
     </section>

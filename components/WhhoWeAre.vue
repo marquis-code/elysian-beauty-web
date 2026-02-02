@@ -17,13 +17,12 @@
             </p>
             
             <div class="pt-4">
-              <button class="group inline-flex items-center px-8 py-4 border border-gray-800 rounded-full text-[#121212] font-semibold text-lg  transition-all duration-300 ease-in-out transform hover:scale-105">
+              <NuxtLink to="/about" class="group inline-flex items-center px-8 py-4 border border-gray-800 rounded-full text-[#121212] font-semibold text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105">
                 Learn more about our company
-                <svg class="ml-3" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.91667 0.75V2.41667H10.4083L0.75 12.075L1.925 13.25L11.5833 3.59167V9.08333H13.25V0.75H4.91667Z" fill="#121212"/>
+                <svg class="ml-3 group-hover:fill-white transition-colors duration-300" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.91667 0.75V2.41667H10.4083L0.75 12.075L1.925 13.25L11.5833 3.59167V9.08333H13.25V0.75H4.91667Z" fill="currentColor"/>
 </svg>
-
-              </button>
+              </NuxtLink>
             </div>
           </div>
           

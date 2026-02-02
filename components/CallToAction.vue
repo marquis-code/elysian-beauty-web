@@ -17,12 +17,12 @@
           </div>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button class="w-full sm:w-auto bg-[#045940] hover:bg-elysian-dark-green text-white font-semibold text-sm py-4 px-8 rounded-full transition-colors duration-300 text-lg">
-              Book a Beauty Pro
-            </button>
-            <button class="w-full sm:w-auto bg-[#045940] hover:bg-elysian-dark-green text-white font-semibold text-sm py-4 px-8 rounded-full transition-colors duration-300 text-lg">
+            <NuxtLink to="/waitlist" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold text-sm py-4 px-8 rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 transform hover:scale-105 text-center">
+              Join Waitlist
+            </NuxtLink>
+            <NuxtLink to="/waitlist" class="w-full sm:w-auto border-2 border-emerald-700 text-emerald-700 hover:bg-emerald-700 hover:text-white font-semibold text-sm py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 text-center">
               Join as a Professional
-            </button>
+            </NuxtLink>
           </div>
         </div>
       </section>
