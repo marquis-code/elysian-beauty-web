@@ -1,0 +1,1 @@
+import{_ as a}from"./BhfW7G9w.js";import{e as n,c as o,b as s,o as t}from"./D_QMQWzK.js";const i=n({__name:"messages",setup(r){return(c,m)=>{const e=a;return t(),o("main",null,[s(e)])}}});export{i as default};
