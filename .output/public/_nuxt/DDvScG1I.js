@@ -1,1 +1,0 @@
-import{G as n}from"./BC4dnuie.js";const a={$_initalize_transactions:t=>n.post("/transactions/init",t),$_verify_transactions:t=>n.post("/transactions/init",t),$_fetch_banks_list:()=>n.get("/transactions/banks")};export{a as t};
