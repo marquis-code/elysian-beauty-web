@@ -5,13 +5,13 @@
       <div class="">
         <!-- Header -->
         <div class="text-center mb-12">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #045940 0%, #059669 100%);">
+          <div class="w-14 h-14 mx-auto mb-6 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
           </div>
-          <h1 class="text-2xl font-bold text-gray-900 mb-3">Sign up</h1>
-          <p class="text-gray-600">Please choose your account category</p>
+          <h1 class="text-xl font-bold text-gray-900 mb-3">Sign up</h1>
+          <p class="text-gray-600 text-sm">Please choose your account category</p>
         </div>
 
         <!-- Account Type Selection -->
@@ -19,16 +19,16 @@
           <!-- Client Option -->
           <button
             @click="selectAccountType('CLIENT')"
-            class="w-full flex items-center justify-between p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
+            class="w-full flex items-center justify-between p-6 bg-white border-[0.5px] border-gray-100 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
           >
             <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
               </div>
               <div class="text-left">
-                <span class="text-lg font-semibold text-gray-900">Client Seeking Services</span>
+                <span class="text-base font-semibold text-gray-900">Client Seeking Services</span>
                 <p class="text-sm text-gray-500">Book beauty services from professionals</p>
               </div>
             </div>
@@ -40,16 +40,16 @@
           <!-- Service Provider Option -->
           <button
             @click="selectAccountType('SERVICE_PROVIDER')"
-            class="w-full flex items-center justify-between p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
+            class="w-full flex items-center justify-between p-6 bg-white border-[0.5px] border-gray-100 rounded-2xl hover:border-emerald-300 transition-all duration-200 group hover:shadow-md"
           >
             <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
                 <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
               </div>
               <div class="text-left">
-                <span class="text-lg font-semibold text-gray-900">Beauty Professionals</span>
+                <span class="text-base font-semibold text-gray-900">Beauty Professionals</span>
                 <p class="text-sm text-gray-500">Offer your services to clients</p>
               </div>
             </div>
@@ -62,8 +62,8 @@
         <!-- Login Link -->
         <div class="text-center">
           <span class="text-gray-600">Already have an account? </span>
-          <!-- <NuxtLink to="/login" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink> -->
-          <NuxtLink to="/waitlist" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink>
+          <NuxtLink to="/login" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink>
+          <!-- <NuxtLink to="/waitlist" class="font-semibold hover:underline" style="color: #045940;">Login</NuxtLink> -->
         </div>
       </div>
     </div>
@@ -93,12 +93,12 @@
 const router = useRouter()
 
 const selectAccountType = (type: 'CLIENT' | 'SERVICE_PROVIDER') => {
-  router.push('/waitlist')
-  // if (type === 'CLIENT') {
-  //   router.push('/signup/client')
-  // } else {
-  //   router.push('/signup/service-provider')
-  // }
+  // router.push('/waitlist')
+  if (type === 'CLIENT') {
+    router.push('/signup/client')
+  } else {
+    router.push('/signup/service-provider')
+  }
 }
 
 // SEO

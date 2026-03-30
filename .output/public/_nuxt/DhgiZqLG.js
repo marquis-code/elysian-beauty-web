@@ -1,0 +1,1 @@
+import{s as c}from"./DcFSTMAN.js";import{j as o,f as r}from"./fmUdw0Ke.js";const p=()=>{const e=r(!1),a=r([]),t=async()=>{e.value=!0;const s=await c.$_fetch_serviceTypes();console.log(s.data,"serves heres"),s.type!=="ERROR"&&(a.value=s?.data?.data?.serviceTypes),e.value=!1};return o(()=>{t()}),{fetchServiceTypes:t,serviceTypes:a,loading:e}};export{p as u};

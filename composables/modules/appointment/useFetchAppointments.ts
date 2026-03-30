@@ -16,5 +16,9 @@ export const useFetchAppointments = () => {
 		loading.value = false;
 	};
 
+	onMounted(() => {
+		fetchAppointments()
+	})
+
 	return { fetchAppointments, appointments, loading };
 };

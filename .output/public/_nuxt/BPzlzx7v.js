@@ -1,0 +1,1 @@
+import{G as n}from"./BC4dnuie.js";const s={$_create_bookings:o=>n.post("/bookingss",o),$_update_bookings:o=>n.put("/bookingss",o),$_delete_bookings:o=>{const t=`/bookingss/${o}`;return n.delete(t)},$_fetch_booking:o=>{const t=`/bookings/${o}`;return n.get(t)},$_fetch_bookings:()=>n.get("/bookings")};export{s as b};

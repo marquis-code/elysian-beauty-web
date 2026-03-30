@@ -9,9 +9,10 @@ export const useFetchAvailabilityByProvider = () => {
   const fetchAvailabilityByProvider = async (serviceProviderId: string) => {
     loading.value = true;
     const res = await availability_api.$_fetch_availability_by_provider(serviceProviderId) as any;
+    console.log("Fetched availability by provider:", res);
 
     if (res.type !== "ERROR") {
-      availabilities.value = res.data;
+      availabilities.value = res.data.data;
     }
 
     loading.value = false;

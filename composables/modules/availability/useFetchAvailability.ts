@@ -8,7 +8,7 @@ export const useFetchAvailability = () => {
   const fetchAvailability = async (id: string) => {
     loading.value = true;
     const res = await availability_api.$_fetch_availability(id) as any;
-
+    console.log("Fetched availability:", res);
     if (res.type !== "ERROR") {
       availability.value = res.data;
     }

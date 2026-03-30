@@ -31,9 +31,16 @@
   import service1 from '@/assets/img/bservice2.png'
     import service2 from '@/assets/img/bservice3.png'
       import service3 from '@/assets/img/bservice4.png'
-            import service4 from '@/assets/img/service.png'
+            // import service4 from '@/assets/img/service.png'
   const mainImage = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-16%20at%2018.24.40-ovxBl969IhdJtNLNJYZKUInAByylW9.png';
   const galleryImages = [
-    service1, service2, service3, service4,  service1, service2, service3, service4
+    service1, service2, service3, service1, service2, service3
   ];
+
+    const props = defineProps({
+    serviceProvider: {
+      type: Object,
+      default: {}
+    }
+  })
   </script>

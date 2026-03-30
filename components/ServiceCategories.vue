@@ -1,126 +1,8 @@
-<!-- <template>
+<template>
     <div class="px-6 mb-6">
       <h2 class="text-xl font-semibold mb-4">Services</h2>
       
-<section class="flex justify-between items-center">
-    <div class="flex overflow-x-auto space-x-2 pb-4 mb-6">
-        <button 
-          v-for="category in categories" 
-          :key="category.id"
-          :class="[
-            'px-4 py-2 rounded-full text-sm whitespace-nowrap',
-            selectedCategory === category.id 
-              ? 'bg-[#282B2A] text-sm font-bold text-white' 
-              : 'text-[#A3A8A7]'
-          ]"
-          @click="selectedCategory = category.id"
-        >
-          {{ category.name }}
-        </button>
-      </div>
-      
-      <div class="flex border p-10 border-[#A3A8A7] rounded-xl justify-center">
-        <button 
-          class="bg-[#282B2A] text-white px-10 text-sm py-3 rounded-full font-medium"
-          @click="$emit('book-now')"
-        >
-          BOOK NOW
-        </button>
-      </div>
-</section>
-
-<section v-for="(value, key) in groupedServices" :key="key" class="mt-8">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-medium text-gray-800">{{ key }}</h2>
-          <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-            {{ value.length }} service{{ value.length !== 1 ? 's' : '' }}
-          </span>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div 
-            v-for="(salon, index) in value" 
-            :key="index" 
-            @click="router.push(`/explore/${salon.id}`)"
-            class="relative group cursor-pointer transform transition-all duration-200 hover:scale-105 hover:shadow-lg"
-          >
-            <div  @click="`/explore/${salon.id}`" class="relative rounded-lg overflow-hidden shadow-sm">
-              <img 
-                src="@/assets/img/explore.png" 
-                alt="Salon" 
-                class="w-full h-[200px] object-cover group-hover:brightness-110 transition-all duration-200" 
-              />
-              <button class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600 hover:text-red-500 transition-colors">
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                </svg>
-              </button>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-            </div>
-            <div  @click="`/explore/${salon.id}`" class="mt-3 space-y-1 p-3 border-b-[0.5px] shadow-lg rounded-b-xl">
-              <h3 class="text-sm font-semibold text-gray-800 line-clamp-1">
-                {{ salon?.ServiceProvider?.businessName }}
-              </h3>
-              <p class="text-base font-bold text-emerald-600">
-                ₦{{ salon?.price?.toLocaleString() }}
-              </p>
-              <div class="flex items-center justify-between text-xs">
-                <span class="text-gray-500 truncate flex-1 mr-2">
-                  {{ salon?.ServiceProvider?.businessLocation }}
-                </span>
-                <div class="flex items-center space-x-1 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                  </svg>
-                  <span class="text-gray-400">({{ salon?.reviews ?? 0 }})</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <span v-if="salon?.ServiceProvider?.businessIsVerified" class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full">
-                  <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  Verified
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref } from 'vue';
-  import { useFetchServiceTypes } from  "@/composables/modules/serviceTypes/useFetchServiceTypes"
-  const {  serviceTypes, loading: fetchingServiceTypes } = useFetchServiceTypes()
-  
-  const selectedCategory = ref('head-spa');
-  const router = useRouter()
-  
-  const groupedServices = computed(() => {
-  return serviceTypes.value?.length
-    ? Object.groupBy(serviceTypes.value, (item) => item.serviceType)
-    : {}
-})
-
-  const categories = [
-    { id: 'head-spa', name: 'Head Spa' },
-    { id: 'makeup', name: 'Make up' },
-    { id: 'eyebrow', name: 'Eyebrow Microblading' },
-    { id: 'eyelash', name: 'Eyelash Extension' },
-    { id: 'waxing', name: 'Waxing' },
-    { id: 'nail', name: 'Nail' },
-    { id: 'facial', name: 'Facial' }
-  ];
-  
-  defineEmits(['book-now']);
-  </script> -->
-
-  <template>
-    <div class="px-6 mb-6">
-      <h2 class="text-xl font-semibold mb-4">Services</h2>
-      
-      <section class="flex justify-between items-center">
+      <section class="flex justify-between items-center max-w-3xl">
         <div class="flex overflow-x-auto space-x-2 pb-4 mb-6">
           <button 
             v-for="category in dynamicCategories" 
@@ -137,14 +19,6 @@
           </button>
         </div>
         
-        <div class="flex border p-10 border-[#A3A8A7] rounded-xl justify-center">
-          <button 
-            class="bg-[#282B2A] text-white px-10 text-sm py-3 rounded-full font-medium hover:bg-[#1a1d1c] transition-colors duration-200"
-            @click="$emit('book-now')"
-          >
-            BOOK NOW
-          </button>
-        </div>
       </section>
   
       <!-- Loading state -->

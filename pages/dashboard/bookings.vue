@@ -173,6 +173,15 @@
   
   <script setup lang="ts">
   import { ref, computed } from 'vue'
+  import { useCreateBooking } from '~/composables/modules/bookings/useCreateBooking'
+  import { useUpdateBooking } from '~/composables/modules/bookings/useUpdateBooking'
+  import { useFetchBookings } from '~/composables/modules/bookings/useFetchBookings'
+  import { useDeleteBooking } from '~/composables/modules/bookings/useDeleteBooking'
+
+  const { updateBooking, loading: updating } = useUpdateBooking()
+  const { fetchBookings, loading: fetching } = useFetchBookings()
+  const { deleteBooking, loading: deleting  } = useDeleteBooking()
+
   import { 
     HomeIcon, 
     CalendarIcon, 

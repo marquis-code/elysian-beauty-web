@@ -1,7 +1,10 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/elysgohr/public_html/
+    - export DEPLOYPATH=/home/elysgohr/develop.elysian-beauty.org/
+    # Copy the built static files from Nuxt
     - /bin/cp -R .output/public/* $DEPLOYPATH/
+    # Copy .htaccess if it exists
     - /bin/cp .htaccess $DEPLOYPATH/ 2>/dev/null || true
+    # Copy environment file if needed
     - /bin/cp .env $DEPLOYPATH/ 2>/dev/null || true

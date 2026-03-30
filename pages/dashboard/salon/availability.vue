@@ -72,7 +72,7 @@
         <!-- Main Content -->
         <div v-else-if="availability" class="space-y-6">
           <!-- Operational Status -->
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          <div class="bg-white rounded-2xl shadow-lg border-[0.5px] border-gray-100 p-6">
             <div class="flex items-center justify-between mb-4">
               <div>
                 <h2 class="text-lg font-bold text-gray-900">Salon Status</h2>
@@ -109,7 +109,7 @@
           </div>
   
           <!-- Tab Navigation -->
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+          <div class="bg-white rounded-2xl shadow-lg border-[0.5px] border-gray-100 overflow-hidden">
             <div class="border-b border-gray-200">
               <nav class="flex space-x-8 px-6" aria-label="Tabs">
                 <button
@@ -150,7 +150,7 @@
                   <div
                     v-for="(day, index) in availability.weeklySchedule"
                     :key="day.dayOfWeek"
-                    class="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                    class="bg-gray-50 rounded-xl p-4 border-[0.5px] border-gray-100"
                   >
                     <!-- Day Header -->
                     <div class="flex items-center justify-between mb-4">
@@ -182,7 +182,7 @@
                       <div
                         v-for="slot in day.timeSlots"
                         :key="slot.id"
-                        class="bg-white rounded-lg p-3 border border-gray-200"
+                        class="bg-white rounded-lg p-3 border-[0.5px] border-gray-100"
                       >
                         <div class="flex items-center justify-between mb-3">
                           <div class="flex items-center space-x-2">
@@ -270,7 +270,7 @@
                   <div
                     v-for="range in availability.dateRanges"
                     :key="range.id"
-                    class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                    class="bg-white border-[0.5px] border-gray-100 rounded-xl p-4 hover:shadow-md transition-shadow"
                   >
                     <div class="flex items-center justify-between mb-3">
                       <div>
@@ -363,7 +363,7 @@
                 </div>
   
                 <!-- Calendar Grid -->
-                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <div class="bg-white border-[0.5px] border-gray-100 rounded-xl overflow-hidden">
                   <!-- Calendar Header -->
                   <div class="grid grid-cols-7 bg-gray-50 border-b border-gray-200">
                     <div
@@ -651,7 +651,7 @@
                   <div
                     v-for="(slot, index) in dateRangeForm.customTimeSlots"
                     :key="slot.id"
-                    class="bg-gray-50 rounded-lg p-3 border border-gray-200"
+                    class="bg-gray-50 rounded-lg p-3 border-[0.5px] border-gray-100"
                   >
                     <div class="grid grid-cols-2 gap-3 mb-3">
                       <input

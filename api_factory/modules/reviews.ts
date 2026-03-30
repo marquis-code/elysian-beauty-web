@@ -29,4 +29,8 @@ export const review_api = {
     const url = "/review";
     return GATEWAY_ENDPOINT.get(url);
   },
+  $_fetch_service_provider_review: (id: string) => {
+    const url = `/review/${id}`;
+    return GATEWAY_ENDPOINT.get(url);
+  },
 };

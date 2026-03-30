@@ -90,7 +90,7 @@ instanceArray.forEach((instance) => {
             (err.message?.includes("Failed to fetch") || err.message?.includes("NetworkError"))))
 
       if (isCORSError) {
-        console.error("CORS Error:", err)
+        // console.error("CORS Error:", err)
         showToast({
           title: "CORS Error",
           message: "Unable to connect to the server due to cross-origin restrictions. Please contact support.",

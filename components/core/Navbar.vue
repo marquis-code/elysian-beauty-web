@@ -1,35 +1,35 @@
 <!-- components/Navbar.vue -->
 <template>
     <main>
-      <header class="sticky top-0 z-50 backdrop-blur-md bg-white/90 border-b border-gray-100 shadow-sm">
-        <div class="flex items-center justify-between px-6 max-w-7xl mx-auto py-4">
-          <div class="flex items-center">
-            <NuxtLink to="/" class="transition-transform hover:scale-105">
-              <img src="@/assets/img/blue-logo.png" alt="Elysian Logo" class="h-9" />
-            </NuxtLink>
-          </div>
-          <nav class="hidden md:flex items-center gap-8">
-            <NuxtLink to="/about" class="relative text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 hover:after:w-full">About</NuxtLink>
-            <NuxtLink to="/services" class="relative text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 hover:after:w-full">Services</NuxtLink>
-            <NuxtLink to="/blogs" class="relative text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 hover:after:w-full">Blog</NuxtLink>
-            <button @click="showContactModal = true" class="relative text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 hover:after:w-full">Contact</button>
-          </nav>
+      <header class="flex items-center justify-between px-6 max-w-7xl mx-auto py-6">
+        <div class="flex items-center">
+          <NuxtLink to="/"><img src="@/assets/img/blue-logo.png" alt="Elysian Logo" class="h-8" /></NuxtLink>
+        </div>
+        <nav class="hidden md:flex gap-6 text-gray-700">
+          <NuxtLink to="/about" class="hover:text-emerald-900 text-sm text-[#101011]">About</NuxtLink>
+          <NuxtLink to="/services" class="hover:text-emerald-900 text-sm text-[#101011]">Services</NuxtLink>
+          <NuxtLink to="/blogs" class="hover:text-emerald-900 text-sm text-[#101011]">Blog</NuxtLink>
+          <button @click="showContactModal = true" class="hover:text-emerald-900 text-sm text-[#101011]">Contact</button>
+        </nav>
 
-          <div class="flex items-center gap-4">
-            <button @click="isOpenSidebar = true" type="button" class="-m-2.5 lg:hidden p-2.5 text-gray-700 hover:text-emerald-700 transition-colors">
-              <span class="sr-only">Open sidebar</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
+        <div class="flex gap-4">
+          <button @click="isOpenSidebar = true" type="button" class="-m-2.5 lg:hidden p-2.5 text-gray-700">
+            <span class="sr-only">Open sidebar</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
 
-            <NuxtLink to="/waitlist" class="hidden lg:flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-sm font-semibold text-white px-6 py-2.5 rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 transform hover:scale-105">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                <polyline points="10 17 15 12 10 7"/>
-                <line x1="15" y1="12" x2="3" y2="12"/>
-              </svg>
-              Join Waitlist
-            </NuxtLink>
-          </div>
+          <NuxtLink to="/login" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
+            Login
+          </NuxtLink>
+          <NuxtLink to="/signup" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
+            SignUp
+          </NuxtLink>
+          <!-- <NuxtLink to="/waitlist" class="border-[0.5px] hidden lg:block border-emerald-900 text-sm text-emerald-900 px-4 py-2.5 rounded-full">
+            Login
+          </NuxtLink>
+          <NuxtLink to="/waitlist" class="bg-emerald-900 hidden lg:block text-sm text-white px-4 py-2.5 rounded-full">
+            SignUp
+          </NuxtLink> -->
         </div>
       </header>
 
@@ -118,14 +118,12 @@
                         </a>
                       </li>
                       <li>
-                        <NuxtLink @click="isOpenSidebar = false" to="/waitlist" class="group flex items-center gap-x-3 rounded-full p-3 py-3 text-sm/6 font-semibold text-white bg-gradient-to-r from-[#045940] to-[#067A4B] hover:from-[#067A4B] hover:to-[#045940] transition-all duration-300">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                            <polyline points="10 17 15 12 10 7"/>
-                            <line x1="15" y1="12" x2="3" y2="12"/>
-                          </svg>
-                          Join Waitlist
+                        <NuxtLink @click="isOpenSidebar = false" to="/login" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
+                          Login
                         </NuxtLink>
+                        <!-- <NuxtLink @click="isOpenSidebar = false" to="/waitlist" class="group flex gap-x-3 rounded-md p-2 py-3 text-sm/6 font-semibold text-emerald-900 hover:bg-gray-50 hover:text-emerald-900">
+                          Login
+                        </NuxtLink> -->
                       </li>
                     </ul>
                   </li>

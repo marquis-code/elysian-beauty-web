@@ -114,7 +114,7 @@
       case 'massage':
         return 'bg-red-50 border border-red-100'
       case 'task':
-        return 'bg-gray-50 border border-gray-200'
+        return 'bg-gray-50 border-[0.5px] border-gray-100'
       default:
         return 'bg-blue-50 border border-blue-100'
     }
