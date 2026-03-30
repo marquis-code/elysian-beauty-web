@@ -5,9 +5,9 @@ import { useCustomToast } from "@/composables/core/useCustomToast"
 const { token, logOut } = useUser()
 const { showToast } = useCustomToast() // Move useCustomToast call outside the interceptor
 
-const $GATEWAY_ENDPOINT_WITHOUT_VERSION = import.meta.env.VITE_BASE_URL as string
-const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL
-const $GATEWAY_ENDPOINT_V2 = import.meta.env.VITE_BASE_URL + "/v2"
+const $GATEWAY_ENDPOINT_WITHOUT_VERSION = "https://api.elysian-beauty.org/api" as string
+const $GATEWAY_ENDPOINT = "https://api.elysian-beauty.org/api"
+const $GATEWAY_ENDPOINT_V2 = "https://api.elysian-beauty.org/api" + "/v2"
 const $IMAGE_UPLOAD_ENDPOINT = import.meta.env.VITE_IMAGE_UPLOAD_BASE_URL as string
 
 export const GATEWAY_ENDPOINT = axios.create({
